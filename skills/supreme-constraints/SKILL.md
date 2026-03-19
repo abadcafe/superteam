@@ -33,12 +33,12 @@ user-invocable: false
   - 规划审查报告: working/plan-review-results.md （仅由plan-reviewer生成和编辑）
   - 提交信息: working/commit-message.md （仅由execution-manager生成和编辑，仅供git commit使用）
   - 任务总结: working/task-summary.md （仅由execution-manager生成和编辑，仅供用户查看）
-  - 任务产出目录: working/artifacts/task-NNN/ （该目录仅供coder, tester, code-reviewer, test-reviewer,   analyst写入，manager不可写入和编辑其下的文件）
-    - 变更总结: working/artifacts/task-NNN/changes.md （仅由coder或tester生成，不可编辑）
-    - 单测报告: working/artifacts/task-NNN/unit-test-results.md （仅由coder生成，不可编辑）
-    - 集测报告: working/artifacts/task-NNN/integration-test-results.md （仅由tester生成，不可编辑）
-    - 代码审查报告: working/artifacts/task-NNN/code-review-results.md （仅由code-reviewer生成，不可编辑）
-    - 集测审查报告: working/artifacts/task-NNN/test-review-results.md （仅由test-reviewer生成，不可编辑）
+  - 任务产出目录: working/artifacts/task-{NNN}/ （该目录仅供coder, tester, code-reviewer, test-reviewer,   analyst写入，manager不可写入和编辑其下的文件）
+    - 变更总结: working/artifacts/task-{NNN}/changes.md （仅由coder或tester生成，不可编辑）
+    - 单测报告: working/artifacts/task-{NNN}/unit-test-results.md （仅由coder生成，不可编辑）
+    - 集测报告: working/artifacts/task-{NNN}/integration-test-results.md （仅由tester生成，不可编辑）
+    - 代码审查报告: working/artifacts/task-{NNN}/code-review-results.md （仅由code-reviewer生成，不可编辑）
+    - 集测审查报告: working/artifacts/task-{NNN}/test-review-results.md （仅由test-reviewer生成，不可编辑）
     - 问题分析报告: working/artifacts/analysis-results.md （仅由analyst生成和编辑）
 
 ## 文档格式与内容约束
@@ -69,7 +69,18 @@ user-invocable: false
 - 规划质量约束：[quality/plan.md](quality/plan.md)
 - 架构质量约束：[quality/design.md](quality/design.md)
 
-# 各角色约束
+# 测试性质约束
+**单元测试（白盒测试）**：
+- **性质**：白盒测试，测试内部实现的正确性和健壮性
+
+**集成测试（黑盒测试）**：
+- **性质**：黑盒测试，不依赖内部实现，只通过外部接口验证行为正确性和健壮性
+- **工具**：Python 调用真实工具（curl、nc、socat 等），禁止调用内部代码
+- **语言**：Python
+- **框架**：pytest
+- **集测代码目录**：tests/integration/
+
+# 角色各自必须遵守的约束
 - 产品经理（product-manager）：[agents/product-manager.md](agents/product-manager.md)
 - 架构团队经理（architecture-manager）：[agents/architecture-manager.md](agents/architecture-manager.md)
 - 执行团队经理（execution-manager）：[agents/execution-manager.md](agents/execution-manager.md)
@@ -82,17 +93,3 @@ user-invocable: false
 - 测试工程师（tester）：[agents/tester.md](agents/tester.md)
 - 测试审查员（test-reviewer）：[agents/test-reviewer.md](agents/test-reviewer.md)
 - 分析师（analyst）：[agents/analyst.md](agents/analyst.md)
-
-# 各团队约束
-[teams.md](teams.md)
-
-# 测试性质约束
-**单元测试（白盒测试）**：
-- **性质**：白盒测试，测试内部实现的正确性和健壮性
-
-**集成测试（黑盒测试）**：
-- **性质**：黑盒测试，不依赖内部实现，只通过外部接口验证行为正确性和健壮性
-- **工具**：Python 调用真实工具（curl、nc、socat 等），禁止调用内部代码
-- **语言**：Python
-- **框架**：pytest
-- **集测代码目录**：tests/integration/
