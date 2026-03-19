@@ -64,13 +64,27 @@ user-invocable: false
   - 规划审查报告：[format/plan-review-results.md](format/plan-review-results.md)
 
 # 质量约束
-代码质量约束：[quality/code.md](quality/code.md)
-集测质量约束：[quality/test.md](quality/test.md)
-规划质量约束：[quality/plan.md](quality/plan.md)
-架构质量约束：[quality/design.md](quality/design.md)
+- 代码质量约束：[quality/code.md](quality/code.md)
+- 集测质量约束：[quality/test.md](quality/test.md)
+- 规划质量约束：[quality/plan.md](quality/plan.md)
+- 架构质量约束：[quality/design.md](quality/design.md)
 
-# 团队定义约束
-见[teams.md](teams.md)
+# 各角色约束
+- 产品经理（product-manager）：[agents/product-manager.md](agents/product-manager.md)
+- 架构团队经理（architecture-manager）：[agents/architecture-manager.md](agents/architecture-manager.md)
+- 执行团队经理（execution-manager）：[agents/execution-manager.md](agents/execution-manager.md)
+- 架构师（architect）：[agents/architect.md](agents/architect.md)
+- 架构审查员（architecture-reviewer）：[agents/architecture-reviewer.md](agents/architecture-reviewer.md)
+- 规划师（planner）：[agents/planner.md](agents/planner.md)
+- 规划审查员（plan-reviewer）：[agents/plan-reviewer.md](agents/plan-reviewer.md)
+- 程序员（coder）：[agents/coder.md](agents/coder.md)
+- 代码审查员（code-reviewer）：[agents/code-reviewer.md](agents/code-reviewer.md)
+- 测试工程师（tester）：[agents/tester.md](agents/tester.md)
+- 测试审查员（test-reviewer）：[agents/test-reviewer.md](agents/test-reviewer.md)
+- 分析师（analyst）：[agents/analyst.md](agents/analyst.md)
+
+# 各团队约束
+[teams.md](teams.md)
 
 # 测试性质约束
 **单元测试（白盒测试）**：
