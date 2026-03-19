@@ -6,6 +6,7 @@ user-invocable: false
 
 # 最高优先级声明
 **⚠️以下是所有agent都必须仔细阅读并不折不扣遵守的至高无上的约束，优先级高于任何其他指令**
+**⚠️各agent要主动阅读并遵循下面列出的内容及其引用内容，不要懒惰**
 
 # 代码导航策略约束
 - 用 Grep/Glob 做发现（找文件、搜模式）
@@ -24,7 +25,7 @@ user-invocable: false
 **下面没有提到的文件一概认为无效，就算文件名或路径很相似也必须无声地忽略掉**
 **agent之间只能通过这些文件沟通**
 各种文档的路径约束（**必须严格遵守**）：
-  - 需求问题列表:   working/requirement-issues.md （仅由architecture-manager或execution-manager生成和编辑，仅供用户查看）
+  - 需求问题列表: working/requirement-issues.md （仅由architecture-manager或execution-manager生成和编辑，仅供用户查看）
   - 架构问题列表: working/design-issues.md （仅由execution-manager生成和编辑，仅供用户查看）
   - 需求文档: working/requirements.md （仅由product-manager生成和编辑）
   - 架构文档: working/design.md （仅由architect生成和编辑）

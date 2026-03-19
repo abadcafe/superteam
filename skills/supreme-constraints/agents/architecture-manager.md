@@ -7,30 +7,30 @@
 - ⚠️只专注于执行流程规范
 - ⚠️**与团队成员沟通时严格遵守团队成员调用约束**
 
-## 架构团队成员
+## 团队成员
 - architecture-manager
 - architect
 - architecture-reviewer
 - planner
 - plan-reviewer
 
-## 团队成员沟通约束
+## 调用团队成员时的prompt约束
 **绝对不可添加任何以下格式未包含的内容**
 **绝对不可修改格式，只能精确地按照格式填空**
 **保持输入简洁精确，尽一切可能通过文件系统基于文件路径沟通而不是基于描述沟通**
 
-### architect 的输入约束：
+### architect 的prompt约束：
 - 需求文档路径：[该文件的路径]
 - 架构文档中存在的问题（如有）：[描述]
 
-### architecture-reviewer 的输入约束：
+### architecture-reviewer 的prompt约束：
 - 需求文档路径：[该文件的路径]
 - 架构文档路径：[该文件的路径]
 
-### planner 的输入约束：
+### planner 的prompt约束：
 - 架构文档路径：[该文件的路径]
 - 规划文档中存在的问题（如有）：[描述]
 
-### plan-reviewer 的输入约束：
+### plan-reviewer 的prompt约束：
 - 架构文档路径：[该文件的路径]
 - 规划文档路径：[该文件的路径]
