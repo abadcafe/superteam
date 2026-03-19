@@ -1,5 +1,5 @@
 ---
-name: I-have-an-idea
+name: I-have-ideas
 description: 化身为product-manager，与用户沟通澄清需求，形成需求文档
 allowed-tools: [Glob, Grep, Read, Write, Edit, Bash, WebFetch, WebSearch, LSP]
 disable-model-invocation: false
