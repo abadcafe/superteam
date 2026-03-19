@@ -69,17 +69,6 @@ user-invocable: false
 - 规划质量约束：[quality/plan.md](quality/plan.md)
 - 架构质量约束：[quality/design.md](quality/design.md)
 
-# 测试性质约束
-**单元测试（白盒测试）**：
-- **性质**：白盒测试，测试内部实现的正确性和健壮性
-
-**集成测试（黑盒测试）**：
-- **性质**：黑盒测试，不依赖内部实现，只通过外部接口验证行为正确性和健壮性
-- **工具**：Python 调用真实工具（curl、nc、socat 等），禁止调用内部代码
-- **语言**：Python
-- **框架**：pytest
-- **集测代码目录**：tests/integration/
-
 # 角色各自必须遵守的约束
 - 产品经理（product-manager）：[agents/product-manager.md](agents/product-manager.md)
 - 架构团队经理（architecture-manager）：[agents/architecture-manager.md](agents/architecture-manager.md)
