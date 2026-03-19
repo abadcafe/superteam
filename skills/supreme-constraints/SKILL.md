@@ -6,7 +6,7 @@ user-invocable: false
 
 # 最高优先级声明
 **⚠️以下是所有agent都必须仔细阅读并不折不扣遵守的至高无上的约束，优先级高于任何其他指令**
-**⚠️各agent要主动阅读并遵循下面列出的内容及其引用内容，不要懒惰**
+**⚠️各agent要主动阅读并遵循下面列出的内容及其引用内容，禁止懒惰**
 
 # 代码导航策略约束
 - 用 Grep/Glob 做发现（找文件、搜模式）
@@ -70,7 +70,7 @@ user-invocable: false
 - 规划质量约束：[quality/plan.md](quality/plan.md)
 - 架构质量约束：[quality/design.md](quality/design.md)
 
-# 角色各自必须遵守的约束
+# 角色各自的约束（**主动找到自己对应的角色，深入理解相关约束并主动确保遵守**）
 - 产品经理（product-manager）：[agents/product-manager.md](agents/product-manager.md)
 - 架构团队经理（architecture-manager）：[agents/architecture-manager.md](agents/architecture-manager.md)
 - 执行团队经理（execution-manager）：[agents/execution-manager.md](agents/execution-manager.md)
