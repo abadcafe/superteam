@@ -20,15 +20,15 @@ user-invocable: false
   - 家目录下的文件
   - /usr 目录下的文件
 
-# 文件系统交互规范约束
-- 所有文档使用 UTF-8 编码
-- **所有文档中绝对禁止用画图画表格的形式来表达任何内容，用其他markdown格式例如列表之类来代替**
-- 各种文档的存储路径（必须严格遵守）：
+# 文档路径约束
+**下面没有提到的文件一概认为无效，就算文件名或路径很相似也必须无声地忽略掉**
+**agent之间只能通过这些文件沟通**
+各种文档的路径约束（**必须严格遵守**）：
+  - 需求问题列表:   working/requirement-issues.md （仅由architecture-manager或execution-manager生成和编辑，仅供用户查看）
+  - 架构问题列表: working/design-issues.md （仅由execution-manager生成和编辑，仅供用户查看）
   - 需求文档: working/requirements.md （仅由product-manager生成和编辑）
   - 架构文档: working/design.md （仅由architect生成和编辑）
   - 架构审查报告: working/design-review-results.md （仅由architecture-reviewer生成和编辑）
-  - 需求问题列表:   working/requirement-issues.md （仅由architecture-manager或execution-manager生成和编辑，仅供用户查看）
-  - 架构问题列表: working/design-issues.md （仅由execution-manager生成和编辑，仅供用户查看）
   - 规划文档: working/plan.md （仅由planner生成和编辑）
   - 规划审查报告: working/plan-review-results.md （仅由plan-reviewer生成和编辑）
   - 提交信息: working/commit-message.md （仅由execution-manager生成和编辑，仅供git commit使用）
@@ -40,19 +40,28 @@ user-invocable: false
     - 代码审查报告: working/artifacts/task-NNN/code-review-results.md （仅由code-reviewer生成，不可编辑）
     - 集测审查报告: working/artifacts/task-NNN/test-review-results.md （仅由test-reviewer生成，不可编辑）
     - 问题分析报告: working/artifacts/analysis-results.md （仅由analyst生成和编辑）
-- **上面没有提到的文件一概认为无效，就算文件名或路径很相似也必须无声地忽略掉**
-- **agent之间只能通过这些文件沟通**
 
 ## 文档格式与内容约束
+所有文档使用 UTF-8 编码
 **绝对不可添加格式中未包含的内容**
 **绝对不可修改格式，只能精确地按照格式填空**
-需求问题列表约束：[format/requirement-issues.md](format/requirement-issues.md)
-架构问题列表约束：[format/design-issues.md](format/design-issues.md)
-需求文档约束：[format/requirements.md](format/requirements.md)
-规划文档约束：[format/plan.md](format/plan.md)
-提交信息约束：[format/commit-message.md](format/commit-message.md)
-任务总结约束：[format/task-summary.md](format/task-summary.md)
-变更总结约束：[format/changes.md](format/changes.md)
+**所有文档中绝对禁止用画图画表格的形式来表达任何内容，用其他markdown格式例如列表之类来代替**
+各种文档的内容约束（**必须严格遵守**）：
+  - 需求问题列表：[format/requirement-issues.md](format/requirement-issues.md)
+  - 架构问题列表：[format/design-issues.md](format/design-issues.md)
+  - 需求文档：[format/requirements.md](format/requirements.md)
+  - 架构文档：[format/design.md](format/design.md)
+  - 规划文档：[format/plan.md](format/plan.md)
+  - 提交信息：[format/commit-message.md](format/commit-message.md)
+  - 任务总结：[format/task-summary.md](format/task-summary.md)
+  - 变更总结：[format/changes.md](format/changes.md)
+  - 单测报告：[format/unit-test-results.md](format/unit-test-results.md)
+  - 集测报告：[format/integration-test-results.md](format/integration-test-results.md)
+  - 问题分析报告：[format/analysis-results.md](format/analysis-results.md)
+  - 代码审查报告：[format/code-review-results.md](format/code-review-results.md)
+  - 集测审查报告：[format/test-review-results.md](format/test-review-results.md)
+  - 架构审查报告：[format/design-review-results.md](format/design-review-results.md)
+  - 规划审查报告：[format/plan-review-results.md](format/plan-review-results.md)
 
 # 质量约束
 代码质量约束：[quality/code.md](quality/code.md)
