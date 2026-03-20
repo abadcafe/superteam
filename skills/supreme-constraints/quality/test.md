@@ -4,14 +4,11 @@
 
 ### 1.1 必须遵守
 1. **所有集测用例必须编写代码**，禁止使用纯文档形式或手动测试步骤
-2. **所有集测用例只可以通过 pytest 命令运行**
-3. **所有集测 mock 必须按 pytest 框架的要求写成 Python 代码**（例如 fixture）
+2. **所有集测 mock 必须按集测框架的要求写成代码**（例如 pytest fixture）
 
 ### 1.2 绝对禁止
-- ❌ `python -c "..."`
-- ❌ `python <<< "..."`
-- ❌ heredoc形式: `python << 'EOF' ... EOF`
-- ❌ 任何形式的内联 Python 脚本
+- `python -c "..."` 或 `python <<< "..."` 或 heredoc 形式: `python << 'EOF' ... EOF`
+- 任何其他形式的内联脚本
 
 ### 1.3 目录结构
 ```
@@ -25,8 +22,8 @@ tests/integration/
 ### 1.4 文件位置
 - ⚠️ **集测代码是主要产出**，必须保存到集测代码目录
 - 集测代码必须规范地写入集测代码目录合适位置
-- 辅助代码（工具类）必须规范地写入集测代码目录合适位置
-- 所有公共 fixture 必须在 `conftest.py` 中定义
+- 辅助代码（工具类）必须规范地按集测框架要求写入集测代码目录合适位置
+  - 例如，所有公共 fixture 都在 `conftest.py` 中定义
 
 ### 1.5 正确示例
 ```python
@@ -63,7 +60,7 @@ def mock_http_server() -> Generator[MockHttpServer, None, None]:
 - 命名清晰（集测函数名应描述集测场景）
 
 ### 2.2 资源管理
-- 使用 pytest fixtures 管理集测环境
+- 使用 fixtures 管理集测环境
 - 资源管理正确（启动/停止、创建/销毁）
 - 正确使用 context manager 管理资源
 - 有适当的等待/超时机制
@@ -90,14 +87,12 @@ def mock_http_server() -> Generator[MockHttpServer, None, None]:
 - 根据场景选择正确的集测工具（curl/socket等）
 
 ## 五、Mock/Fixture 设计规范
-
 - Mock 设计必须合理
 - Mock 响应必须符合协议规范
 - Mock 必须有全面的错误模拟能力
 - Fixture 生命周期必须正确（setup/teardown）
 
 ## 六、覆盖率要求
-
 ⚠️ **必须达到100%覆盖率**
 
 ### 6.1 覆盖范围
