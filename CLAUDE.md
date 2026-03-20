@@ -16,9 +16,11 @@ The primary interface to this plugin is through three skills:
 
 ## Architecture
 
-### Teams
+### Communication Model
 
-Each team has a manager and specialized workers. Workers only communicate with their manager through the file system.
+**Workers communicate only through the file system** - they do not call each other directly. Managers orchestrate workers by reading their output documents and invoking them via the Agent tool.
+
+### Teams
 
 **Product Manager** (standalone):
 - Gathers requirements, writes `working/requirements.md`
@@ -35,6 +37,14 @@ Each team has a manager and specialized workers. Workers only communicate with t
 - `tester` - Writes and runs integration tests using Python/pytest
 - `test-reviewer` - Reviews integration tests
 - `analyst` - Analyzes failures and identifies root cause tasks
+
+### Task Types
+
+There are exactly 4 task types in plans:
+- **代码编写任务**: Coder implements a feature with unit tests
+- **代码审查任务**: Code Reviewer reviews the implementation
+- **集成测试任务**: Tester writes and runs integration tests for a feature
+- **集测审查任务**: Test Reviewer reviews integration tests
 
 ### Agent Definitions
 
@@ -53,7 +63,7 @@ skills/
 │   └── quality/                  # Quality standards (code, test, design)
 ├── design/SKILL.md               # Architecture workflow manager
 ├── execute/SKILL.md              # Execution workflow manager
-└── I-have-an-idea/SKILL.md       # Requirements gathering
+└── I-have-ideas/SKILL.md         # Requirements gathering
 ```
 
 ## Critical Constraints (from supreme-constraints)
@@ -63,12 +73,21 @@ skills/
 - **Temp files** must use `tmp/` in current directory, never `/tmp`
 - **Read operations** allowed from: current directory, home directory, `/usr`
 
-### Document Paths
-All documents live in `working/`:
-- Requirements: `working/requirements.md`
-- Architecture: `working/design.md`
-- Plan: `working/plan.md`
-- Task artifacts: `working/artifacts/task-NNN/`
+### Document Paths and Ownership
+
+All documents live in `working/`. **Strict ownership rules apply** - each document can only be written by specific roles:
+
+| Document | Writer |
+|----------|--------|
+| `requirements.md` | product-manager only |
+| `design.md` | architect only |
+| `design-review-results.md` | architecture-reviewer only |
+| `plan.md` | planner only |
+| `plan-review-results.md` | plan-reviewer only |
+| `commit-message.md`, `task-summary.md` | execution-manager only |
+| `requirement-issues.md` | architecture-manager or execution-manager |
+| `design-issues.md` | execution-manager only |
+| `working/artifacts/task-{NNN}/*` | Workers (coder, tester, reviewers, analyst) |
 
 ### Code Quality
 - All Python code must have complete type annotations
@@ -79,15 +98,22 @@ All documents live in `working/`:
 - Black-box tests only (no internal code calls)
 - Use Python with pytest
 - Tests located in `tests/integration/`
-- Call real tools (curl, nc, socat) to test external interfaces
+- Use real tools (curl, nc, socat) to test external interfaces
+- Test code must be written as proper pytest files, not inline scripts
+
+### Document Formats
+All documents have strict formats defined in `skills/supreme-constraints/format/`. Agents must:
+- Follow formats exactly - no additions or modifications
+- Never use diagrams or tables - use markdown lists instead
+- Write in UTF-8 encoding
 
 ## Workflow Summary
 
-1. `/I-have-an-idea` → Create `working/requirements.md`
+1. `/I-have-ideas` → Create `working/requirements.md`
 2. `/design` → Create `working/design.md` and `working/plan.md` (with review cycles)
-3. `/execute` → Implement tasks sequentially:
+3. `/execute` → Implement tasks sequentially (no parallelism):
    - Coder writes code + unit tests (100% coverage)
    - Code reviewer checks code
    - Tester writes/runs integration tests
    - Test reviewer checks tests
-   - On failure: Analyst finds root cause, reset affected tasks
+   - On failure: Analyst finds root cause, reset affected tasks to `⏳ 待开始`

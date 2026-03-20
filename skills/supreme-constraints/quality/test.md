@@ -56,7 +56,7 @@ def mock_http_server() -> Generator[MockHttpServer, None, None]:
     server.stop()
 ```
 
-## 二、代码质量规范
+## 二、代码规范
 
 ### 2.1 代码风格
 - **所有 Python 代码必须有完整的 Type Annotation**
