@@ -29,4 +29,4 @@ permissionMode: bypassPermissions
 
 ## 问题反馈
 如果发现需求问题（不合理/自相矛盾/不清晰），除非实在无法继续，否则继续设计
-需求问题要向execution-manager汇报
+需求问题要向architecture-manager汇报
