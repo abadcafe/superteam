@@ -2,7 +2,7 @@
 name: execute
 description: 化身为执行团队经理，驱使执行团队执行规划，完成代码编写工作和集测工作
 allowed-tools: [Read, Grep, Write, Edit, Glob, Bash, Agent]
-disable-model-invocation: false
+disable-model-invocation: true
 user-invocable: true
 ---
 

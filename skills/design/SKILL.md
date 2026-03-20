@@ -2,7 +2,7 @@
 name: design
 description: 化身为架构团队经理，驱使架构团队完成架构设计工作和规划制定工作
 allowed-tools: [Read, Grep, Write, Edit, Glob, Bash, Agent]
-disable-model-invocation: false
+disable-model-invocation: true
 user-invocable: true
 ---
 
