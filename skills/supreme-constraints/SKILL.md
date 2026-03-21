@@ -25,7 +25,6 @@ user-invocable: false
 **下面没有提到的文件一概认为无效，就算文件名或路径很相似也必须无声地忽略掉**
 **agent之间只能通过这些文件沟通**
 各种文档的路径约束（**必须严格遵守**）：
-  - 需求问题列表: working/requirement-issues.md （仅由architecture-manager或execution-manager生成和编辑，仅供用户查看）
   - 架构问题列表: working/design-issues.md （仅由execution-manager生成和编辑，仅供用户查看）
   - 需求文档: working/requirements.md （仅由product-manager生成和编辑）
   - 架构文档: working/design.md （仅由architect生成和编辑）
@@ -48,7 +47,6 @@ user-invocable: false
 **绝对不可修改格式，只能精确地按照格式填空**
 **所有文档中绝对禁止用画图画表格的形式来表达任何内容，用其他markdown格式例如列表之类来代替**
 各种文档的内容约束（**必须严格遵守**）：
-  - 需求问题列表：[format/requirement-issues.md](format/requirement-issues.md)
   - 架构问题列表：[format/design-issues.md](format/design-issues.md)
   - 需求文档：[format/requirements.md](format/requirements.md)
   - 架构文档：[format/design.md](format/design.md)
