@@ -28,9 +28,9 @@ user-invocable: false
   - 架构问题列表: working/design-issues.md （仅由execution-manager生成和编辑，仅供用户查看）
   - 需求文档: working/requirements.md （仅由product-manager生成和编辑）
   - 架构文档: working/design.md （仅由architect生成和编辑）
-  - 架构审查报告: working/design-review-results.md （仅由architecture-reviewer生成和编辑）
+  - 架构审查报告: working/design-review-results.md （仅由architecture-reviewer生成和编辑，architecture-manager可删除）
   - 规划文档: working/plan.md （仅由planner生成和编辑）
-  - 规划审查报告: working/plan-review-results.md （仅由plan-reviewer生成和编辑）
+  - 规划审查报告: working/plan-review-results.md （仅由plan-reviewer生成和编辑，architecture-manager可删除）
   - 提交信息: working/commit-message.md （仅由execution-manager生成和编辑，仅供git commit使用）
   - 任务总结: working/task-summary.md （仅由execution-manager生成和编辑，仅供用户查看）
   - 任务产出目录: working/artifacts/task-{NNN}/ （该目录仅供coder, tester, code-reviewer, test-reviewer,   analyst写入，manager不可写入和编辑其下的文件）
