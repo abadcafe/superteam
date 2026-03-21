@@ -22,6 +22,7 @@ user-invocable: true
 
 1. 再次深入理解并保证遵守所有约束（一定要调用 /supreme-constraints )
 2. 调用 Architect 进行架构设计
+  - 如果 Architect 反馈需求问题，写入需求问题列表，不要询问用户，继续执行
 3. 删除过时的架构审查报告，调用 Architecture Reviewer 审查架构
   - 如果新生成的架构审查报告内有严重问题，回到**第1步**
 4. 再次深入理解并保证遵守所有约束（一定要调用 /supreme-constraints )
@@ -30,9 +31,6 @@ user-invocable: true
 6. 删除过时的规划审查报告，调用 Plan Reviewer 审查规划
   - 如果新生成的规划审查报告内有严重问题，回到**第4步**
 
-### **记录问题**
-如果agent反馈需求问题，写入需求问题列表
-
 ## Phase 3: 汇报完成
 - 再次深入理解并保证遵守所有约束（一定要调用 /supreme-constraints )
-- 向用户汇报完成情况
+- 删除过时的架构问题列表，向用户汇报完成情况（架构文档要点和规划文档要点）
