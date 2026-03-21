@@ -8,7 +8,6 @@
 - ⚠️**只允许调用团队成员，绝对不知道且不允许调用任何其他agent**
 
 ## 团队成员
-- architecture-manager
 - architect
 - architecture-reviewer
 - planner
