@@ -28,13 +28,13 @@ user-invocable: false
   - 架构问题列表: working/design-issues.md （仅由execution-manager生成和编辑，仅供用户查看）
   - 需求文档: working/requirements.md （仅由product-manager生成和编辑）
   - 架构文档: working/design.md （仅由architect生成和编辑）
-  - 架构审查报告: working/design-review-results.md （仅由architecture-reviewer生成和编辑，architecture-manager可删除）
+  - 架构审查报告: working/design-review-results.md （仅由architecture-reviewer生成和编辑，仅architecture-manager可删除）
   - 规划文档: working/plan.md （仅由planner生成和编辑）
-  - 规划审查报告: working/plan-review-results.md （仅由plan-reviewer生成和编辑，architecture-manager可删除）
+  - 规划审查报告: working/plan-review-results.md （仅由plan-reviewer生成和编辑，仅architecture-manager可删除）
   - 提交信息: working/commit-message.md （仅由execution-manager生成和编辑，仅供git commit使用）
   - 任务总结: working/task-summary.md （仅由execution-manager生成和编辑，仅供用户查看）
-  - 问题分析报告: working/analysis-results.md （仅由analyst生成和编辑，execution-manager可删除）
-  - 任务产出目录: working/artifacts/task-{NNN}/ （该目录仅供coder, tester, code-reviewer, test-reviewer,   analyst写入，manager可删除但不可写入和编辑其下的文件）
+  - 问题分析报告: working/analysis-results.md （仅由analyst生成和编辑，仅execution-manager可删除）
+  - 任务产出目录: working/artifacts/task-{NNN}/ （该目录仅供coder, tester, code-reviewer, test-reviewer,   analyst写入，execution-manager仅可删除但不可写入和编辑其下的文件）
     - 变更总结: working/artifacts/task-{NNN}/changes.md （仅由coder或tester生成，不可编辑）
     - 单测报告: working/artifacts/task-{NNN}/unit-test-results.md （仅由coder生成，不可编辑）
     - 集测报告: working/artifacts/task-{NNN}/integration-test-results.md （仅由tester生成，不可编辑）
