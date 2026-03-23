@@ -93,7 +93,6 @@ def mock_http_server() -> Generator[MockHttpServer, None, None]:
 - Fixture 生命周期必须正确（setup/teardown）
 
 ## 六、覆盖率要求
-⚠️**必须达到100%覆盖率**
 
 ### 6.1 覆盖范围
 - 覆盖架构文档所有功能点
