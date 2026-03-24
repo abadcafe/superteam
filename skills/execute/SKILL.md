@@ -93,12 +93,12 @@ user-invocable: true
   - 调用识别到的执行者agent执行任务，更新任务列表中的任务状态为 `🔄 进行中`
     - 代码编写任务 → 调用 Coder Agent
     - 代码审查任务 → 执行代码审查循环：
-      - 调用 Coder Reviewer → 检查状态
+      - 调用 Coder Reviewer → 检查代码审查报告状态
       - 状态 = `继续审查` → 重新调用 Coder Reviewer
       - 状态 = `完结` → 退出循环
     - 集成测试任务 → 调用 Tester Agent
     - 集测审查任务 → 执行集测审查循环：
-      - 调用 Tester Reviewer → 检查状态
+      - 调用 Tester Reviewer → 检查集测审查报告状态
       - 状态 = `继续审查` → 重新调用 Tester Reviewer
       - 状态 = `完结` → 退出循环
 
