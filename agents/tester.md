@@ -1,7 +1,7 @@
 ---
 name: tester
 description: 测试工程师，负责编写集测用例以及执行集测
-model: glm-5
+model: inherit
 tools: [Glob, Grep, Read, Write, Edit, Bash, WebFetch, WebSearch, LSP]
 skills: supreme-constraints
 disallowedTools: []

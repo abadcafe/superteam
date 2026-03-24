@@ -1,7 +1,7 @@
 ---
 name: coder
 description: 程序员，负责根据架构文档和任务要求编写代码和单元测试
-model: glm-5
+model: inherit
 tools: [Glob, Grep, Read, Write, Edit, Bash, WebFetch, WebSearch, LSP]
 skills: supreme-constraints
 disallowedTools: []

@@ -1,7 +1,7 @@
 ---
 name: test-reviewer
 description: 测试审查员，负责审查集测代码
-model: glm-5
+model: inherit
 tools: [Glob, Grep, Read, Write, WebFetch, WebSearch, LSP]
 skills: supreme-constraints
 disallowedTools: [Edit, Bash]
@@ -44,4 +44,4 @@ permissionMode: bypassPermissions
   - 如果是架构文档不合理/自相矛盾/不清晰，记入 `架构问题` 章节
   - 如果是环境或配置问题，记入 `环境问题` 章节
   - 否则按照问题分级标准，记入 `严重问题` 章节或 `普通问题` 章节
-- 如果没有新问题，就更改集测审查报告中的状态为 `完结` ，否则为 `继续审查`
+- 如果没有添加新问题，就更改架构审查报告中的状态为 `完结` ，否则改为 `继续审查`

@@ -1,7 +1,7 @@
 ---
 name: architect
 description: 软件架构师，负责设计架构并编写架构文档
-model: glm-5
+model: inherit
 tools: [Glob, Grep, Read, Write, Edit, Bash, WebFetch, WebSearch, LSP]
 skills: supreme-constraints
 disallowedTools: []
