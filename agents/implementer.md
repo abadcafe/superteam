@@ -55,7 +55,7 @@ Output files:
 # White-box Test Results: Task-NNN
 
 ## Status
-PASS | FAIL
+EXPECTED | UNEXPECTED
 
 ## Blocked Tests (not counted in status)
 
@@ -65,10 +65,12 @@ PASS | FAIL
 
 ## Test Results
 
-| Test | Result | Details |
-|------|--------|---------|
-| test_name | PASS | - |
-| test_name | FAIL | AssertionError: expected True, got False |
+| Test | Result | Expected | Details |
+|------|--------|----------|---------|
+| test_name | PASS | PASS | - |
+| test_name | FAIL | PASS | AssertionError: expected True, got False |
+| test_name | FAIL | FAIL | AssertionError: unauthorized access granted |
+| test_name | PASS | FAIL | unexpected - regression no longer exists |
 
 ## Failed Tests (for self-debugging)
 
@@ -78,12 +80,14 @@ PASS | FAIL
 - **File:** tests/whitebox/test_xxx.py::test_name
 
 ## Summary
-- PASS: N
-- FAIL: N
+- EXPECTED (Result=Expected): N
+- UNEXPECTED (Result≠Expected): N
 - Blocked: N (see env-issues.md / plan-issues.md)
 ```
 
-**Status values:** PASS (all pass) | FAIL (any fails)
+**Status values:** EXPECTED (all Result match Expected) | UNEXPECTED (any Result mismatch Expected)
+
+**Expected column default:** PASS (if plan step has no Expected field)
 
 ### File: working/plan-issues.md
 
@@ -109,13 +113,13 @@ PASS | FAIL
 
 ```
 Step 1: Read Context and Filter
-  read plan.md → find Task NNN:
+  read `plan.md` → find Task NNN:
     Files section → skip tests/blackbox/, tests/integration/
     Checkbox steps → skip tests/blackbox/, tests/integration/
-  read plan-issues.md (if exists) → skip known blocking
-  read env-issues.md (if exists) → skip known blocking
+  read `plan-issues.md` (if exists) → skip known blocking
+  read `env-issues.md` (if exists) → skip known blocking
   read task output directory (if exists):
-    implement-review-results.md → issues to fix (all sections)
+    `implement-review-results.md` → issues to fix (all sections)
 
 Step 2: Handle Pending Issues
   read implement-review-results.md (if exists)
@@ -123,25 +127,25 @@ Step 2: Handle Pending Issues
   do NOT set status yet - status set after implementation verified
 
 Step 3: Implement (TDD for All)
-  use superpowers:test-driven-development
-  for each pending issue AND filtered checkbox steps/files (exclude blackbox/integration):
+  use `superpowers:test-driven-development`
+  for each pending issue AND filtered checkbox steps/files (exclude tests/blackbox and tests/integration):
     1. write failing test for the issue/feature
     2. run test → verify RED (test fails as expected)
-    3. implement minimum code to make test pass
-    4. run test → verify GREEN (test passes)
+    3. implement minimum code to achieve task step Expected Result
+    4. run test → verify Result matches task step Expected (`PASS` or `FAIL` as intended)
     5. if test blocked by env/plan issue:
-       - record to env-issues.md or plan-issues.md
-       - note in Blocked Tests section (not counted in status)
-       - continue with remaining tests/tasks
+       - record to `env-issues.md` or `plan-issues.md`
+       - note in `Blocked Tests` section (not counted in status)
+       - continue with remaining works
   after verified working:
-    for each verified Pending issue: set Resolved (DELETE Decision Reason)
+    for each verified `Pending` issue: set `Resolved` (DELETE Decision Reason)
   if issues genuinely blocked after exhausting approaches:
-    for that issue: set Don't Fix (fill Decision Reason)
+    for that issue: set `Don't Fix` (fill Decision Reason)
   follow plan file structure
   file growing beyond plan intent → record to plan-issues
 
 Step 4: Self-Review
-  all runnable tests pass? (use superteam:verification-before-completion)
+  all runnable tests match according task step Expected? (use `superteam:verification-before-completion`)
   blocked tests recorded properly?
   follows conventions?
   no obvious bugs/issues?
@@ -150,8 +154,7 @@ Step 4: Self-Review
 
 Step 5: Record Blocking Issues
   when discover plan/environment issue:
-    write to plan-issues.md or env-issues.md
-    add decision/assumption
+    write to `plan-issues.md` or `env-issues.md` with decision/assumption
     continue working
 ```
 

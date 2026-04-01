@@ -36,7 +36,7 @@ Output files:
 ```markdown
 # Plan Review Results
 
-**Review Status:** Continue | Done
+**Review Status:** Reviewing | Reviewed
 
 ---
 
@@ -49,8 +49,8 @@ Output files:
 ```
 
 **Review Status values:**
-- Continue — New issues found, continue reviewing
-- Done — No new issues found, review complete
+- Reviewing — New issues found, continue reviewing
+- Reviewed — No new issues found, review complete
 
 **Issue Status values:**
 - Pending — Found, awaiting fix (you create)
@@ -69,97 +69,64 @@ Output files:
 - **Assumption**: [what we assume to proceed]
 ```
 
+## Calibration
+
+**Only flag issues that would cause real problems during implementation.**
+
+An implementer building the wrong thing or getting stuck is an issue.
+Minor wording, stylistic preferences, and "nice to have" suggestions are not.
+
+Approve unless there are serious gaps — missing requirements from the spec,
+contradictory steps, placeholder content, or tasks so vague they can't be acted on.
+
 ## Process Flow
 
 ```
 Step 1: Ensure Output File Exists
-  create plan-review-results.md if missing:
+  create `plan-review-results.md` if missing:
     # Plan Review Results
-    **Review Status:** Continue
+    **Review Status:** Reviewing
     ---
     ## Issues
 
 Step 2: Read Context
-  read spec-issues.md (if exists) → skip known issues
+  read `spec-issues.md` (if exists) → skip known issues
   read spec file → understand requirements
-  read plan-review-results.md (if exists) → cumulative history
+  read `plan-review-results.md` (if exists) → cumulative history
   read plan file:
-    → not exists / empty / no tasks: write Done, skip remaining
+    → not exists / empty / no tasks: write `Reviewed`, skip remaining
 
-Step 3: Check Completeness (Gate Function each check)
-  IDENTIFY → READ → VERIFY → ONLY THEN move on
-  check: plan header (Goal, Architecture, Tech Stack)
-  check: each task has Files section with specific paths
-  check: each step has exact commands and expected output
-  check: code steps have code blocks
+Step 3: Check Plan
+  Completeness:
+    scan for TODOs, placeholders, incomplete tasks, missing steps
 
-Step 4: Check Spec Alignment (Gate Function each check)
-  IDENTIFY → READ → VERIFY → ONLY THEN move on
-  for each requirement: covered by at least one task?
-  create coverage matrix for 3+ requirements:
-    | Spec Requirement | Task |
-    | User registration | Task 001 |
+  Spec Alignment:
+    for each requirement: covered by at least one task?
+    check for major scope creep
 
-Step 5: Check Task Decomposition (Gate Function each check)
-  IDENTIFY → READ → VERIFY → ONLY THEN move on
-  check: tasks self-contained
-  check: dependencies ordered correctly
-  check: each step is ONE action (2-5 minutes)
-  check: steps have exact commands/output
+  Task Decomposition:
+    tasks have clear boundaries?
+    steps are actionable (specific action, not vague)?
 
-Step 6: Re-check Resolved Issues
-  for each Resolved in Issues section:
-    re-read plan to verify fix
-    → not fixed: set back to Pending
+  Buildability:
+    could an engineer follow without getting stuck?
+    steps have what they need (code blocks, commands, expected output)?
 
-Step 7: Record Issues
+Step 4: Re-check `Resolved` Issues
+  for each `Resolved` in `Issues` section:
+    re-read plan to verify it was fixed
+    → not fixed: set back to `Pending`
+
+Step 5: Record Issues
   check ALL existing issues before appending
   → same issue already recorded: skip
-  → new issue: append to Issues section
+  → new issue: append to `Issues` section
 
   for spec issues (problems of spec):
-    check spec-issues.md → skip if exists
-    new → record to spec-issues.md
+    check `spec-issues.md → skip if exists
+    else → record to `spec-issues.md`
 
-  write Review Status after header:
-    → have new issues appended to plan-review-results.md: Continue
-    → else: Done
+  write `Review Status` after header:
+    → have new issues appended to `plan-review-results.md`: write `Reviewing`
+    → else: write `Reviewed`
 ```
-
-## Required Evidence
-
-| Claim | Requires | Not Sufficient |
-|-------|----------|----------------|
-| Plan complete | Every field filled with concrete content | Fields exist but contain placeholders |
-| Files section adequate | Lists specific file paths | "Create necessary files" |
-| Requirement covered | Task steps describe behavior from spec | Task name sounds related |
-| Step atomic | ONE specific action | "Implement the feature" |
-| Step actionable | Has command and expected output | Vague without specifics |
-
-## Red Flags
-
-- Writing "Done" after quick scan without checking every task
-- Assuming spec alignment because task names match requirements
-- No coverage matrix for 3+ requirements
-- Accepting vague steps
-- Accepting steps without commands/output
-- Skipping re-check of Resolved issues
-
-**If you catch yourself:** STOP, check properly.
-
-## Common Mistakes
-
-| Mistake | Why | What To Do Instead |
-|---------|-----|-------------------|
-| "Planner says covered" without reading spec | Trusting summary | Read spec, verify each requirement |
-| "Plan looks structured" without checking steps | Pattern matching format | Verify each step is ONE action |
-| Missing spec issues | Assuming planner caught everything | Read spec independently |
-| Accepting vague steps | Trusting planner | Flag: needs specific action |
-| Accepting steps without command/output | Trusting planner | Flag: needs exact command/output |
-| Done without re-checking Resolved | Forgetting Step 6 | Always re-check Resolved first |
-
-## Do NOT Check
-
-- Implementation details (planner doesn't write code)
-- Code quality (code-reviewer's job)
-- Suggesting "better" approaches (only flag blocking issues)

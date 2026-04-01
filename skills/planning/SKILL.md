@@ -38,14 +38,18 @@ Use EXACT format only. Any extra content = violation.
 ## Process Flow
 
 ```
-S1: dispatch planner
-S2: dispatch plan-reviewer
-S3: read Review Status from plan-review-results.md
-    → Continue: go to S2
-    → Done: go to S4
-S4: read issues in plan-review-results.md
-    → has Pending: go to S1
-    → no Pending: complete
+Setup:
+    read `spec.md` → output summary
+    wait user confirm → begin Step 1
+
+Step 1: dispatch planner
+Step 2: dispatch plan-reviewer
+Step 3: read `Review Status` from `plan-review-results.md`
+    → `Review Status` is `Reviewing`: go to Step 2 (intended loop)
+    → `Review Status` is `Reviewed`: go to Step 4
+Step 4: read issues in plan-review-results.md
+    → has `Pending` issues: go to Step 1 (fix issues and do reviewing loop again)
+    → no `Pending` issues: complete
 ```
 
 ## Prohibited Actions

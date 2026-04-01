@@ -40,7 +40,7 @@ Your section:
 ```markdown
 ## Spec Review Issues
 
-**Review Status:** Continue | Done
+**Review Status:** Reviewing | Reviewed
 
 ### SR-001: [descriptive name]
 - **Status**: Pending
@@ -49,8 +49,8 @@ Your section:
 ```
 
 **Review Status values:**
-- Continue — New issues found, continue reviewing
-- Done — No new issues found, review complete
+- Reviewing — New issues found, continue reviewing
+- Reviewed — No new issues found, review complete
 
 **Issue Status values:**
 - Pending — Found (you create)
@@ -83,26 +83,26 @@ Your section:
 
 ```
 Step 1: Ensure Output File Exists
-  create implement-review-results.md if missing:
+  create `implement-review-results.md` if missing:
     # Implement Review Results: Task-NNN
     ## Spec Review Issues
-    **Review Status:** Continue
+    **Review Status:** Reviewing
     ## Code Review Issues
-    **Review Status:** Continue
+    **Review Status:** Reviewing
     ## Black-box Test Issues
 
 Step 2: Read Context
-  read plan.md → find Task NNN:
+  read `plan.md` → find Task NNN:
     Files section
     Checkbox steps → skip tests/blackbox/, tests/integration/
-  read plan-issues.md (if exists) → skip known blocking
-  read env-issues.md (if exists) → skip known blocking
-  read implement-review-results.md (if exists) → existing issues
-  read changes.md:
-    → not exists / empty / no files: write Done, skip remaining
+  read `plan-issues.md` (if exists) → skip known blocking
+  read `env-issues.md` (if exists) → skip known blocking
+  read `implement-review-results.md` (if exists) → existing issues
+  read `changes.md`:
+    → not exists / empty / no files: write `Reviewed`, skip remaining
     → has tests/blackbox/ or tests/integration/: record issue, skip these files
-  read code files in changes.md (skip tests/blackbox/, tests/integration/)
-  read test files in changes.md (skip tests/blackbox/, tests/integration/)
+  read code files in `changes.md` (skip tests/blackbox/, tests/integration/)
+  read test files in `changes.md` (skip tests/blackbox/, tests/integration/)
 
 Step 3: Verify Implementation Matches Steps (Gate Function each step)
   IDENTIFY: What code proves this step?
@@ -130,12 +130,12 @@ Step 6: Record Issues
     different root cause → new, append
 
   for plan/env blocking issues:
-    check plan-issues.md, env-issues.md → skip if exists
+    check `plan-issues.md`, `env-issues.md` → skip if exists
     new → record to appropriate file
 
-  write Review Status at section start:
-    → have new issues appended to YOUR section: Continue
-    → else: Done
+  write `Review Status` at section start:
+    → have new issues appended to YOUR section: write `Reviewing`
+    → else: write `Reviewed`
 ```
 
 ## Required Evidence
@@ -150,7 +150,7 @@ Step 6: Record Issues
 
 - Marking "verified" without reading actual code
 - Trusting changes.md without opening files
-- Writing "Done" because "looks fine"
+- Writing "Reviewed" because "looks fine"
 - Skipping verification because "implementer is thorough"
 - Assuming test covers requirement because name matches
 
@@ -162,8 +162,8 @@ Step 6: Record Issues
 |---------|-----|-------------------|
 | "changes.md says done" | Trusting report over code | Read actual implementation |
 | "Test exists so covered" | Confusing existence with coverage | Read test assertions |
-| "No issues, writing Done" | Rushing | Verify each requirement |
-| Done without re-checking Resolved | Forgetting Step 5 | Always re-check Resolved first |
+| "No issues, writing Reviewed" | Rushing | Verify each requirement |
+| Reviewed without re-checking Resolved | Forgetting Step 5 | Always re-check Resolved first |
 
 ## Do NOT Check
 

@@ -52,7 +52,7 @@ If all available, write only header:
 read plan.md → find Black-box Test Environment section
 for each dependency:
   run check command → verify availability
-  → unavailable: record to env-issues.md
+  → unavailable: record to `env-issues.md`
 ```
 
 ## Common Mistakes

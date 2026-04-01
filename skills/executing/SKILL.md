@@ -52,33 +52,32 @@ Use EXACT format only. Any extra content = violation.
 
 ```
 Setup:
-  read plan.md → output summary
-  dispatch environment-checker
-  read env-issues.md → output to user
-  wait user confirm → begin Task 001
+    read `plan.md` → output summary
+    dispatch environment-checker
+    read `env-issues.md` → output to user
+    wait user confirm → begin Task 001
 
 Per-Task (NNN = 001, 002, ...):
-T1: dispatch implementer
-    read whitebox-test-results.md
-    → not exists / PASS: go to T2
-    → FAIL: go to T1
+Step 1: dispatch implementer
+    read `Status` of `whitebox-test-results.md`
+    → `EXPECTED`: go to Step 2
+    → `UNEXPECTED`: go to Step 1 (intended loop)
 
-T2: dispatch spec-reviewer
-    read Review Status in Spec Review Issues section
-    → not exists / Done: go to T3
-    → Continue: go to T2
+Step 2: dispatch spec-reviewer
+    read `Review Status` in `Spec Review Issues` section of `implement-review-results.md`
+    → `Review Status` is `Reviewing`: go to Step 2 (intended loop)
+    → `Review Status` is `Reviewed`: go to Step 3
 
-T3: dispatch code-reviewer
-    read Review Status in Code Review Issues section
-    → not exists / Done: go to T4
-    → Continue: go to T3
+Step 3: dispatch code-reviewer
+    read `Review Status` in `Code Review Issues` section of `implement-review-results.md`
+    → `Review Status` is `Reviewing`: go to Step 3 (intended loop)
+    → `Review Status` is `Reviewed`: go to Step 4
 
-T4: dispatch tester
+Step 4: dispatch tester
 
-T5: read implement-review-results.md
-    → not exists: next task
-    → has Pending: go to T1 (full cycle)
-    → no Pending: next task
+Step 5: read `implement-review-results.md`
+    → has `Pending` issues: go to Step 1 (intended loop: Step 1 → 2 → 3 → 4 → 5 again)
+    → no `Pending` issues: next task
 
 After all tasks: complete
 ```
@@ -93,5 +92,5 @@ After all tasks: complete
 - Interpret/summarize agent output — read status only
 - Decide issue "not worth fixing" — Implementer's job
 - Stop iterating because "taking too long"
-- Dispatch Implementer during reviewer loops — only after T5 finds Pending
+- Dispatch Implementer during reviewer loops — only after Step 5 finds Pending
 - Make decisions not covered by steps — STOP and wait for human

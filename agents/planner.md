@@ -33,7 +33,9 @@ Output files:
 
 ### File: working/plan.md
 
-```markdown
+**Task struct is also included, follow it**:
+
+````markdown
 # [Feature Name] Implementation Plan
 
 **Goal:** [One sentence]
@@ -42,15 +44,38 @@ Output files:
 
 ---
 
-### Task 001: [Component Name]
+### Task NNN: [Component Name]
 
 **Files:**
-- Create: path/to/file.py
-- Modify: path/to/file.py
+- Create: `exact/path/to/file.py`
+- Modify: `exact/path/to/existing.py`
+- Test: `tests/exact/path/to/test.py`
 
 - [ ] **Step 1: Write the failing test**
-[exact action with code block and command]
+
+```python
+def test_specific_behavior():
+    result = function(input)
+    assert result == expected
 ```
+
+- [ ] **Step 2: Run test to verify it fails**
+
+Run: `pytest tests/path/test.py::test_name -v`
+Expected: FAIL with "function not defined"
+
+- [ ] **Step 3: Write minimal implementation**
+
+```python
+def function(input):
+    return expected
+```
+
+- [ ] **Step 4: Run test to verify it passes**
+
+Run: `pytest tests/path/test.py::test_name -v`
+Expected: PASS
+````
 
 ### File: working/spec-issues.md
 
@@ -66,88 +91,40 @@ Output files:
 
 ```
 Step 1: Read Context
-  read spec-issues.md (if exists) → skip known issues
+  read `spec-issues.md` (if exists) → skip known issues
   read spec file → understand requirements
-  read review results (if exists) → previous issues
-  read plan file (if exists) → previous version
+  read `plan-review-results.md` (if exists) → collect Pending issues
+  read `plan.md` (if exists) → previous version
 
-Step 2: Handle Pending Issues
-  for each Pending in review results:
-    fix → set Resolved, DELETE Decision Reason content entirely
-    spec problem → set Don't Fix, fill Decision Reason
-    disagree → set Don't Fix, fill Decision Reason
-
-Step 3: Check Scope
+Step 2: Check Scope
   multiple independent subsystems? → suggest separate plans
 
-Step 4: Record Spec Issues
+Step 3: Record Spec Issues
   for each spec ambiguity/gap:
-    check spec-issues.md for existing → skip if found
-    new issue → record to spec-issues.md with assumption
-  continue planning
+    check `spec-issues.md` for issue existing → skip if found
+    new issue → record to `spec-issues.md` with assumption
 
-Step 5: File Structure
+Step 4: Write/Update Plan
   map files to create/modify
   design units with clear boundaries
   prefer smaller focused files
-
-Step 6: Plan Structure
+  address `Pending` issues in plan updates where applicable
   step granularity: ONE action (2-5 minutes)
-  write complete plan to plan file
+  write complete plan to `plan.md`
+
+Step 5: Handle `Pending` Issues (AFTER plan written)
+  for each `Pending` in `plan-review-results.md`:
+    plan addresses it → set `Resolved`, DELETE Decision Reason entirely
+    spec problem (cannot fix in plan) → set `Don't Fix`, FILL Decision Reason
 ```
 
-## Step Granularity
+## Bite-Sized Task Granularity
 
-Each checkbox step is ONE action (2-5 minutes):
-- "Write failing test" → step
-- "Run test verify fail" → step
-- "Write minimal implementation" → step
-- "Run test verify pass" → step
-
-**Task Template:**
-
-````markdown
-### Task N: [Component Name]
-
-**Files:**
-- Create: `path/to/new/file.py`
-- Modify: `path/to/existing.py`
-- Test: `tests/path/to/test.py`
-
-- [ ] **Step 1: Write the failing test**
-
-Create test file with test for expected behavior:
-
-```python
-def test_function_returns_expected():
-    result = function_name(valid_input)
-    assert result == expected_output
-```
-
-- [ ] **Step 2: Run test to verify it fails**
-
-Run: `pytest tests/test_submodule.py -v`
-Expected: FAIL with "function_name not defined"
-
-- [ ] **Step 3: Write minimal implementation**
-
-Create implementation file:
-
-```python
-def function_name(input):
-    return expected_output
-```
-
-- [ ] **Step 4: Run test to verify it passes**
-
-Run: `pytest tests/test_submodule.py -v`
-Expected: PASS
-````
-
-## Decision Reason Rules
-
-- Resolved → DELETE content entirely, leave: `- **Decision Reason**:`
-- Don't Fix → MUST fill with reasoning
+**Each step is one action (2-5 minutes):**
+- "Write the failing test" - step
+- "Run it to make sure it fails" - step
+- "Implement the minimal code to make the test pass" - step
+- "Run the tests and make sure they pass" - step
 
 ## Forbidden Phrases
 

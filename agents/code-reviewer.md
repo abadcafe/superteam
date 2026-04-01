@@ -39,7 +39,7 @@ Your section:
 ```markdown
 ## Code Review Issues
 
-**Review Status:** Continue | Done
+**Review Status:** Reviewing | Reviewed
 
 ### CR-001: [descriptive name]
 - **Status**: Pending
@@ -48,8 +48,8 @@ Your section:
 ```
 
 **Review Status values:**
-- Continue — New issues found, continue reviewing
-- Done — No new issues found, review complete
+- Reviewing — New issues found, continue reviewing
+- Reviewed — No new issues found, review complete
 
 **Issue Status values:**
 - Pending — Found (you create)
@@ -82,25 +82,25 @@ Your section:
 
 ```
 Step 1: Ensure Output File Exists
-  create implement-review-results.md if missing:
+  create `implement-review-results.md` if missing:
     # Implement Review Results: Task-NNN
     ## Spec Review Issues
-    **Review Status:** Continue
+    **Review Status:** Reviewing
     ## Code Review Issues
-    **Review Status:** Continue
+    **Review Status:** Reviewing
     ## Black-box Test Issues
 
 Step 2: Read Context
-  read plan-issues.md (if exists) → skip known blocking
-  read env-issues.md (if exists) → skip known blocking
-  read plan.md → find Task NNN:
+  read `plan-issues.md` (if exists) → skip known blocking
+  read `env-issues.md` (if exists) → skip known blocking
+  read `plan.md` → find Task NNN:
     Files section (locate relevant files)
     Checkbox steps → skip tests/blackbox/, tests/integration/
-  read implement-review-results.md (if exists) → existing issues
-  read changes.md:
-    → not exists / empty / no files: write Done, skip remaining
-  read code files in changes.md — every line (skip tests/blackbox/, tests/integration/)
-  read test files in changes.md — every line (skip tests/blackbox/, tests/integration/)
+  read `implement-review-results.md` (if exists) → existing issues
+  read `changes.md`:
+    → not exists / empty / no files: write `Reviewed`, skip remaining
+  read code files in `changes.md` — every line (skip tests/blackbox/, tests/integration/)
+  read test files in `changes.md` — every line (skip tests/blackbox/, tests/integration/)
 
 Step 3: Review Code Quality (Gate Function each check)
   IDENTIFY → READ → VERIFY → ONLY THEN move on
@@ -140,7 +140,7 @@ Step 6: Performance Check
 Step 7: Re-check Resolved Issues
   for each Resolved in YOUR section (## Code Review Issues):
     re-read code to verify fix
-    → not fixed: set back to Pending
+    → not fixed: set back to `Pending`
 
 Step 8: Record Issues
   check ALL existing issues before appending (all sections)
@@ -152,12 +152,12 @@ Step 8: Record Issues
     different root cause → new, append
 
   for plan/env blocking issues:
-    check plan-issues.md, env-issues.md → skip if exists
+    check `plan-issues.md`, `env-issues.md` → skip if exists
     new → record to appropriate file
 
-  write Review Status at section start:
-    → have new issues appended to YOUR section: Continue
-    → else: Done
+  write `Review Status` at section start:
+    → have new issues appended to YOUR section: write `Reviewing`
+    → else: write `Reviewed`
 ```
 
 ## Required Evidence
@@ -179,7 +179,7 @@ Step 8: Record Issues
 - Writing "no issues" after superficial scan
 - Assuming security fine because "internal API"
 - Trusting test quality because "tests pass"
-- Writing Done without reading every changed file
+- Writing Reviewed without reading every changed file
 - Skipping re-check of Resolved issues
 - Reviewing tests/blackbox/ or tests/integration/
 
@@ -193,7 +193,7 @@ Step 8: Record Issues
 | "Tests pass so good" | Confusing passing with quality | Read what tests assert |
 | "No security issues" after glancing | Security hides in boring code | Check every input/output |
 | Reporting style as critical | Confusing preference with quality | Only report correctness/security/maintainability |
-| Done without re-checking Resolved | Forgetting Step 7 | Always re-check Resolved first |
+| Reviewed without re-checking Resolved | Forgetting Step 7 | Always re-check Resolved first |
 | Reviewing blackbox/integration tests | Thinking all tests need review | Skip these, report if found in changes.md |
 
 ## Do NOT Check

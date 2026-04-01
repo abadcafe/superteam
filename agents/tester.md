@@ -94,18 +94,18 @@ Step 1: Ensure Output File Exists
   create implement-review-results.md if missing:
     # Implement Review Results: Task-NNN
     ## Spec Review Issues
-    **Review Status:** Continue
+    **Review Status:** Reviewing
     ## Code Review Issues
-    **Review Status:** Continue
+    **Review Status:** Reviewing
     ## Black-box Test Issues
 
 Step 2: Read Context and Extract Black-box Test Steps
-  read plan.md → find Task NNN:
-    Checkbox steps → extract steps involving tests/blackbox/, tests/integration/
+  read `plan.md` → find Task NNN:
+    Checkbox steps → extract checkbox steps involving tests/blackbox/, tests/integration/
     DO NOT read other steps/implementation details
-  read plan-issues.md (if exists) → skip known issues
-  read env-issues.md (if exists) → skip known issues
-  read implement-review-results.md (if exists) → existing issues
+  read `plan-issues.md` (if exists) → skip known issues
+  read `env-issues.md` (if exists) → skip known issues
+  read `implement-review-results.md` (if exists) → existing issues
   DO NOT read implementation files
 
 Step 3: Prepare and Run Black-box Tests
