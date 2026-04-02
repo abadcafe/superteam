@@ -3,14 +3,16 @@ name: executing
 description: Use when you have a completed plan at working/plan.md to execute serially.
 ---
 
-# Executing Plans
+# Executing
+
+You operate as a state machine, dispatching agents and reading files strictly
+according to the process flow.
 
 ## Iron Law
 
-```
-YOU ARE A STATE MACHINE. YOU DISPATCH AGENTS AND READ FILES.
 YOU DO NOT THINK, INTERPRET, SUMMARIZE, OR DECIDE.
-```
+
+NEVER DOUBT THE PROCESS FLOW.
 
 ## File Paths
 
@@ -53,44 +55,31 @@ Use EXACT format only. Any extra content = violation.
 ```
 Setup:
     read `plan.md` → output summary
-    dispatch environment-checker
-    read `env-issues.md` → output to user
     wait user confirm → begin Task 001
 
 Per-Task (NNN = 001, 002, ...):
 Step 1: dispatch implementer
-    read `Status` of `whitebox-test-results.md`
+    read `Status` of `test-results.md`
+    → `UNEXPECTED`: go to Step 1 (intended loop for fix `UNEXPECTED` cases)
     → `EXPECTED`: go to Step 2
-    → `UNEXPECTED`: go to Step 1 (intended loop)
-
 Step 2: dispatch spec-reviewer
-    read `Review Status` in `Spec Review Issues` section of `implement-review-results.md`
-    → `Review Status` is `Reviewing`: go to Step 2 (intended loop)
-    → `Review Status` is `Reviewed`: go to Step 3
-
 Step 3: dispatch code-reviewer
-    read `Review Status` in `Code Review Issues` section of `implement-review-results.md`
-    → `Review Status` is `Reviewing`: go to Step 3 (intended loop)
-    → `Review Status` is `Reviewed`: go to Step 4
-
-Step 4: dispatch tester
-
 Step 5: read `implement-review-results.md`
-    → has `Pending` issues: go to Step 1 (intended loop: Step 1 → 2 → 3 → 4 → 5 again)
+    → has `Pending` issues: go to Step 1 (intended loop: Step 1 → 2 → 3 → 4 → 5 again for fix `Pending` issues)
     → no `Pending` issues: next task
 
 After all tasks: complete
 ```
 
-## Prohibited Actions
+## Do not
 
-- Add context/explanations to agent calls
-- Skip any step/reviewer
-- Reorder steps (Spec → Code → Tester, always)
+- Skip any step of process flow
+- Combine steps of process flow
+- Reorder steps of process flow (Implement → Spec review → Code review, always)
 - Combine tasks into one dispatch
-- Fix code yourself — dispatch Implementer
-- Interpret/summarize agent output — read status only
-- Decide issue "not worth fixing" — Implementer's job
 - Stop iterating because "taking too long"
-- Dispatch Implementer during reviewer loops — only after Step 5 finds Pending
+- Decide issue "not worth fixing" — Implementer's job
+- Fix code yourself — dispatch Implementer
+- Add context/explanations to agent calls
+- Interpret/summarize agent output — read status only
 - Make decisions not covered by steps — STOP and wait for human

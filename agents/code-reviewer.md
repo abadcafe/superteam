@@ -39,17 +39,11 @@ Your section:
 ```markdown
 ## Code Review Issues
 
-**Review Status:** Reviewing | Reviewed
-
 ### CR-001: [descriptive name]
 - **Status**: Pending
 - **Description**: [what is wrong and why it matters]
 - **Decision Reason**: [leave empty — implementer fills for Don't Fix]
 ```
-
-**Review Status values:**
-- Reviewing — New issues found, continue reviewing
-- Reviewed — No new issues found, review complete
 
 **Issue Status values:**
 - Pending — Found (you create)
@@ -85,22 +79,16 @@ Step 1: Ensure Output File Exists
   create `implement-review-results.md` if missing:
     # Implement Review Results: Task-NNN
     ## Spec Review Issues
-    **Review Status:** Reviewing
     ## Code Review Issues
-    **Review Status:** Reviewing
-    ## Black-box Test Issues
 
 Step 2: Read Context
   read `plan-issues.md` (if exists) → skip known blocking
   read `env-issues.md` (if exists) → skip known blocking
-  read `plan.md` → find Task NNN:
-    Files section (locate relevant files)
-    Checkbox steps → skip tests/blackbox/, tests/integration/
+  read `plan.md` → find Task NNN, collect task files and checkbox steps
   read `implement-review-results.md` (if exists) → existing issues
   read `changes.md`:
-    → not exists / empty / no files: write `Reviewed`, skip remaining
-  read code files in `changes.md` — every line (skip tests/blackbox/, tests/integration/)
-  read test files in `changes.md` — every line (skip tests/blackbox/, tests/integration/)
+    → not exists / empty / no files: skip remaining
+  read files in `changes.md` — every line
 
 Step 3: Review Code Quality (Gate Function each check)
   IDENTIFY → READ → VERIFY → ONLY THEN move on
@@ -121,7 +109,7 @@ Step 3: Review Code Quality (Gate Function each check)
     complex logic: comments
     no magic numbers/strings
 
-Step 4: Review White-box Tests
+Step 4: Review Tests
   tests readable
   tests follow TDD
   tests verify real behavior (not mock behavior)
@@ -154,10 +142,6 @@ Step 8: Record Issues
   for plan/env blocking issues:
     check `plan-issues.md`, `env-issues.md` → skip if exists
     new → record to appropriate file
-
-  write `Review Status` at section start:
-    → have new issues appended to YOUR section: write `Reviewing`
-    → else: write `Reviewed`
 ```
 
 ## Required Evidence
@@ -179,9 +163,8 @@ Step 8: Record Issues
 - Writing "no issues" after superficial scan
 - Assuming security fine because "internal API"
 - Trusting test quality because "tests pass"
-- Writing Reviewed without reading every changed file
+- Reviewed without reading every changed file
 - Skipping re-check of Resolved issues
-- Reviewing tests/blackbox/ or tests/integration/
 
 **If you catch yourself:** STOP, read code line by line.
 
@@ -194,7 +177,6 @@ Step 8: Record Issues
 | "No security issues" after glancing | Security hides in boring code | Check every input/output |
 | Reporting style as critical | Confusing preference with quality | Only report correctness/security/maintainability |
 | Reviewed without re-checking Resolved | Forgetting Step 7 | Always re-check Resolved first |
-| Reviewing blackbox/integration tests | Thinking all tests need review | Skip these, report if found in changes.md |
 
 ## Do NOT Check
 

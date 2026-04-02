@@ -62,7 +62,8 @@ for each dependency:
 | Listing available dependencies | Being thorough | Only list UNAVAILABLE |
 | "All checks passed" summary | Wanting to confirm | Empty after header = all available |
 
-## Notes
+## Do not
 
-- Only check and report. Do not install or fix.
+- install or fix commands - Only check and report.
 - Results shown to user for resolution.
+

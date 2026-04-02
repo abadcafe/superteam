@@ -56,7 +56,7 @@ Build:
 ## When To Apply
 
 ALWAYS before:
-- Writing PASS/FAIL to whitebox-test-results.md
+- Writing PASS/FAIL to test-results.md
 - ANY expression of satisfaction about work state
 - ANY positive statement about correctness
 - Finishing self-review

@@ -22,7 +22,7 @@ Disagreeing requires having tried and failed to fix first.
 
 - `working/plan-issues.md` - Known blocking issues (hardcoded)
 - `working/env-issues.md` - Known blocking issues (hardcoded)
-- Task output directory files: changes.md, implement-review-results.md, whitebox-test-results.md
+- Task output directory files: changes.md, implement-review-results.md, test-results.md
 
 ## Return Format
 
@@ -31,7 +31,7 @@ Return ONLY:
 # implementer
 Output files:
 - working/artifacts/task-NNN/changes.md
-- working/artifacts/task-NNN/whitebox-test-results.md
+- working/artifacts/task-NNN/test-results.md
 ```
 
 ## Output Files
@@ -49,7 +49,7 @@ Output files:
 [Brief description]
 ```
 
-### File: working/artifacts/task-NNN/whitebox-test-results.md
+### File: working/artifacts/task-NNN/test-results.md
 
 ```markdown
 # White-box Test Results: Task-NNN
@@ -112,10 +112,8 @@ EXPECTED | UNEXPECTED
 ## Process Flow
 
 ```
-Step 1: Read Context and Filter
-  read `plan.md` → find Task NNN:
-    Files section → skip tests/blackbox/, tests/integration/
-    Checkbox steps → skip tests/blackbox/, tests/integration/
+Step 1: Read Context
+  read `plan.md` → find Task NNN, collect task files and checkbox steps
   read `plan-issues.md` (if exists) → skip known blocking
   read `env-issues.md` (if exists) → skip known blocking
   read task output directory (if exists):
@@ -128,7 +126,8 @@ Step 2: Handle Pending Issues
 
 Step 3: Implement (TDD for All)
   use `superpowers:test-driven-development`
-  for each pending issue AND filtered checkbox steps/files (exclude tests/blackbox and tests/integration):
+  use `superteam:verification-before-completion`
+  for each pending issue AND checkbox steps/files:
     1. write failing test for the issue/feature
     2. run test → verify RED (test fails as expected)
     3. implement minimum code to achieve task step Expected Result
@@ -138,14 +137,14 @@ Step 3: Implement (TDD for All)
        - note in `Blocked Tests` section (not counted in status)
        - continue with remaining works
   after verified working:
-    for each verified `Pending` issue: set `Resolved` (DELETE Decision Reason)
+    for each verified `Pending` issue: set `Resolved` (DELETE `Decision Reason`'s content)
   if issues genuinely blocked after exhausting approaches:
-    for that issue: set `Don't Fix` (fill Decision Reason)
+    for that issue: set `Don't Fix` (fill `Decision Reason`)
   follow plan file structure
   file growing beyond plan intent → record to plan-issues
 
 Step 4: Self-Review
-  all runnable tests match according task step Expected? (use `superteam:verification-before-completion`)
+  all runnable tests match corresponding task step Expected?
   blocked tests recorded properly?
   follows conventions?
   no obvious bugs/issues?
@@ -160,17 +159,12 @@ Step 5: Record Blocking Issues
 
 ## Don't Fix Requirements
 
-Decision Reason MUST document:
+`Decision Reason` MUST document:
 1. At least 3 approaches attempted — what you tried
 2. Why each failed — specific errors/blockers
 3. What would resolve — plan change, env fix, spec clarification
 
 **Example:** "Tried: (1) try-catch on DB error - no error type exposed. (2) pre-check query - race condition. (3) custom handler - needs framework change. Resolution: plan must specify introspection-capable library."
-
-## Decision Reason Rules
-
-- Resolved → DELETE content entirely: `- **Decision Reason**:`
-- Don't Fix → MUST fill with reasoning (1-2 sentences: blocker + key attempts)
 
 ## Red Flags
 

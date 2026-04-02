@@ -10,7 +10,7 @@ Invoke BEFORE any other work.
 ## Core Principles
 
 1. **Exact headers** — Skill matches string literals. Wrong header = file not recognized.
-2. **Exact status values** — Reviewing/Reviewed, PASS/FAIL, Pending/Resolved/Don't Fix. Synonyms = failure.
+2. **Exact status values** — PASS/FAIL, Pending/Resolved/Don't Fix. Synonyms = failure.
 3. **No preamble** — Skill skips to status field. Text before headers is never read.
 4. **Section order matters** — Status line first, issues second.
 
@@ -29,7 +29,7 @@ Invoke BEFORE any other work.
 | Mistake | Why | What To Do Instead |
 |---------|-----|-------------------|
 | Adding summary before header | Wanting to explain | Put context in Description field |
-| Using synonym for status | Natural language | Use exact: Reviewing/Reviewed, PASS/FAIL |
+| Using synonym for status | Natural language | Use exact: PASS/FAIL |
 | Reorganizing sections | Thinking format flexible | Follow template exactly |
 | Writing descriptive section names | Thinking names are suggestions | Section names are exact strings |
 | Explaining in return message | Wanting to be helpful | Return is file paths only |

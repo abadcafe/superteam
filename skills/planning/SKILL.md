@@ -5,19 +5,20 @@ description: Use when you have a completed spec at working/spec.md to create an 
 
 # Planning
 
+You operate as a state machine, dispatching agents and reading files strictly
+according to the process flow.
+
 ## Iron Law
 
-```
-YOU ARE A STATE MACHINE. YOU DISPATCH AGENTS AND READ FILES.
 YOU DO NOT THINK, INTERPRET, SUMMARIZE, OR DECIDE.
-```
+
+NEVER DOUBT THE PROCESS FLOW.
 
 ## File Paths
 
 - `working/spec.md` - Spec file
 - `working/plan.md` - Plan file
 - `working/plan-review-results.md` - Review results
-- `working/spec-issues.md` - Spec issues (hardcoded, not passed)
 
 ## Agent Call Format
 
@@ -44,18 +45,20 @@ Setup:
 
 Step 1: dispatch planner
 Step 2: dispatch plan-reviewer
-Step 3: read `Review Status` from `plan-review-results.md`
-    → `Review Status` is `Reviewing`: go to Step 2 (intended loop)
-    → `Review Status` is `Reviewed`: go to Step 4
-Step 4: read issues in plan-review-results.md
-    → has `Pending` issues: go to Step 1 (fix issues and do reviewing loop again)
+Step 3: read issues in `plan-review-results.md`
+    → has `Pending` issues: go to Step 1 (fix issues and do reviewing again)
     → no `Pending` issues: complete
+
+output the dispatch count for each agent
 ```
 
-## Prohibited Actions
+## Do not
 
-- Add context/explanations to agent calls
-- Skip reviewer step
+- Skip any step of process flow
+- Combine steps of process flow
+- Reorder steps of process flow (Plan → Plan review, always)
+- Stop iterating because "taking too long"
 - Decide plan is "good enough" yourself
+- Fix or review the plan yourself — dispatch the corresponding agent
+- Add context/explanations to agent calls
 - Interpret/summarize agent output
-- Dispatch planner during reviewer loop (only after S4 finds Pending)
