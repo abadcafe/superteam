@@ -38,6 +38,8 @@ Output files:
 ````markdown
 # [Feature Name] Implementation Plan
 
+> **For agentic workers:** implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
 **Goal:** [One sentence]
 **Architecture:** [2-3 sentences]
 **Tech Stack:** [Key technologies]
