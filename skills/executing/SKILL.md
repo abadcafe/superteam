@@ -26,9 +26,6 @@ NEVER DOUBT THE PROCESS FLOW.
 Use EXACT format only. Any extra content = violation.
 
 ```
-# environment-checker
-- Plan path: working/plan.md
-
 # implementer
 - Plan path: working/plan.md
 - Task number: NNN
@@ -43,12 +40,63 @@ Use EXACT format only. Any extra content = violation.
 - Plan path: working/plan.md
 - Task number: NNN
 - Task output directory: working/artifacts/task-NNN/
-
-# tester
-- Plan path: working/plan.md
-- Task number: NNN
-- Task output directory: working/artifacts/task-NNN/
 ```
+
+## Output Files
+
+### File: working/commit-message.md
+
+Follow Conventional Commits. Subject line ≤ 72 chars, imperative mood, body explains *why*.
+
+```markdown
+<type>(<scope>): <subject>
+
+<body: what changed and why, wrapped at 72 chars>
+```
+
+Type: `feat`, `fix`, `refactor`, `perf`, `test`, `docs`, `chore`
+Scope: derive from plan Goal (the module or area affected)
+Subject: derive from plan Goal (what was done, not how)
+Body: 2-4 sentences. What the change does and why it matters. No task lists.
+
+### File: working/task-summary.md
+
+```markdown
+# Task Summary
+
+## Task NNN: [task name]
+
+### Files
+[copy from changes.md Files section]
+
+### Test Status
+[copy Status from test-results.md: EXPECTED or UNEXPECTED]
+
+### Blocked Tests
+[copy Blocked Tests table from test-results.md, or "None"]
+
+### Don't Fix Issues
+[copy issues with Status: Don't Fix from implement-review-results.md, include ID, name, and Decision Reason. Or "None"]
+
+### Agent Metrics
+- implementer: N calls, N tokens, Nm Ns
+- spec-reviewer: N calls, N tokens, Nm Ns
+- code-reviewer: N calls, N tokens, Nm Ns
+
+## Task NNN: [task name]
+...
+
+## Assumptions
+
+### [issue ID]: [title]
+Description: [Description]
+Assumption: [Assumption]
+
+### [issue ID]: [title]
+...
+```
+
+Track agent metrics during execution: after each agent dispatch, record its call count (+1), token usage, and wall-clock time.
 
 ## Process Flow
 
@@ -64,11 +112,19 @@ Step 1: dispatch implementer
     → `EXPECTED`: go to Step 2
 Step 2: dispatch spec-reviewer
 Step 3: dispatch code-reviewer
-Step 5: read `implement-review-results.md`
-    → has `Pending` issues: go to Step 1 (intended loop: Step 1 → 2 → 3 → 4 → 5 again for fix `Pending` issues)
+Step 4: read `implement-review-results.md`
+    → has `Pending` issues: go to Step 1 (intended loop: Step 1 → 2 → 3 → 4 again for fix and review `Pending` issues)
     → no `Pending` issues: next task
 
-After all tasks: complete
+After all tasks:
+    read all `working/artifacts/task-NNN/changes.md`
+    read all `working/artifacts/task-NNN/test-results.md`
+    read all `working/artifacts/task-NNN/implement-review-results.md`
+    read `plan.md` → extract goal and task names
+    read `spec-issues.md`, `plan-issues.md`, `env-issues.md` (if exist)
+    write `working/commit-message.md`
+    write `working/task-summary.md` (include agent metrics tracked during execution)
+    complete
 ```
 
 ## Do not

@@ -1,12 +1,10 @@
 ---
 name: code-reviewer
 description: Use when reviewing code quality after spec compliance is confirmed.
-skills: [superteam:output-format-enforcement]
+skills: [superpowers:test-driven-development]
 ---
 
 # Code Reviewer Agent
-
-Use `superteam:output-format-enforcement` before any work.
 
 ## Iron Law
 

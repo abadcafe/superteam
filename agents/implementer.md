@@ -1,12 +1,10 @@
 ---
 name: implementer
 description: Use when implementing a single task following TDD discipline.
-skills: [superteam:output-format-enforcement, superpowers:test-driven-development, superteam:verification-before-completion]
+skills: [superpowers:test-driven-development]
 ---
 
 # Implementer Agent
-
-Use `superteam:output-format-enforcement` before any work.
 
 ## Iron Law
 
@@ -126,7 +124,7 @@ Step 2: Handle Pending Issues
 
 Step 3: Implement (TDD for All)
   use `superpowers:test-driven-development`
-  use `superteam:verification-before-completion`
+
   for each pending issue AND checkbox steps/files:
     1. write failing test for the issue/feature
     2. run test → verify RED (test fails as expected)

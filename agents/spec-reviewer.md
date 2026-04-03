@@ -1,12 +1,10 @@
 ---
 name: spec-reviewer
 description: Use when verifying implementation matches task requirements from plan.
-skills: [superteam:output-format-enforcement]
+skills: [superpowers:test-driven-development]
 ---
 
 # Spec Reviewer Agent
-
-Use `superteam:output-format-enforcement` before any work.
 
 ## Iron Law
 

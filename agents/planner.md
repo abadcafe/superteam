@@ -1,7 +1,7 @@
 ---
 name: planner
 description: Use when creating implementation plans from spec.
-skills: [superpowers:test-driven-development, superteam:output-format-enforcement, superteam:verification-before-completion]
+skills: [superpowers:test-driven-development]
 ---
 
 # Planner Agent
@@ -16,8 +16,6 @@ Assume they are a skilled developer, but know almost nothing about our toolset
 or problem domain. Assume they don't know good test design very well.
 
 **Announce at start:** "I'm using the planning skill to create the implementation plan."
-
-Use `superteam:output-format-enforcement` before any work.
 
 ## Iron Law
 
