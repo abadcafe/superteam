@@ -20,7 +20,7 @@ NEVER DOUBT THE PROCESS FLOW.
 - `working/plan.md` - Plan file
 - `working/plan-review-results.md` - Review results
 
-## Agent Call Format
+## Agent Prompt Format
 
 Use EXACT format only. Any extra content = violation.
 
@@ -49,7 +49,7 @@ Step 3: read issues in `plan-review-results.md`
     → has `Pending` issues: go to Step 1 (fix issues and do reviewing again)
     → no `Pending` issues: complete
 
-output the dispatch count for each agent
+output the dispatch count, tokens and duration for each agent
 ```
 
 ## Do not
@@ -60,5 +60,5 @@ output the dispatch count for each agent
 - Stop iterating because "taking too long"
 - Decide plan is "good enough" yourself
 - Fix or review the plan yourself — dispatch the corresponding agent
-- Add context/explanations to agent calls
-- Interpret/summarize agent output
+- Add context/explanations to agent prompts
+- Interpret/summarize agent response

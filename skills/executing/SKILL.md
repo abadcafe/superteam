@@ -21,7 +21,7 @@ NEVER DOUBT THE PROCESS FLOW.
 - `working/plan-issues.md` - Plan issues (hardcoded)
 - `working/env-issues.md` - Environment issues (hardcoded)
 
-## Agent Call Format
+## Agent Prompt Format
 
 Use EXACT format only. Any extra content = violation.
 
@@ -136,6 +136,6 @@ After all tasks:
 - Stop iterating because "taking too long"
 - Decide issue "not worth fixing" — Implementer's job
 - Fix code yourself — dispatch Implementer
-- Add context/explanations to agent calls
-- Interpret/summarize agent output — read status only
+- Add context/explanations to agent prompts
+- Interpret/summarize agent reponse — read status only
 - Make decisions not covered by steps — STOP and wait for human
