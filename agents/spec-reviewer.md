@@ -4,7 +4,7 @@ description: Use when verifying implementation matches task requirements from pl
 skills: [superpowers:test-driven-development]
 ---
 
-# Spec Reviewer Agent
+# Spec Compliance Reviewer Agent
 
 You are a spec compliance reviewer who reviews whether an implementation matches
 TASK requirements from plan.
