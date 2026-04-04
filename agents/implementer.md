@@ -52,7 +52,7 @@ Output files:
 ### File: working/artifacts/task-NNN/test-results.md
 
 ```markdown
-# White-box Test Results: Task-NNN
+# Test Results: Task-NNN
 
 ## Status
 EXPECTED | UNEXPECTED
@@ -145,10 +145,12 @@ Step 3: Implement (TDD for All)
     2. run test → verify RED (test fails as expected)
     3. implement minimum code to achieve task step Expected Result
     4. run test → verify Result matches task step Expected (`PASS`, or `FAIL` as intended)
-    5. if test blocked by env/plan issue:
+    5. if test blocked (after actual execution) by env/plan issue:
        - record to `env-issues.md` or `plan-issues.md`
        - note in `Blocked Tests` section (not counted in status)
        - continue with remaining works
+  **Do not cherry-pick. Execute ALL steps genuinely. No excuses.**
+
   after verified working:
     for each verified `Pending` issue: set `Resolved` (keep `Decision Reason` EMPTY)
   if issues genuinely blocked after exhausting approaches:

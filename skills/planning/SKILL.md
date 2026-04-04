@@ -47,7 +47,7 @@ Step 1: dispatch planner
 Step 2: dispatch plan-reviewer
 Step 3: read issues in `plan-review-results.md`
     → has `Pending` issues: go to Step 1 (fix issues and do reviewing again)
-    → no `Pending` issues: complete
+    → no `Pending` issues: complete (all reviewers MUST be confirmed)
 
 output the dispatch count, tokens and duration for each agent
 ```

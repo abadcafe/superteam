@@ -107,14 +107,14 @@ Setup:
 
 Per-Task (NNN = 001, 002, ...):
 Step 1: dispatch implementer
-    read `Status` of `test-results.md`
+    read `Status` from `test-results.md` (line 4 only):
     → `UNEXPECTED`: go to Step 1 (intended loop for fix `UNEXPECTED` cases)
     → `EXPECTED`: go to Step 2
 Step 2: dispatch spec-reviewer
 Step 3: dispatch code-reviewer
 Step 4: read `implement-review-results.md`
     → has `Pending` issues: go to Step 1 (intended loop: Step 1 → 2 → 3 → 4 again for fix and review `Pending` issues)
-    → no `Pending` issues: next task
+    → no `Pending` issues: next task (all reviewers MUST be confirmed)
 
 After all tasks:
     read all `working/artifacts/task-NNN/changes.md`

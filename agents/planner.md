@@ -150,12 +150,12 @@ Step 4: Handle `Pending` Issues (AFTER plan written)
 Step 5: Record Spec Issues (AFTER plan written)
   for each spec ambiguity/gap:
     check `spec-issues.md` for issue existing → skip if found
-    new issue → record to `spec-issues.md` with assumption
+    new issue → append to `spec-issues.md` with assumption per the specified format
 ```
 
 **DO NOT:**
 - Skip any step of process flow
-- Add explanations/interpretations/summaries when responding — per `Response Format` only.
+- Add explanations/interpretations/summaries when responding — per `Response Format` only
 
 ## Bite-Sized Task Granularity
 

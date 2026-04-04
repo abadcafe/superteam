@@ -122,7 +122,7 @@ Step 5: Record Issues
 
   for each spec issue (problems of spec):
     check `spec-issues.md` → skip if issue already recorded
-    else → record to `spec-issues.md`
+    else → append to `spec-issues.md` per the specified format
 ```
 
 **DO NOT:**
