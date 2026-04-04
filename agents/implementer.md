@@ -32,6 +32,8 @@ Output files:
 - working/artifacts/task-NNN/test-results.md
 ```
 
+**DO NOT add any extra content to the response**
+
 ## Output Files
 
 ### File: working/artifacts/task-NNN/changes.md
@@ -187,8 +189,7 @@ Step 6: Write reports
   write `changes.md` and `test-results.md`
 ```
 
-### Do not
-
+**DO NOT:**
 - Skip any step of process flow
 - Add explanations/interpretations/summaries when responding — per `Response Format` only.
 

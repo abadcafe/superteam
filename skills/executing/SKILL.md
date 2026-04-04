@@ -10,7 +10,7 @@ according to the process flow.
 
 ## Iron Law
 
-YOU DO NOT THINK, INTERPRET, SUMMARIZE, OR DECIDE.
+YOU DO NOT THINK, VERIFY, INTERPRET, SUMMARIZE, OR DECIDE.
 
 NEVER DOUBT THE PROCESS FLOW.
 
@@ -127,15 +127,14 @@ After all tasks:
     complete
 ```
 
-## Do not
-
+**DO NOT:**
 - Skip any step of process flow
 - Combine steps of process flow
 - Reorder steps of process flow (Implement → Spec review → Code review, always)
 - Combine tasks into one dispatch
 - Stop iterating because "taking too long"
 - Decide issue "not worth fixing" — Implementer's job
-- Fix code yourself — dispatch Implementer
-- Add context/explanations to agent prompts
+- Fix, verify or review code yourself — dispatch the corresponding agent
+- Add context/explanations or any extra content to agent prompts - per `Agent Prompt format` ONLY
 - Interpret/summarize agent reponse — read status only
 - Make decisions not covered by steps — STOP and wait for human

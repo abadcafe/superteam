@@ -52,13 +52,12 @@ Step 3: read issues in `plan-review-results.md`
 output the dispatch count, tokens and duration for each agent
 ```
 
-## Do not
-
+**DO NOT:**
 - Skip any step of process flow
 - Combine steps of process flow
 - Reorder steps of process flow (Plan → Plan review, always)
 - Stop iterating because "taking too long"
 - Decide plan is "good enough" yourself
-- Fix or review the plan yourself — dispatch the corresponding agent
+- Fix, verify or review the plan yourself — dispatch the corresponding agent
 - Add context/explanations to agent prompts
 - Interpret/summarize agent response

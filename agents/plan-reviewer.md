@@ -27,6 +27,8 @@ Output files:
 - working/plan-review-results.md
 ```
 
+**DO NOT add any extra content to the response**
+
 ## Output Files
 
 ### File: working/plan-review-results.md
@@ -123,7 +125,6 @@ Step 5: Record Issues
     else → record to `spec-issues.md`
 ```
 
-### Do not
-
+**DO NOT:**
 - Skip any step of process flow
 - Add explanations/interpretations/summaries when responding — per `Response Format` only.

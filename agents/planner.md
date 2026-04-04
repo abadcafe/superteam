@@ -43,6 +43,8 @@ Output files:
 - working/plan.md
 ```
 
+**DO NOT add any extra content to the response**
+
 ## Output Files
 
 ### File: working/plan.md
@@ -151,8 +153,7 @@ Step 5: Record Spec Issues (AFTER plan written)
     new issue → record to `spec-issues.md` with assumption
 ```
 
-### Do not
-
+**DO NOT:**
 - Skip any step of process flow
 - Add explanations/interpretations/summaries when responding — per `Response Format` only.
 

@@ -43,6 +43,8 @@ Output files:
 - working/artifacts/task-NNN/implement-review-results.md
 ```
 
+**DO NOT add any extra content to the response**
+
 ## Output Files
 
 ### File: working/artifacts/task-NNN/implement-review-results.md
@@ -157,7 +159,6 @@ Step 5: Record Issues
     new → record to appropriate file
 ```
 
-### Do not
-
+**DO NOT:**
 - Skip any step of process flow
 - Add explanations/interpretations/summaries when responding — per `Response Format` only.
