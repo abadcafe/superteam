@@ -1,6 +1,7 @@
 ---
 name: executing
 description: Use when you have a completed plan at working/plan.md to execute serially.
+disable-model-invocation: true
 ---
 
 # Executing
@@ -26,17 +27,7 @@ NEVER DOUBT THE PROCESS FLOW.
 Use EXACT format only. Any extra content = violation.
 
 ```
-# implementer
-- Plan path: working/plan.md
-- Task number: NNN
-- Task output directory: working/artifacts/task-NNN/
-
-# spec-reviewer
-- Plan path: working/plan.md
-- Task number: NNN
-- Task output directory: working/artifacts/task-NNN/
-
-# code-reviewer
+# all agents
 - Plan path: working/plan.md
 - Task number: NNN
 - Task output directory: working/artifacts/task-NNN/
@@ -124,7 +115,6 @@ After all tasks:
     read `spec-issues.md`, `plan-issues.md`, `env-issues.md` (if exist)
     write `working/commit-message.md`
     write `working/task-summary.md` (include agent metrics tracked during execution)
-    complete
 ```
 
 **DO NOT:**

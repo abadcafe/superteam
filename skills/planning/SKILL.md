@@ -1,6 +1,7 @@
 ---
 name: planning
 description: Use when you have a completed spec at working/spec.md to create an implementation plan.
+disable-model-invocation: true
 ---
 
 # Planning
@@ -25,12 +26,7 @@ NEVER DOUBT THE PROCESS FLOW.
 Use EXACT format only. Any extra content = violation.
 
 ```
-# planner
-- Spec path: working/spec.md
-- Plan path: working/plan.md
-- Review results path: working/plan-review-results.md
-
-# plan-reviewer
+# all agents
 - Spec path: working/spec.md
 - Plan path: working/plan.md
 - Review results path: working/plan-review-results.md

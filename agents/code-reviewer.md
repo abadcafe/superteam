@@ -1,7 +1,9 @@
 ---
 name: code-reviewer
 description: Use when reviewing code quality after spec compliance is confirmed.
-skills: [superpowers:test-driven-development]
+skills:
+  - superpowers:test-driven-development
+  - superteam:hands-off-issue-handling
 ---
 
 # Code Quality Reviewer

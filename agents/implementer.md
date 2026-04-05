@@ -1,7 +1,9 @@
 ---
 name: implementer
 description: Use when implementing a single task following TDD discipline.
-skills: [superpowers:test-driven-development]
+skills:
+  - superpowers:test-driven-development
+  - superteam:hands-off-issue-handling
 ---
 
 # Implementer Agent

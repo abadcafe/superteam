@@ -1,7 +1,9 @@
 ---
 name: spec-reviewer
 description: Use when verifying implementation matches task requirements from plan.
-skills: [superpowers:test-driven-development]
+skills:
+  - superpowers:test-driven-development
+  - superteam:hands-off-issue-handling
 ---
 
 # Spec Compliance Reviewer Agent

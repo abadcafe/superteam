@@ -1,7 +1,9 @@
 ---
 name: planner
 description: Use when creating implementation plans from spec.
-skills: [superpowers:test-driven-development]
+skills:
+  - superpowers:test-driven-development
+  - superteam:hands-off-issue-handling
 ---
 
 # Planner Agent
@@ -29,10 +31,6 @@ If the spec covers multiple independent subsystems, it should have been broken
 into sub-project specs. If it wasn't, suggest breaking this into separate
 plans — one per subsystem. Each plan should produce working, testable software
 on its own.
-
-## File Paths
-
-- `working/spec-issues.md` - Known spec issues (hardcoded)
 
 ## Response Format
 
@@ -95,17 +93,7 @@ Run: `pytest tests/path/test.py::test_name -v`
 Expected: PASS
 ````
 
-### File: working/spec-issues.md
-
-```markdown
-# Spec Issues
-
-## SI-001: [title]
-- **Description**: [ambiguity/gap in spec]
-- **Assumption**: [what we assume to proceed]
-```
-
-## File Structure
+## Task's File Structure
 
 Before defining tasks, map out which files will be created or modified and what
 each one is responsible for. This is where decomposition decisions get locked
@@ -125,37 +113,22 @@ in.
 This structure informs the task decomposition. Each task should produce
 self-contained changes that make sense independently.
 
-## Process Flow
+## Process
 
-```
-Step 1: Read Context
-  read `spec-issues.md` (if exists) → skip known issues
-  read spec file → understand requirements
-  read `plan-review-results.md` (if exists) → collect Pending issues
-  read `plan.md` (if exists) → previous version
+1. Read context
+  - Read spec → understand requirements
+  - Read plan review results (if exists) → collect `Pending` review issues
+  - Read previous version plan (if exists)
 
-Step 2: Check Scope
-  multiple independent subsystems? → suggest separate plans
+2. Write/update plan
+  - use `superpowers:test-driven-development`
+  - use `superteam:hands-off-issue-handling`
+  - write down complete plan
+  - address each `Pending` issues in plan review results:
+    - plan addresses it → set `Resolved`, keep `Decision Reason` EMPTY
+    - spec problem (cannot fix in plan) → set `Don't Fix`, FILL `Decision Reason`
 
-Step 3: Write/Update Plan
-  use `superpowers:test-driven-development`
-  address `Pending` issues in plan updates where applicable
-  write complete plan to `plan.md`
-
-Step 4: Handle `Pending` Issues (AFTER plan written)
-  for each `Pending` in `plan-review-results.md`:
-    plan addresses it → set `Resolved`, keep `Decision Reason` EMPTY
-    spec problem (cannot fix in plan) → set `Don't Fix`, FILL `Decision Reason`
-
-Step 5: Record Spec Issues (AFTER plan written)
-  for each spec ambiguity/gap:
-    check `spec-issues.md` for issue existing → skip if found
-    new issue → append to `spec-issues.md` with assumption per the specified format
-```
-
-**DO NOT:**
-- Skip any step of process flow
-- Add explanations/interpretations/summaries when responding — per `Response Format` only
+**DO NOT add explanations/interpretations/summaries when responding — per `Response Format` only**
 
 ## Bite-Sized Task Granularity
 
