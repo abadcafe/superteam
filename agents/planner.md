@@ -5,6 +5,7 @@ disallowedTools: Skill
 skills:
   - superpowers:test-driven-development
   - superteam:hands-off-issue-handling
+  - superteam:black-box-testing
 ---
 
 # Planner Agent
@@ -123,10 +124,11 @@ self-contained changes that make sense independently.
 2. Write/update plan
   - use `superpowers:test-driven-development`
   - use `superteam:hands-off-issue-handling`
+  - use `superteam:black-box-testing`
   - write down complete plan
   - address each `Pending` issues in plan review results:
-    - plan addresses it → set `Resolved`, keep `Decision Reason` EMPTY
-    - spec problem (cannot fix in plan) → set `Don't Fix`, FILL `Decision Reason`
+    - plan addresses it → set to `Resolved`, keep `Decision Reason` EMPTY
+    - spec problem (cannot fix in plan) → set to `Don't Fix`, FILL `Decision Reason`
 
 **DO NOT add explanations/interpretations/summaries when responding — per `Response Format` only**
 

@@ -1,6 +1,7 @@
 ---
 name: planning
-description: Use when you have a completed spec at working/spec.md to create an implementation plan.
+description: Use when you have a completed spec to create an implementation plan.
+disable-model-invocation: true
 ---
 
 # Planning

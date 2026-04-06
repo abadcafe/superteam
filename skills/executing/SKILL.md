@@ -1,6 +1,7 @@
 ---
 name: executing
-description: Use when you have a completed plan at working/plan.md to execute serially.
+description: Use when you have a completed plan to execute serially.
+disable-model-invocation: true
 ---
 
 # Executing

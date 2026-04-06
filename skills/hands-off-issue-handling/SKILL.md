@@ -4,9 +4,7 @@ description: Use when issues require escalation
 user-invocation: false
 ---
 
-# Hands Off Issue Handling
-
-## 概览
+# Hands-Off Issue Handling
 
 在写代码, 做测试, 做任务规划文档(plan.md), 以及各种review工作的时候, 会发现各种问题
 (issue). 有些问题是写的或被审查的代码或方案本身的bug, 有些问题则是运行环境或前置工作引起的,
@@ -17,6 +15,7 @@ user-invocation: false
 **只按条记录问题, 禁止记录任何其他信息:**
   - "no issue found" - 这类信息没有任何意义, **绝对禁止**
   - "Notes" - 这类信息与真正的问题无关, **绝对禁止**
+  - 不知道要写什么就马上住手!
 
 ## 问题记录文件路径
 

@@ -5,6 +5,7 @@ disallowedTools: Skill
 skills:
   - superpowers:test-driven-development
   - superteam:hands-off-issue-handling
+  - superteam:black-box-testing
 ---
 
 # Code Quality Reviewer

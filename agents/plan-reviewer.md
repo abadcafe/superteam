@@ -5,6 +5,7 @@ disallowedTools: Skill
 skills:
   - superpowers:test-driven-development
   - superteam:hands-off-issue-handling
+  - superteam:black-box-testing
 ---
 
 # Plan Reviewer Agent
@@ -67,8 +68,8 @@ contradictory steps, placeholder content, or tasks so vague they can't be acted 
 
 ## Process
 
-1. create empty plan review results if missing:
-  - write down the `Document Header` only
+1. create empty plan review results if not exists:
+  - write down the `Document Header` only (Warning: NEVER overwrite existing file)
 
 2. read context:
   - read spec → understand requirements
@@ -78,13 +79,15 @@ contradictory steps, placeholder content, or tasks so vague they can't be acted 
 3. Check Plan:
   - use `superpowers:test-driven-development`
   - use `superteam:hands-off-issue-handling`
-  - For each `Resolved` in `Issues` section:
-    - Re-read plan to verify it was fixed → not fixed: set back to `Pending`
-  - Check the plan against the `Checklist`.
+  - use `superteam:black-box-testing`
+  - Check the plan against the `Checklist`
   - Record Review Issues:
     - **check ALL existing review issues before appending:**
-      - → same issue already recorded: skip
-      - → new issue: append to `Issues` section
+      - → same issue already recorded: don't append again
+      - → new issue: **APPEND** to `Issues` section only
+  - For each `Resolved` in `Issues` section:
+    - verify it was really fixed → not fixed: set back to `Pending`
+    - **NEVER delete any issue**
 
 **DO NOT add explanations/interpretations/summaries when responding — per `Response Format` only.**
 
