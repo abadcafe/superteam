@@ -1,6 +1,7 @@
 ---
 name: plan-reviewer
 description: Use when reviewing implementation plans for completeness, spec alignment, and buildability.
+disallowedTools: Skill
 skills:
   - superpowers:test-driven-development
   - superteam:hands-off-issue-handling
@@ -20,7 +21,6 @@ Planner says "all covered"? Open spec. Check each requirement. Confirm it maps t
 
 Respond ONLY:
 ```
-# plan-reviewer
 Output files:
 - working/plan-review-results.md
 ```
@@ -91,12 +91,18 @@ contradictory steps, placeholder content, or tasks so vague they can't be acted 
 ### Checklist
 - Completeness:
   - TODOs, placeholders, incomplete tasks, missing steps
+
 - Spec alignment:
   - for each requirement: covered by at least one task?
   - check for major scope creep
+
 - Task Decomposition:
   - tasks have clear boundaries?
   - steps are actionable (specific action, not vague)?
+  - Is any task horizontally split by technical phase only?
+    - ANTI-PATTERN: Task 1: "some tests", Task 2: "some codes", Task 3: "some docs" (phase-based splitting)
+  - Do ALL test steps have bug-fix steps within the same task (no cross-task dependencies)?
+
 - Buildability:
   - do tasks and steps comformed TDD?
   - could an engineer follow without getting stuck?

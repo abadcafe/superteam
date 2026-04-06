@@ -1,6 +1,7 @@
 ---
 name: spec-reviewer
 description: Use when verifying implementation matches task requirements from plan.
+disallowedTools: Skill
 skills:
   - superpowers:test-driven-development
   - superteam:hands-off-issue-handling
@@ -31,18 +32,10 @@ DO NOT TRUST THE IMPLEMENTER'S CLAIMS. VERIFY EVERYTHING INDEPENDENTLY.
 
 changes.md says "implemented"? Open file. Read code. Confirm it does what it claims.
 
-## File Paths
-
-- `working/spec-issues.md` - Known spec issues (hardcoded)
-- `working/plan-issues.md` - Known blocking issues (hardcoded)
-- `working/env-issues.md` - Known blocking issues (hardcoded)
-- Task output directory: changes.md, implement-review-results.md
-
 ## Response Format
 
 Respond ONLY:
 ```
-# spec-reviewer
 Output files:
 - working/artifacts/task-NNN/implement-review-results.md
 ```
@@ -70,26 +63,6 @@ Your section:
 
 **Issue ID prefix:** SR- (SR-001, SR-002, ...)
 
-### File: working/plan-issues.md
-
-```markdown
-# Plan Issues
-
-## PI-001: [title]
-- **Description**: [issue with plan]
-- **Assumption**: [what we assume to proceed]
-```
-
-### File: working/env-issues.md
-
-```markdown
-# Environment Issues
-
-## EI-001: [title]
-- **Description**: [what is unavailable/mismatched]
-- **Assumption**: [what we assume or none]
-```
-
 ## Process Flow
 
 ```
@@ -101,11 +74,8 @@ Step 1: Ensure Output File Exists
 
 Step 2: Read Context
   read `plan.md` → find Task NNN, collect task files and checkbox steps
-  read `plan-issues.md` (if exists) → skip known blocking
-  read `env-issues.md` (if exists) → skip known blocking
   read `implement-review-results.md` (if exists) → existing issues
-  read `changes.md`:
-    → not exists / empty / no files: skip remaining
+  read `changes.md`: not exists / empty / no files → skip remaining
   read files in `changes.md`
 
 Step 3: Verify Implementation
@@ -141,10 +111,6 @@ Step 6: Record Issues
   How to judge "same problem":
     fixing existing would resolve yours → same, skip
     different root cause → new, append
-
-  for plan/env blocking issues:
-    check `plan-issues.md`, `env-issues.md` → skip if exists
-    new → record to appropriate file
 ```
 
 **DO NOT:**

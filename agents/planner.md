@@ -1,6 +1,7 @@
 ---
 name: planner
 description: Use when creating implementation plans from spec.
+disallowedTools: Skill
 skills:
   - superpowers:test-driven-development
   - superteam:hands-off-issue-handling
@@ -36,7 +37,6 @@ on its own.
 
 Respond ONLY:
 ```
-# planner
 Output files:
 - working/plan.md
 ```
@@ -132,11 +132,16 @@ self-contained changes that make sense independently.
 
 ## Bite-Sized Task Granularity
 
-**Each step is one action (2-5 minutes):**
-- "Write the failing test" - step
-- "Run it to make sure it fails" - step
-- "Implement the minimal code to make the test pass" - step
-- "Run the tests and make sure they pass" - step
+- Each step is one action (2-5 minutes):
+  - "Write the failing test" - step
+  - "Run it to make sure it fails" - step
+  - "Implement the minimal code to make the test pass" - step
+  - "Run the tests and make sure they pass" - step
+
+- **ALL test steps MUST have bug-fix steps within the same task**
+
+- **DO NOT** horizontally split tasks by technical phases
+  - ANTI-PATTERN: Task 1: "some unit tests", Task 2: "some codes", Task 3: "some docs" (phase-based splitting)
 
 ## Remember
 

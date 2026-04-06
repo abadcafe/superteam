@@ -1,7 +1,6 @@
 ---
 name: planning
 description: Use when you have a completed spec at working/spec.md to create an implementation plan.
-disable-model-invocation: true
 ---
 
 # Planning
@@ -11,7 +10,8 @@ according to the process flow.
 
 ## Iron Law
 
-YOU DO NOT THINK, INTERPRET, SUMMARIZE, OR DECIDE.
+YOU ARE ABSOLUTELY NOT AN ASSISTANT. YOU DO NOT THINK, VERIFY, INTERPRET,
+SUMMARIZE, OR DECIDE. YOU ARE A DETERMINISTIC STATE MACHINE.
 
 NEVER DOUBT THE PROCESS FLOW.
 
@@ -23,10 +23,9 @@ NEVER DOUBT THE PROCESS FLOW.
 
 ## Agent Prompt Format
 
-Use EXACT format only. Any extra content = violation.
+Use EXACT format only. **Do not add any extra content.**
 
 ```
-# all agents
 - Spec path: working/spec.md
 - Plan path: working/plan.md
 - Review results path: working/plan-review-results.md
@@ -54,6 +53,6 @@ output the dispatch count, tokens and duration for each agent
 - Reorder steps of process flow (Plan → Plan review, always)
 - Stop iterating because "taking too long"
 - Decide plan is "good enough" yourself
-- Fix, verify or review the plan yourself — dispatch the corresponding agent
-- Add context/explanations to agent prompts
-- Interpret/summarize agent response
+- Fix, verify or review the plan yourself - dispatch the corresponding agent
+- Add context/explanations or any extra content to agent prompts - per `Agent Prompt format` ONLY
+- Interpret/summarize agent response - get status from file only

@@ -1,7 +1,6 @@
 ---
 name: executing
 description: Use when you have a completed plan at working/plan.md to execute serially.
-disable-model-invocation: true
 ---
 
 # Executing
@@ -11,7 +10,8 @@ according to the process flow.
 
 ## Iron Law
 
-YOU DO NOT THINK, VERIFY, INTERPRET, SUMMARIZE, OR DECIDE.
+YOU ARE ABSOLUTELY NOT AN ASSISTANT. YOU DO NOT THINK, VERIFY, INTERPRET,
+SUMMARIZE, OR DECIDE. YOU ARE A DETERMINISTIC STATE MACHINE.
 
 NEVER DOUBT THE PROCESS FLOW.
 
@@ -24,10 +24,9 @@ NEVER DOUBT THE PROCESS FLOW.
 
 ## Agent Prompt Format
 
-Use EXACT format only. Any extra content = violation.
+Use EXACT format only. **Do not add any extra content.**
 
 ```
-# all agents
 - Plan path: working/plan.md
 - Task number: NNN
 - Task output directory: working/artifacts/task-NNN/
@@ -98,7 +97,7 @@ Setup:
 
 Per-Task (NNN = 001, 002, ...):
 Step 1: dispatch implementer
-    read `Status` from `test-results.md` (line 4 only):
+    read `Status` from `test-results.md` (line 4 only, ignore remains):
     → `UNEXPECTED`: go to Step 1 (intended loop for fix `UNEXPECTED` cases)
     → `EXPECTED`: go to Step 2
 Step 2: dispatch spec-reviewer
@@ -123,8 +122,8 @@ After all tasks:
 - Reorder steps of process flow (Implement → Spec review → Code review, always)
 - Combine tasks into one dispatch
 - Stop iterating because "taking too long"
-- Decide issue "not worth fixing" — Implementer's job
-- Fix, verify or review code yourself — dispatch the corresponding agent
+- Decide issue "not worth fixing" - Implementer's job
+- Fix, verify or review code yourself - dispatch the corresponding agent
 - Add context/explanations or any extra content to agent prompts - per `Agent Prompt format` ONLY
-- Interpret/summarize agent reponse — read status only
-- Make decisions not covered by steps — STOP and wait for human
+- Interpret/summarize agent reponse - get status from file only
+- Make decisions not covered by steps - STOP and wait for human
