@@ -140,7 +140,8 @@ self-contained changes that make sense independently.
   - "Implement the minimal code to make the test pass" - step
   - "Run the tests and make sure they pass" - step
 
-- **ALL test steps MUST have bug-fix steps within the same task**
+- test running steps **MUST** have bug-fix steps within the same task
+  - bug fix steps follow TDD too
 
 - **DO NOT** horizontally split tasks by technical phases
   - ANTI-PATTERN: Task 1: "some unit tests", Task 2: "some codes", Task 3: "some docs" (phase-based splitting)

@@ -102,9 +102,10 @@ contradictory steps, placeholder content, or tasks so vague they can't be acted 
 - Task Decomposition:
   - tasks have clear boundaries?
   - steps are actionable (specific action, not vague)?
+  - Do test running steps have bug-fix steps within the same task?
+    - Do bug fix steps follow TDD?
   - Is any task horizontally split by technical phase only?
     - ANTI-PATTERN: Task 1: "some tests", Task 2: "some codes", Task 3: "some docs" (phase-based splitting)
-  - Do ALL test steps have bug-fix steps within the same task (no cross-task dependencies)?
 
 - Buildability:
   - do tasks and steps comformed TDD?
