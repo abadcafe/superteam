@@ -91,6 +91,7 @@ Step 3: Verify Implementation
   - Did they build things that weren't requested?
   - Did they over-engineer or add unnecessary features?
   - Did they add "nice to haves" that weren't in spec?
+  - Exception: Bug fixes are ALWAYS permitted.
 
   **Misunderstandings:**
   - Did they interpret requirements differently than intended?

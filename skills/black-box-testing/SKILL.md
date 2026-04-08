@@ -48,7 +48,7 @@ Task N: [run black-box tests, verify if implementions works, do bug fix]
 4. 辅助代码（例如, 工具类）必须规范地按测试框架要求写入测试代码目录合适位置
   - 例如，所有公共 fixture 都在 conftest.py 中定义
 5. 所有 Python 代码必须有完整的 Type Annotation
-6. 检查被测的可执行文件存在与否并正确提示用户
+6. 保证被测的可执行文件存在且是最新版本
 7. 规范管理测试产出物，不污染无关目录和环境
 8. 测试配置文件应作为测试代码的一部分，而不能污染正常配置文件目录
 9. 测试用例可独立运行（无用例间依赖）

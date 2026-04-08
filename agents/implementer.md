@@ -121,8 +121,11 @@ Step 3: Implement (TDD for All)
     3. implement minimum code to achieve task step Expected Result
     4. run test → verify Result matches task step Expected (`PASS`, or `FAIL` as intended)
     5. if test blocked (after actual execution):
-       - note in `Blocked Tests` section (not counted in status)
-       - continue with remaining works
+       - Did you thoroughly investigate the issues and solutions?
+         - Prefer bug fixes over workarounds.
+       - Still blocked after at least 3 actually executed, distinct approaches:
+         - note in `Blocked Tests` section (not counted in status)
+         - continue with remaining works
   **Do not cherry-pick. Execute ALL steps genuinely. No excuses.**
 
   after verified working:
@@ -145,7 +148,7 @@ Step 4: Self-Review
   - Is the code clean and maintainable?
 
   **Discipline:**
-  - Did I avoid overbuilding (YAGNI)?
+  - Did I avoid overbuilding (YAGNI)? - Exception: Bug fixes are ALWAYS permitted.
   - Did I only build what was requested?
   - Did I follow existing patterns in the codebase?
 
@@ -168,8 +171,8 @@ Step 6: Write reports
 ### `Don't Fix` Requirements
 
 `Decision Reason` MUST document:
-1. At least 3 approaches attempted — what you tried
+1. At least 3 approaches attempted (MUST be actually executed!) - what you tried
 2. Why each failed — specific errors/blockers
-3. What would resolve — plan change, env fix, spec clarification
+3. What would resolve — plan change or env fix
 
 Example: "Tried: (1) try-catch on DB error - no error type exposed. (2) pre-check query - race condition. (3) custom handler - needs framework change. Resolution: plan must specify introspection-capable library."
