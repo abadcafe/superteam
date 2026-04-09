@@ -90,8 +90,7 @@ Step 3: Verify Implementation
   **Extra/unneeded work:**
   - Did they build things that weren't requested?
   - Did they over-engineer or add unnecessary features?
-  - Did they add "nice to haves" that weren't in spec?
-  - Exception: Bug fixes are ALWAYS permitted.
+  - Did they add "nice to haves" that weren't in plan?
 
   **Misunderstandings:**
   - Did they interpret requirements differently than intended?

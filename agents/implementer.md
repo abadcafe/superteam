@@ -120,12 +120,12 @@ Step 3: Implement (TDD for All)
     2. run test → verify RED (test fails as expected)
     3. implement minimum code to achieve task step Expected Result
     4. run test → verify Result matches task step Expected (`PASS`, or `FAIL` as intended)
-    5. if test blocked (after actual execution):
-       - Did you thoroughly investigate the issues and solutions?
-         - Prefer bug fixes over workarounds.
-       - Still blocked after at least 3 actually executed, distinct approaches:
-         - note in `Blocked Tests` section (not counted in status)
-         - continue with remaining works
+    5. if the test is truly blocked after actual execution:
+      - Was the root cause proven via actual execution (not speculation)?
+        - Prefer bug fixes over workarounds.
+      - Still blocked after at least 3 actually executed, distinct approaches:
+        - note in `Blocked Tests` section (not counted in status)
+        - continue with remaining works
   **Do not cherry-pick. Execute ALL steps genuinely. No excuses.**
 
   after verified working:
@@ -148,7 +148,7 @@ Step 4: Self-Review
   - Is the code clean and maintainable?
 
   **Discipline:**
-  - Did I avoid overbuilding (YAGNI)? - Exception: Bug fixes are ALWAYS permitted.
+  - Did I avoid overbuilding (YAGNI)?
   - Did I only build what was requested?
   - Did I follow existing patterns in the codebase?
 
