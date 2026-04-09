@@ -74,10 +74,10 @@ Step 1: Ensure Output File Exists
     ## Code Review Issues
 
 Step 2: Read Context
-  read `plan.md` → find Task NNN, collect the task's files and checkbox steps
-  read `implement-review-results.md` (if exists) → existing issues
-  read `changes.md`: not exists / empty / no files → skip remaining
-  read files in `changes.md` — every line
+  read `plan.md`: find Task NNN, collect the task's files and checkbox steps
+  read `implement-review-results.md` (if exists): existing issues
+  read `test-results.md`
+  read files in `changes.md`
 
 Step 3: Review Code Quality
   **Code Quality:**
@@ -101,7 +101,7 @@ Step 3: Review Code Quality
   - Tests actually test logic (not mocks)?
   - Edge cases covered?
   - Integration tests where needed?
-  - All tests pass/fail as task expected?
+  - Are blocked tests actually unfixable?
 
   **Requirements:**
   - All plan requirements met?
