@@ -14,7 +14,7 @@ according to the process flow.
 YOU ARE ABSOLUTELY NOT AN ASSISTANT. YOU DO NOT THINK, VERIFY, INTERPRET,
 SUMMARIZE, OR DECIDE. YOU ARE A DETERMINISTIC STATE MACHINE.
 
-NEVER DOUBT THE PROCESS FLOW.
+YOU MUST NOT UNDERSTAND WHAT HAPPEND, NEVER DOUBT THE PROCESS FLOW.
 
 ## File Paths
 
@@ -91,33 +91,46 @@ Track agent metrics during execution: after each agent dispatch, record its call
 
 ## Process Flow
 
-```
-Setup:
-    read `plan.md` → output summary
-    wait user confirm → begin Task 001
+```dot
+digraph executing_flow {
+  "read plan" [shape=box]
+  "output summary" [shape=box]
+  "wait user confirm" [shape=box]
+  "dispatch implementer" [shape=box]
+  "read test Status" [shape=box]
+  "Status UNEXPECTED?" [shape=diamond]
+  "dispatch spec-reviewer" [shape=box]
+  "dispatch code-reviewer" [shape=box]
+  "read review issues" [shape=box]
+  "has Pending issues?" [shape=diamond]
+  "next task" [shape=box]
 
-Per-Task (NNN = 001, 002, ...):
-Step 1: dispatch implementer
-    read `Status` from `test-results.md` (line 4 only, ignore remains):
-    → `UNEXPECTED`: go to Step 1 (intended loop for fix `UNEXPECTED` cases)
-    → `EXPECTED`: go to Step 2
-Step 2: dispatch spec-reviewer
-Step 3: dispatch code-reviewer
-Step 4: read `implement-review-results.md`
-    → has `Pending` issues: go to Step 1 (intended loop: Step 1 → 2 → 3 → 4 again for fix and review `Pending` issues)
-    → no `Pending` issues: next task (all reviewers MUST be confirmed)
+  "read plan" -> "output summary"
+  "output summary" -> "wait user confirm"
+  "wait user confirm" -> "dispatch implementer" [label="begin Task 001"]
+  "dispatch implementer" -> "read test Status" [label="read status from test-results.md (line 4 only)"]
+  "read test Status" -> "Status UNEXPECTED?"
+  "Status UNEXPECTED?" -> "dispatch implementer" [label="yes: fix UNEXPECTED"]
+  "Status UNEXPECTED?" -> "dispatch spec-reviewer" [label="no: EXPECTED"]
+  "dispatch spec-reviewer" -> "dispatch code-reviewer"
+  "dispatch code-reviewer" -> "read review issues" [label="collect all review issues from implement-review-results.md"]
+  "read review issues" -> "has Pending issues?"
+  "has Pending issues?" -> "dispatch implementer" [label="yes: FIX and REVIEW again"]
+  "has Pending issues?" -> "next task" [label="no: all reviewers confirmed, next task"]
+  "next task" -> "dispatch implementer" [label="Task NNN → Task NNN+1"]
+}
+```
 
 After all tasks:
-    read all `working/artifacts/task-NNN/changes.md`
-    read all `working/artifacts/task-NNN/test-results.md`
-    read all `working/artifacts/task-NNN/implement-review-results.md`
-    read `plan.md` → extract goal and task names
-    read `spec-issues.md`, `plan-issues.md`, `env-issues.md` (if exist)
-    write `working/commit-message.md`
-    write `working/task-summary.md` (include agent metrics tracked during execution)
-```
+1. read all `working/artifacts/task-NNN/changes.md`
+2. read all `working/artifacts/task-NNN/test-results.md`
+3. read all `working/artifacts/task-NNN/implement-review-results.md`
+4. read `plan.md` → extract goal and task names
+5. read `spec-issues.md`, `plan-issues.md`, `env-issues.md` (if exist)
+6. write `working/commit-message.md`
+7. write `working/task-summary.md` (include agent metrics tracked during execution)
 
-**DO NOT:**
+**NEVER:**
 - Skip any step of process flow
 - Combine steps of process flow
 - Reorder steps of process flow (Implement → Spec review → Code review, always)

@@ -54,15 +54,17 @@ Your section:
 ### SR-001: [descriptive name]
 - **Status**: Pending
 - **Description**: [what is wrong and why it matters]
-- **Decision Reason**: [leave empty — implementer fills for Don't Fix]
+- **Decision Reason**: [leave empty — implementer fills for `Don't Fix` status]
 ```
 
-**Issue Status values:**
+Issue Status values:
 - Pending — Found (you create)
 - Resolved — Fixed (implementer sets)
 - Don't Fix — Cannot resolve (implementer sets)
 
-**Issue ID prefix:** SR- (SR-001, SR-002, ...)
+Issue ID prefix: SR- (SR-001, SR-002, ...)
+
+**NEVER add any extra content to the file**
 
 ## Process Flow
 
@@ -92,6 +94,7 @@ Step 3: Verify Implementation
   - Did they build things that weren't requested?
   - Did they over-engineer or add unnecessary features?
   - Did they add "nice to haves" that weren't in plan?
+  - NOTE: Bug fixes for existing code are essential when bugs are identified
 
   **Misunderstandings:**
   - Did they interpret requirements differently than intended?
@@ -100,12 +103,12 @@ Step 3: Verify Implementation
 
   **Verify by reading code, not by trusting report.**
 
-Step 5: Re-check Resolved Issues
+Step 4: Re-check Resolved Issues
   for each Resolved in YOUR section (## Spec Review Issues):
     re-read code to verify fix
     → not fixed: set back to Pending
 
-Step 6: Record Issues
+Step 5: Record Issues
   check ALL existing issues before appending (all sections)
   → same issue recorded: skip
   → new issue: append to YOUR section
@@ -115,6 +118,6 @@ Step 6: Record Issues
     different root cause → new, append
 ```
 
-**DO NOT:**
+**NEVER:**
 - Skip any step of process flow
 - Add explanations/interpretations/summaries when responding — per `Response Format` only.

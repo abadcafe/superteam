@@ -42,7 +42,7 @@ Output files:
 - working/plan.md
 ```
 
-**DO NOT add any extra content to the response**
+**NEVER add any extra content to the response**
 
 ## Output Files
 
@@ -130,7 +130,7 @@ self-contained changes that make sense independently.
     - plan addresses it → set to `Resolved`, keep `Decision Reason` EMPTY
     - spec problem (cannot fix in plan) → set to `Don't Fix`, FILL `Decision Reason`
 
-**DO NOT add explanations/interpretations/summaries when responding — per `Response Format` only**
+**NEVER add explanations/interpretations/summaries when responding — per `Response Format` only**
 
 ## Bite-Sized Task Granularity
 

@@ -29,7 +29,7 @@ Output files:
 - working/artifacts/task-NNN/test-results.md
 ```
 
-**DO NOT add any extra content to the response**
+**NEVER add any extra content to the response**
 
 ## Output Files
 
@@ -54,20 +54,15 @@ Output files:
 ## Status
 EXPECTED | UNEXPECTED
 
-## Blocked Tests (not counted in status)
-
-| Test | Blocker | Reference |
-|------|---------|-----------|
-| test_name | PostgreSQL not running | env-issues.md#EI-001 |
-
 ## Test Results
 
-| Test | Result | Expected | Details |
-|------|--------|----------|---------|
-| test_name | PASS | PASS | - |
-| test_name | FAIL | PASS | AssertionError: expected True, got False |
-| test_name | FAIL | FAIL | AssertionError: unauthorized access granted |
-| test_name | PASS | FAIL | unexpected - regression no longer exists |
+| Test | Result | Expected | Blocked | Details |
+|------|--------|----------|---------|---------|
+| test_name | PASS | PASS | no | - |
+| test_name | FAIL | PASS | no | AssertionError: expected True, got False |
+| test_name | FAIL | FAIL | no | AssertionError: unauthorized access granted |
+| test_name | PASS | FAIL | no | unexpected - regression no longer exists |
+| test_name | PASS | PASS | yes | PostgreSQL not running (see env-issues.md#EI-001) |
 
 ## Failed Tests (for self-debugging)
 
@@ -77,14 +72,14 @@ EXPECTED | UNEXPECTED
 - **File:** tests/whitebox/test_xxx.py::test_name
 
 ## Summary
-- EXPECTED (Result=Expected): N
-- UNEXPECTED (Result≠Expected): N
-- Blocked: N (see env-issues.md / plan-issues.md)
+- EXPECTED (Result=Expected, Blocked=no): N
+- UNEXPECTED (Result≠Expected, Blocked=no): N
+- Blocked (Blocked=yes): N (see env-issues.md / plan-issues.md)
 ```
 
 `Status` values:
-- `EXPECTED` (all Result match Expected)
-- `UNEXPECTED` (any Result mismatch Expected)
+- `EXPECTED` (all non-blocked tests: Result match Expected)
+- `UNEXPECTED` (any non-blocked test: Result mismatch Expected)
 
 `Expected` column default: `PASS` (if plan step has no `Expected` field)
 
@@ -120,18 +115,20 @@ Step 3: Implement (TDD for All)
     2. run test → verify RED (test fails as expected)
     3. implement minimum code to achieve task step Expected Result
     4. run test → verify Result matches task step Expected (`PASS`, or `FAIL` as intended)
-    5. if the test is truly blocked after actual execution:
-      - Was the root cause proven via actual execution (not speculation)?
-        - Prefer bug fixes over workarounds.
-      - Still blocked after at least 3 actually executed, distinct approaches:
-        - note in `Blocked Tests` section (not counted in status)
-        - continue with remaining works
+
+  If the test is truly blocked after actual execution:
+    1. Verify the root cause via actual execution (not speculation).
+    2. Prioritize bug fixes over workarounds, even if they exceed the task scope.
+    3. If still blocked after ≥3 distinct, actually executed approaches:
+      - Mark `Blocked=yes` in test results, include blocker info & attempted approaches in `Details`.
+      - Continue with remaining work.
+
   **Do not cherry-pick. Execute ALL steps genuinely. No excuses.**
 
   after verified working:
-    for each verified `Pending` issue: set `Resolved` (keep `Decision Reason` EMPTY)
-  if issues genuinely blocked after exhausting approaches:
-    for that issue: set `Don't Fix` (fill `Decision Reason`)
+    - for each verified `Pending` issue: set `Resolved` (MUST SET `Decision Reason` TO EMPTY)
+    - if issues genuinely blocked after exhausting approaches:
+      - for that issue: set `Don't Fix` (fill `Decision Reason`)
 
 Step 4: Self-Review
   Review your work with fresh eyes. Ask yourself:
@@ -160,11 +157,11 @@ Step 4: Self-Review
 
   If you find problems during self-review, fix them now
 
-Step 6: Write reports
+Step 5: Write reports
   write `changes.md` and `test-results.md`
 ```
 
-**DO NOT:**
+**NEVER:**
 - Skip any step of process flow
 - Add explanations/interpretations/summaries when responding — per `Response Format` only.
 

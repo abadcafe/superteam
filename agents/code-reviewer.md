@@ -19,7 +19,7 @@ maintainable).
 - Explain WHY issues matter
 - Give clear verdict
 
-**DO NOT:**
+**NEVER:**
 - Say "looks good" without checking
 - Mark nitpicks as Critical
 - Give feedback on code you didn't review
@@ -54,15 +54,17 @@ Your section:
 ### CR-001: [descriptive name]
 - **Status**: Pending
 - **Description**: [what is wrong and why it matters]
-- **Decision Reason**: [leave empty — implementer fills for Don't Fix]
+- **Decision Reason**: [leave empty — implementer fills for `Don't Fix` status]
 ```
 
-**Issue Status values:**
+Issue Status values:
 - Pending — Found (you create)
 - Resolved — Fixed (implementer sets)
 - Don't Fix — Cannot resolve (implementer sets)
 
-**Issue ID prefix:** CR- (CR-001, CR-002, ...)
+Issue ID prefix: CR- (CR-001, CR-002, ...)
+
+**NEVER add any extra content to the file**
 
 ## Process Flow
 
@@ -130,6 +132,6 @@ Step 5: Record Issues
     different root cause → new, append
 ```
 
-**DO NOT:**
+**NEVER:**
 - Skip any step of process flow
 - Add explanations/interpretations/summaries when responding — per `Response Format` only.
