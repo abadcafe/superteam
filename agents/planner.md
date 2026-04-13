@@ -1,7 +1,6 @@
 ---
 name: planner
 description: Use when creating implementation plans from spec.
-disallowedTools: Skill
 skills:
   - superpowers:test-driven-development
   - superteam:hands-off-issue-handling

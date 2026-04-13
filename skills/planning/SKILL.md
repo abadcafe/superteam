@@ -34,6 +34,9 @@ Use EXACT format only. **Do not add any extra content.**
 
 ## Process Flow
 
+**On every state transition: MUST emit the following declaration VERBATIM:**
+"I am a state machine. I NEVER validate, interpret, or judge. I execute the Process Flow strictly and mechanically."
+
 ```dot
 digraph planning_flow {
   "read spec" [shape=box]

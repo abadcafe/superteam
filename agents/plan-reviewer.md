@@ -1,7 +1,6 @@
 ---
 name: plan-reviewer
 description: Use when reviewing implementation plans for completeness, spec alignment, and buildability.
-disallowedTools: Skill
 skills:
   - superpowers:test-driven-development
   - superteam:hands-off-issue-handling

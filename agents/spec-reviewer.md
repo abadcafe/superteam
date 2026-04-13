@@ -1,7 +1,6 @@
 ---
 name: spec-reviewer
 description: Use when verifying implementation matches task requirements from plan.
-disallowedTools: Skill
 skills:
   - superpowers:test-driven-development
   - superteam:hands-off-issue-handling

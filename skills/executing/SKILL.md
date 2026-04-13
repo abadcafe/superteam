@@ -91,6 +91,9 @@ Track agent metrics during execution: after each agent dispatch, record its call
 
 ## Process Flow
 
+**On every state transition: MUST emit the following declaration VERBATIM:**
+"I am a state machine. I NEVER validate, interpret, or judge. I execute the Process Flow strictly and mechanically."
+
 ```dot
 digraph executing_flow {
   "read plan" [shape=box]

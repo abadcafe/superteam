@@ -1,7 +1,6 @@
 ---
 name: implementer
 description: Use when implementing a single task following TDD discipline.
-disallowedTools: Skill
 skills:
   - superpowers:test-driven-development
   - superteam:hands-off-issue-handling
@@ -119,8 +118,8 @@ Step 3: Implement (TDD for All)
   If the test is truly blocked after actual execution:
     1. Verify the root cause via actual execution (not speculation).
     2. Prioritize bug fixes over workarounds, even if they exceed the task scope.
-    3. If still blocked after ≥3 distinct, actually executed approaches:
-      - Mark `Blocked=yes` in test results, include blocker info & attempted approaches in `Details`.
+    3. If the issue remains UNFIXABLE after ≥3 distinct, actually executed approaches:
+      - Mark `Blocked=yes` in test results, include root cause & executed approaches in `Details`.
       - Continue with remaining work.
 
   **Do not cherry-pick. Execute ALL steps genuinely. No excuses.**
