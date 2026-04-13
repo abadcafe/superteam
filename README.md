@@ -2,6 +2,26 @@
 
 Superteam 是 Superpowers 的改写和扩展，提供轻量级的 AI 驱动开发工作流
 
+注意，这套流程是依赖superpowers的，主要是它的tdd skill实在太好了。但是superpowers的其他skill实际上会干扰整体流程执行，因此要加上这些设置：
+~/.local/bin/claude \
+  --disallowedTools \
+    "Skill(superpowers:using-superpowers),"\
+    "Skill(superpowers:writing-plans),"\
+    "Skill(superpowers:executing-plans),"\
+    "Skill(superpowers:subagent-driven-development),"\
+    "Skill(superpowers:dispatching-parallel-agents),"\
+    "Skill(superpowers:systematic-debugging),"\
+    "Skill(superpowers:requesting-code-review),"\
+    "Skill(superpowers:receiving-code-review),"\
+    "Skill(superpowers:verification-before-completion),"\
+    "Skill(superpowers:finishing-a-development-branch),"\
+    "Skill(superpowers:using-git-worktrees),"\
+    "Skill(superpowers:writing-skills),"\
+    "Skill(superpowers:brainstorm),"\
+    "Skill(superpowers:write-plan),"\
+    "Skill(superpowers:execute-plan)" \
+  --dangerously-skip-permissions \
+
 ## 设计理念
 
 我希望在我跟claude沟通完spec之后，他就不要再打扰我了，自己慢慢跑去我睡一觉起来再收货。时间长一点也没关系，不要打扰我睡觉就行。如果不满意，我就删掉让他重新跑，反正电费不值钱，coding plan又是包月的。这样，我就可以没事时就预先搞出一堆东西，在合适的时候拿出来，轻松又愉快🐶
