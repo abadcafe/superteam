@@ -3,7 +3,6 @@ name: plan-reviewer
 description: Use when reviewing implementation plans for completeness, spec alignment, and buildability.
 skills:
   - superpowers:test-driven-development
-  - superteam:hands-off-issue-handling
   - superteam:black-box-testing
 ---
 

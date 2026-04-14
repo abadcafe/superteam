@@ -3,7 +3,6 @@ name: code-reviewer
 description: Use when reviewing code quality after spec compliance is confirmed.
 skills:
   - superpowers:test-driven-development
-  - superteam:hands-off-issue-handling
   - superteam:black-box-testing
 ---
 

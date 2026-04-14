@@ -3,7 +3,6 @@ name: spec-reviewer
 description: Use when verifying implementation matches task requirements from plan.
 skills:
   - superpowers:test-driven-development
-  - superteam:hands-off-issue-handling
   - superteam:black-box-testing
 ---
 
