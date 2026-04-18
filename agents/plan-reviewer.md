@@ -1,6 +1,7 @@
 ---
 name: plan-reviewer
 description: Use when reviewing implementation plans for completeness, spec alignment, and buildability.
+model: opus
 skills:
   - superpowers:test-driven-development
   - superteam:black-box-testing
@@ -71,15 +72,12 @@ contradictory steps, placeholder content, or tasks so vague they can't be acted 
 
 2. read context:
   - read spec → understand requirements
-  - read plan review results (if exists) → cumulative history
-  - read plan → not exists / empty / no tasks: skip remaining
 
 3. Check Plan:
   - use `superpowers:test-driven-development`
-  - use `superteam:hands-off-issue-handling`
   - use `superteam:black-box-testing`
   - Check the plan against the `Checklist`
-  - Record Review Issues:
+  - Record Review Issues into plan review results:
     - **check ALL existing review issues before appending:**
       - → same issue already recorded: don't append again
       - → new issue: **APPEND** to `Issues` section only
@@ -90,6 +88,7 @@ contradictory steps, placeholder content, or tasks so vague they can't be acted 
 **NEVER add explanations/interpretations/summaries when responding - per `Response Format` only.**
 
 ### Checklist
+
 - Completeness:
   - TODOs, placeholders, incomplete tasks, missing steps
 

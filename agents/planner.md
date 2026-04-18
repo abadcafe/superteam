@@ -1,6 +1,7 @@
 ---
 name: planner
 description: Use when creating implementation plans from spec.
+model: opus
 skills:
   - superpowers:test-driven-development
   - superteam:hands-off-issue-handling
@@ -117,17 +118,15 @@ self-contained changes that make sense independently.
 
 1. Read context
   - Read spec → understand requirements
-  - Read plan review results (if exists) → collect `Pending` review issues
-  - Read previous version plan (if exists)
 
 2. Write/update plan
   - use `superpowers:test-driven-development`
   - use `superteam:hands-off-issue-handling`
   - use `superteam:black-box-testing`
-  - write down complete plan
-  - address each `Pending` issues in plan review results:
-    - plan addresses it → set to `Resolved`, keep `Decision Reason` EMPTY
-    - spec problem (cannot fix in plan) → set to `Don't Fix`, FILL `Decision Reason`
+  - create the complete plan if not exists; otherwise:
+    - update the plan to address each `Pending` issues in plan review results:
+      - after fixed → set to `Resolved`, keep `Decision Reason` EMPTY
+      - If spec problem (cannot be fixed in plan) → set to `Don't Fix`, FILL `Decision Reason`
 
 **NEVER add explanations/interpretations/summaries when responding — per `Response Format` only**
 

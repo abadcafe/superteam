@@ -118,7 +118,7 @@ digraph executing_flow {
   "dispatch spec-reviewer" -> "dispatch code-reviewer"
   "dispatch code-reviewer" -> "read review issues" [label="collect all review issues from implement-review-results.md"]
   "read review issues" -> "has Pending issues?"
-  "has Pending issues?" -> "dispatch implementer" [label="yes: FIX and REVIEW again"]
+  "has Pending issues?" -> "dispatch implementer" [label="yes: FIX and SPEC/CODE REVIEW again"]
   "has Pending issues?" -> "next task" [label="no: all reviewers confirmed, next task"]
   "next task" -> "dispatch implementer" [label="Task NNN → Task NNN+1"]
 }

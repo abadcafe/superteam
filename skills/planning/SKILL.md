@@ -54,7 +54,7 @@ digraph planning_flow {
   "dispatch planner" -> "dispatch plan-reviewer"
   "dispatch plan-reviewer" -> "read review issues" [label="collect all review issues from plan-review-results.md"]
   "read review issues" -> "has Pending issues?"
-  "has Pending issues?" -> "dispatch planner" [label="yes: fix and review again"]
+  "has Pending issues?" -> "dispatch planner" [label="yes: FIX and REVIEW again"]
   "has Pending issues?" -> "complete" [label="no: all reviewers confirmed"]
 }
 ```

@@ -109,6 +109,8 @@ Step 3: Implement (TDD for All)
       the way a good developer would, but don't restructure things outside your task.
 
   use `superpowers:test-driven-development`
+  use `superteam:hands-off-issue-handling`
+  use `superteam:black-box-testing`
   for each pending issue AND checkbox steps/files:
     1. write failing test for the issue/feature
     2. run test → verify RED (test fails as expected)
