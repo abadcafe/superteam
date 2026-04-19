@@ -39,29 +39,33 @@ on its own.
 Respond ONLY:
 ```
 Output files:
-- working/plan.md
+- working/plan/task-NNN/task.md
+- working/plan/task-MMM/task.md
+...[all task files list here]
 ```
 
 **NEVER add any extra content to the response**
 
 ## Output Files
 
-### File: working/plan.md
-
-**Task struct is also included, follow it**:
+### File: working/plan/task-NNN/task.md
 
 ````markdown
-# [Feature Name] Implementation Plan
+# Task NNN: [Component Name]
 
-> **For agentic workers:** implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+## Project Overview
 
-**Goal:** [One sentence]
-**Architecture:** [2-3 sentences]
-**Tech Stack:** [Key technologies]
+- **Goal:** [One sentence - from spec]
+- **Architecture:** [2-3 sentences - from spec]
+- **Tech Stack:** [Key technologies - from spec]
+
+## Task Objective
+
+[1-2 sentences describing what this task accomplishes and its role in the overall project]
+
+This is Task N of M.
 
 ---
-
-### Task NNN: [Component Name]
 
 **Files:**
 - Create: `exact/path/to/file.py`
@@ -141,7 +145,7 @@ self-contained changes that make sense independently.**
 - test running steps **MUST** have bug-fix steps within the same task
   - bug fix steps follow TDD too
 
-- **DO NOT** horizontally split tasks by technical phases
+- **NEVER** horizontally split tasks by technical phases
   - ANTI-PATTERN: Task 1: "some unit tests", Task 2: "some codes", Task 3: "some docs" (phase-based splitting)
 
 ## Remember

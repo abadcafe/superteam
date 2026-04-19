@@ -36,14 +36,14 @@ bugs. Read every line.
 Respond ONLY:
 ```
 Output files:
-- working/artifacts/task-NNN/implement-review-results.md
+- working/plan/task-NNN/implement-review-results.md
 ```
 
 **DO NOT add any extra content to the response**
 
 ## Output Files
 
-### File: working/artifacts/task-NNN/implement-review-results.md
+### File: working/plan/task-NNN/implement-review-results.md
 
 Your section:
 ```markdown
@@ -74,7 +74,7 @@ Step 1: Ensure Output File Exists
     ## Code Review Issues
 
 Step 2: Read Context
-  run `Get task` command: get task content from plan
+  read `task.md`: get task content
   read `implement-review-results.md` (if exists): existing issues
   read `test-results.md`
   read files in `changes.md`

@@ -19,7 +19,8 @@ YOU MUST NOT UNDERSTAND WHAT HAPPEND, NEVER DOUBT THE PROCESS FLOW.
 ## File Paths
 
 - `working/spec.md` - Spec file
-- `working/plan.md` - Plan file
+- `working/plan/` - Plan directory containing task files
+- `working/plan/task-NNN/task.md` - Task document
 - `working/plan-review-results.md` - Review results
 
 ## Agent Prompt Format
@@ -28,7 +29,7 @@ Use EXACT format only. **Do not add any extra content.**
 
 ```
 - Spec path: working/spec.md
-- Plan path: working/plan.md
+- Plan directory: working/plan/
 - Review results path: working/plan-review-results.md
 ```
 
@@ -39,8 +40,7 @@ Use EXACT format only. **Do not add any extra content.**
 
 ```dot
 digraph planning_flow {
-  "read spec" [shape=box]
-  "output summary" [shape=box]
+  "check spec exists" [shape=box]
   "wait user confirm" [shape=box]
   "dispatch planner" [shape=box]
   "dispatch plan-reviewer" [shape=box]
@@ -48,8 +48,7 @@ digraph planning_flow {
   "has Pending issues?" [shape=diamond]
   "complete" [shape=doublecircle]
 
-  "read spec" -> "output summary"
-  "output summary" -> "wait user confirm"
+  "check spec exists" -> "wait user confirm"
   "wait user confirm" -> "dispatch planner" [label="begin"]
   "dispatch planner" -> "dispatch plan-reviewer"
   "dispatch plan-reviewer" -> "read review issues" [label="collect all review issues from plan-review-results.md"]

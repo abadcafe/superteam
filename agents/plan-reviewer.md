@@ -50,7 +50,7 @@ Output files:
 
 Issue ID prefix: PR- (PR-001, PR-002, ...)
 
-Issue Status values:
+Issue `Status` values:
 - Pending — Found, awaiting fix (you create)
 - Resolved — Fixed (planner sets)
 - Don't Fix — Cannot resolve (planner sets)
@@ -72,16 +72,18 @@ contradictory steps, placeholder content, or tasks so vague they can't be acted 
 
 2. read context:
   - read spec → understand requirements
+  - read all task files → working/plan/task-NNN/task.md
 
 3. Check Plan:
   - use `superpowers:test-driven-development`
   - use `superteam:black-box-testing`
-  - Check the plan against the `Checklist`
-  - Record Review Issues into plan review results:
+  - for each task-NNN/task.md in plan dir:
+    - check the task.md against the `Checklist`
+  - record Review Issues into plan review results:
     - **check ALL existing review issues before appending:**
-      - → same issue already recorded: don't append again
-      - → new issue: **APPEND** to `Issues` section only
-  - For each `Resolved` in `Issues` section:
+      - same issue already recorded: NEVER append again
+      - new issue: **APPEND** to `Issues` section only
+  - for each `Resolved` in `Issues` section:
     - verify it was really fixed → not fixed: set back to `Pending`
     - **NEVER delete any issue**
 

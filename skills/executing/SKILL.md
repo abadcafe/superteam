@@ -18,8 +18,11 @@ YOU MUST NOT UNDERSTAND WHAT HAPPEND, NEVER DOUBT THE PROCESS FLOW.
 
 ## File Paths
 
-- `working/plan.md` - Plan file
-- `working/artifacts/task-NNN/` - Task output directory
+- `working/plan/` - Plan directory
+- `working/plan/task-NNN/task.md` - Task document
+- `working/plan/task-NNN/changes.md` - Task changes
+- `working/plan/task-NNN/test-results.md` - Test results
+- `working/plan/task-NNN/implement-review-results.md` - Review results
 - `working/plan-issues.md` - Plan issues (hardcoded)
 - `working/env-issues.md` - Environment issues (hardcoded)
 
@@ -29,8 +32,8 @@ Use EXACT format only. **Do not add any extra content.**
 
 ```
 - Task number: NNN
-- Task output directory: working/artifacts/task-NNN/
-- Get task: perl -ne 'if(/^(#+) Task[- ]NNN:/){$l=length($1);$f=1;print;next}$f&&/^(#+) /&&length($1)<=$l&&exit;$f&&print' working/plan.md
+- Task directory: working/plan/task-NNN/
+- Task file: working/plan/task-NNN/task.md
 ```
 
 ## Output Files
@@ -46,8 +49,8 @@ Follow Conventional Commits. Subject line ≤ 72 chars, imperative mood, body ex
 ```
 
 Type: `feat`, `fix`, `refactor`, `perf`, `test`, `docs`, `chore`
-Scope: derive from plan Goal (the module or area affected)
-Subject: derive from plan Goal (what was done, not how)
+Scope: derive from Project Overview Goal in task files (the module or area affected)
+Subject: derive from Project Overview Goal in task files (what was done, not how)
 Body: What the change does and why it matters. No tasks.
 
 ### File: working/task-summary.md
@@ -108,7 +111,7 @@ digraph executing_flow {
   "has Pending issues?" [shape=diamond]
   "next task" [shape=box]
 
-  "get task list" -> "output summary" [taillabel="grep -E '^#+ Task[- ][0-9]+:' on plan.md"]
+  "get task list" -> "output summary" [taillabel="grep -h -m1 '^# Task' working/plan/task-*/task.md | sort"]
   "output summary" -> "wait user confirm"
   "wait user confirm" -> "dispatch implementer" [label="begin Task 001"]
   "dispatch implementer" -> "read test Status" [label="read status from test-results.md (line 4 only)"]
@@ -125,10 +128,10 @@ digraph executing_flow {
 ```
 
 After all tasks:
-1. read all `working/artifacts/task-NNN/changes.md`
-2. read all `working/artifacts/task-NNN/test-results.md`
-3. read all `working/artifacts/task-NNN/implement-review-results.md`
-4. read `plan.md` → extract goal and task names
+1. read all `working/plan/task-NNN/changes.md`
+2. read all `working/plan/task-NNN/test-results.md`
+3. read all `working/plan/task-NNN/implement-review-results.md`
+4. read all `working/plan/task-NNN/task.md` → extract goal and task names
 5. read `spec-issues.md`, `plan-issues.md`, `env-issues.md` (if exist)
 6. write `working/commit-message.md`
 7. write `working/task-summary.md` (include agent metrics tracked during execution)

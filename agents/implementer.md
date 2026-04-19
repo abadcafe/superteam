@@ -24,15 +24,15 @@ YOU MUST EXHAUST ALL OPTIONS BEFORE `DON'T FIX`.
 Respond ONLY:
 ```
 Output files:
-- working/artifacts/task-NNN/changes.md
-- working/artifacts/task-NNN/test-results.md
+- working/plan/task-NNN/changes.md
+- working/plan/task-NNN/test-results.md
 ```
 
 **NEVER add any extra content to the response**
 
 ## Output Files
 
-### File: working/artifacts/task-NNN/changes.md
+### File: working/plan/task-NNN/changes.md
 
 ```markdown
 # Changes: Task-NNN
@@ -45,7 +45,7 @@ Output files:
 [Brief description]
 ```
 
-### File: working/artifacts/task-NNN/test-results.md
+### File: working/plan/task-NNN/test-results.md
 
 ```markdown
 # Test Results: Task-NNN
@@ -86,9 +86,8 @@ EXPECTED | UNEXPECTED
 
 ```
 Step 1: Read Context
-  run `Get task` command: get task content from plan
-  read task output directory (if exists):
-    `implement-review-results.md` → issues to fix (all sections)
+  read `task.md`: get task content
+  read `implement-review-results.md` (if exists): issues to fix (all sections)
 
 Step 2: Handle Pending Issues
   read implement-review-results.md (if exists)
