@@ -74,7 +74,7 @@ Step 1: Ensure Output File Exists
     ## Code Review Issues
 
 Step 2: Read Context
-  read `plan.md`: find Task NNN, collect the task's files and checkbox steps
+  run `Get task` command: get task content from plan
   read `implement-review-results.md` (if exists): existing issues
   read `test-results.md`
   read files in `changes.md`
@@ -88,7 +88,7 @@ Step 3: Review Code Quality
   - Edge cases handled?
   - Does each file have one clear responsibility with a well-defined interface?
   - Are units decomposed so they can be understood and tested independently?
-  - Is the implementation following the file structure from the plan?
+  - Is the implementation following the file structure from the task?
   - Did this implementation create new files that are already large, or significantly grow existing files? (Don't flag pre-existing file sizes — focus on what this change contributed.)
 
   **Architecture:**
@@ -104,8 +104,8 @@ Step 3: Review Code Quality
   - Are blocked tests actually unfixable?
 
   **Requirements:**
-  - All plan requirements met?
-  - Implementation matches spec?
+  - All task requirements met?
+  - Implementation matches task?
   - No scope creep?
   - Breaking changes documented?
 

@@ -74,7 +74,7 @@ Step 1: Ensure Output File Exists
     ## Code Review Issues
 
 Step 2: Read Context
-  read `plan.md`: find Task NNN, collect the task's files and checkbox steps
+  run `Get task` command: get task content from plan
   read `implement-review-results.md` (if exists): existing issues
   read `test-results.md`
   read files in `changes.md`
@@ -86,12 +86,12 @@ Step 3: Verify Implementation
   - Did they implement everything that was requested?
   - Are there requirements they skipped or missed?
   - Did they claim something works but didn't actually implement it?
-  - Do all test outcomes (pass/fail) match task expectations? - conform to the plan, not the report
+  - Do all test outcomes (pass/fail) match task expectations? - conform to the task, not the report
 
   **Extra/unneeded work:**
   - Did they build things that weren't requested?
   - Did they over-engineer or add unnecessary features?
-  - Did they add "nice to haves" that weren't in plan?
+  - Did they add "nice to haves" that weren't in task?
   - NOTE: Bug fixes for existing code are essential when bugs are identified
 
   **Misunderstandings:**

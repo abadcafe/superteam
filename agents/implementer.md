@@ -17,7 +17,7 @@ YOU MUST EXHAUST ALL OPTIONS BEFORE `DON'T FIX`.
 
 `Pending` issue = real problem found. Your job = fix it.
 `Don't Fix` = only for problems truly beyond control (plan defects, environment constraints).
-Disagreeing requires having tried and failed to fix first.
+`Don't Fix` requires having tried and failed to fix first.
 
 ## Response Format
 
@@ -73,20 +73,20 @@ EXPECTED | UNEXPECTED
 ## Summary
 - EXPECTED (Result=Expected, Blocked=no): N
 - UNEXPECTED (Result≠Expected, Blocked=no): N
-- Blocked (Blocked=yes): N (see env-issues.md / plan-issues.md)
+- Blocked (Blocked=yes): N
 ```
 
 `Status` values:
 - `EXPECTED` (all non-blocked tests: Result match Expected)
 - `UNEXPECTED` (any non-blocked test: Result mismatch Expected)
 
-`Expected` column default: `PASS` (if plan step has no `Expected` field)
+`Expected` column default: `PASS` (if task step has no `Expected` field)
 
 ## Process Flow
 
 ```
 Step 1: Read Context
-  read `plan.md` → find Task NNN, collect task files and checkbox steps
+  run `Get task` command: get task content from plan
   read task output directory (if exists):
     `implement-review-results.md` → issues to fix (all sections)
 
@@ -99,12 +99,12 @@ Step 3: Implement (TDD for All)
   **Code Organization:**
     You reason best about code you can hold in context at once, and your edits are more
     reliable when files are focused. Keep this in mind:
-    - Follow the file structure defined in the plan
+    - Follow the file structure defined in the task
     - Each file should have one clear responsibility with a well-defined interface
-    - If a file you're creating is growing beyond the plan's intent, record it
-      as plan issue — don't split files on your own without plan guidance
+    - If a file you're creating is growing beyond the task's intent, consider it
+      as an issue - don't split files on your own without task guidance
     - If an existing file you're modifying is already large or tangled, work carefully
-      and record it as a plan issue
+      and consider it as an issue
     - In existing codebases, follow established patterns. Improve code you're touching
       the way a good developer would, but don't restructure things outside your task.
 
@@ -127,9 +127,9 @@ Step 3: Implement (TDD for All)
   **Do not cherry-pick. Execute ALL steps genuinely. No excuses.**
 
   after verified working:
-    - for each verified `Pending` issue: set `Resolved` (MUST SET `Decision Reason` TO EMPTY)
+    - for each verified `Pending` issue: set `Resolved` silently, no extra contents
     - if issues genuinely blocked after exhausting approaches:
-      - for that issue: set `Don't Fix` (fill `Decision Reason`)
+      - for that issue: set `Don't Fix`, fill `Decision Reason` only, no extra contents
 
 Step 4: Self-Review
   Review your work with fresh eyes. Ask yourself:
@@ -171,6 +171,6 @@ Step 5: Write reports
 `Decision Reason` MUST document:
 1. At least 3 approaches attempted (MUST be actually executed!) - what you tried
 2. Why each failed — specific errors/blockers
-3. What would resolve — plan change or env fix
+3. What would resolve — task change or env fix
 
-Example: "Tried: (1) try-catch on DB error - no error type exposed. (2) pre-check query - race condition. (3) custom handler - needs framework change. Resolution: plan must specify introspection-capable library."
+Example: "Tried: (1) try-catch on DB error - no error type exposed. (2) pre-check query - race condition. (3) custom handler - needs framework change. Resolution: task must specify introspection-capable library."

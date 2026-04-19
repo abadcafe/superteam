@@ -111,8 +111,8 @@ in.
   files, don't unilaterally restructure - but if a file you're modifying has
   grown unwieldy, including a split in the plan is reasonable.
 
-This structure informs the task decomposition. Each task should produce
-self-contained changes that make sense independently.
+This structure informs the task decomposition. **Each task should produce
+self-contained changes that make sense independently.**
 
 ## Process
 
@@ -125,8 +125,8 @@ self-contained changes that make sense independently.
   - use `superteam:black-box-testing`
   - create the complete plan if not exists; otherwise:
     - update the plan to address each `Pending` issues in plan review results:
-      - after fixed → set to `Resolved`, keep `Decision Reason` EMPTY
-      - If spec problem (cannot be fixed in plan) → set to `Don't Fix`, FILL `Decision Reason`
+      - after fixed: set `Resolved` silently, no extra contents
+      - If spec problem (cannot be fixed in plan): set `Don't Fix`, fill `Decision Reason` only, no extra contents
 
 **NEVER add explanations/interpretations/summaries when responding — per `Response Format` only**
 

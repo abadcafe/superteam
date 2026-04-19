@@ -28,9 +28,9 @@ YOU MUST NOT UNDERSTAND WHAT HAPPEND, NEVER DOUBT THE PROCESS FLOW.
 Use EXACT format only. **Do not add any extra content.**
 
 ```
-- Plan path: working/plan.md
 - Task number: NNN
 - Task output directory: working/artifacts/task-NNN/
+- Get task: perl -ne 'if(/^(#+) Task[- ]NNN:/){$l=length($1);$f=1;print;next}$f&&/^(#+) /&&length($1)<=$l&&exit;$f&&print' working/plan.md
 ```
 
 ## Output Files
@@ -48,7 +48,7 @@ Follow Conventional Commits. Subject line ≤ 72 chars, imperative mood, body ex
 Type: `feat`, `fix`, `refactor`, `perf`, `test`, `docs`, `chore`
 Scope: derive from plan Goal (the module or area affected)
 Subject: derive from plan Goal (what was done, not how)
-Body: 2-4 sentences. What the change does and why it matters. No task lists.
+Body: What the change does and why it matters. No tasks.
 
 ### File: working/task-summary.md
 
@@ -96,7 +96,7 @@ Track agent metrics during execution: after each agent dispatch, record its call
 
 ```dot
 digraph executing_flow {
-  "read plan" [shape=box]
+  "get task list" [shape=box]
   "output summary" [shape=box]
   "wait user confirm" [shape=box]
   "dispatch implementer" [shape=box]
@@ -108,7 +108,7 @@ digraph executing_flow {
   "has Pending issues?" [shape=diamond]
   "next task" [shape=box]
 
-  "read plan" -> "output summary"
+  "get task list" -> "output summary" [taillabel="grep -E '^#+ Task[- ][0-9]+:' on plan.md"]
   "output summary" -> "wait user confirm"
   "wait user confirm" -> "dispatch implementer" [label="begin Task 001"]
   "dispatch implementer" -> "read test Status" [label="read status from test-results.md (line 4 only)"]
