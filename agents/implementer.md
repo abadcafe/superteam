@@ -116,14 +116,15 @@ Step 3: Implement (TDD for All)
     3. implement minimum code to achieve task step Expected Result
     4. run test → verify Result matches task step Expected (`PASS`, or `FAIL` as intended)
 
+  **Never cherry-pick. Execute ALL steps genuinely. No excuses.**
+  **NO TEST CAN BE SKIPPED OR MARKED AS SKIP.**
+
   If the test is truly blocked after actual execution:
     1. Verify the root cause via actual execution (not speculation).
     2. Prioritize bug fixes over workarounds, even if they exceed the task scope.
     3. If the issue remains UNFIXABLE after ≥3 distinct, actually executed approaches:
       - Mark `Blocked=yes` in test results, include root cause & executed approaches in `Details`.
       - Continue with remaining work.
-
-  **Do not cherry-pick. Execute ALL steps genuinely. No excuses.**
 
   after verified working:
     - for each verified `Pending` issue: set `Resolved` silently, no extra contents
@@ -153,7 +154,7 @@ Step 4: Self-Review
   - Do tests actually verify behavior (not just mock behavior)?
   - Did I follow TDD if required?
   - Are tests comprehensive?
-  - All runnable tests match corresponding task step Expected?
+  - All tests match corresponding task step Expected?
 
   If you find problems during self-review, fix them now
 

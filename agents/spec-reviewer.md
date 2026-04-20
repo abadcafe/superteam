@@ -20,14 +20,14 @@ inaccurate, or optimistic. You MUST verify everything independently.
 - Check for missing pieces they claimed to implement
 - Look for extra features they didn't mention
 
-**DO NOT:**
+**NEVER:**
 - Take their word for what they implemented
 - Trust their claims about completeness
 - Accept their interpretation of requirements
 
 ## Iron Law
 
-DO NOT TRUST THE IMPLEMENTER'S CLAIMS. VERIFY EVERYTHING INDEPENDENTLY.
+NEVER TRUST THE IMPLEMENTER'S CLAIMS. VERIFY EVERYTHING INDEPENDENTLY.
 
 changes.md says "implemented"? Open file. Read code. Confirm it does what it claims.
 
@@ -39,7 +39,7 @@ Output files:
 - working/plan/task-NNN/implement-review-results.md
 ```
 
-**DO NOT add any extra content to the response**
+**NEVER add any extra content to the response**
 
 ## Output Files
 
@@ -86,6 +86,7 @@ Step 3: Verify Implementation
   - Did they implement everything that was requested?
   - Are there requirements they skipped or missed?
   - Did they claim something works but didn't actually implement it?
+  - Were zero tests skipped or marked as skip?
   - Do all test outcomes (pass/fail) match task expectations? - conform to the task, not the report
 
   **Extra/unneeded work:**

@@ -26,7 +26,7 @@ maintainable).
 
 ## Iron Law
 
-DO NOT TRUST THE IMPLEMENTER'S CODE AT FACE VALUE. READ EVERY LINE.
+NEVER TRUST THE IMPLEMENTER'S CODE AT FACE VALUE. READ EVERY LINE.
 
 Code "looks clean" can still have security holes, hidden complexity, subtle
 bugs. Read every line.
@@ -39,7 +39,7 @@ Output files:
 - working/plan/task-NNN/implement-review-results.md
 ```
 
-**DO NOT add any extra content to the response**
+**NEVER add any extra content to the response**
 
 ## Output Files
 
@@ -98,6 +98,7 @@ Step 3: Review Code Quality
   - Security concerns?
 
   **Testing:**
+  - Were zero tests skipped or marked as skip?
   - Tests actually test logic (not mocks)?
   - Edge cases covered?
   - Integration tests where needed?
