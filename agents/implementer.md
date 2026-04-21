@@ -110,7 +110,7 @@ Step 3: Implement (TDD for All)
   use `superpowers:test-driven-development`
   use `superteam:hands-off-issue-handling`
   use `superteam:black-box-testing`
-  for each pending issue AND checkbox steps/files:
+  for each `Pending` issue AND checkbox steps/files:
     1. write failing test for the issue/feature
     2. run test → verify RED (test fails as expected)
     3. implement minimum code to achieve task step Expected Result
@@ -119,7 +119,7 @@ Step 3: Implement (TDD for All)
   **Never cherry-pick. Execute ALL steps genuinely. No excuses.**
   **NO TEST CAN BE SKIPPED OR MARKED AS SKIP.**
 
-  If the test is truly blocked after actual execution:
+  If ANY test (in task or not) is truly blocked after actual execution:
     1. Verify the root cause via actual execution (not speculation).
     2. Prioritize bug fixes over workarounds, even if they exceed the task scope.
     3. If the issue remains UNFIXABLE after ≥3 distinct, actually executed approaches:
@@ -155,16 +155,18 @@ Step 4: Self-Review
   - Did I follow TDD if required?
   - Are tests comprehensive?
   - All tests match corresponding task step Expected?
+  - Were zero tests skipped or marked as skip?
+  - Were the root causes of blocked tests analyzed, and were exhaustive fix attempts made?
 
   If you find problems during self-review, fix them now
 
 Step 5: Write reports
-  write `changes.md` and `test-results.md`
+  update `changes.md` and write `test-results.md`
 ```
 
 **NEVER:**
 - Skip any step of process flow
-- Add explanations/interpretations/summaries when responding — per `Response Format` only.
+- Add explanations/interpretations/summaries when responding - per `Response Format` only.
 
 ### `Don't Fix` Requirements
 

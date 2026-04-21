@@ -89,7 +89,7 @@ Step 3: Review Code Quality
   - Does each file have one clear responsibility with a well-defined interface?
   - Are units decomposed so they can be understood and tested independently?
   - Is the implementation following the file structure from the task?
-  - Did this implementation create new files that are already large, or significantly grow existing files? (Don't flag pre-existing file sizes — focus on what this change contributed.)
+  - Did this implementation create new files that are already large, or significantly grow existing files? (Don't flag pre-existing file sizes - focus on what this change contributed.)
 
   **Architecture:**
   - Sound design decisions?
@@ -98,11 +98,11 @@ Step 3: Review Code Quality
   - Security concerns?
 
   **Testing:**
-  - Were zero tests skipped or marked as skip?
   - Tests actually test logic (not mocks)?
   - Edge cases covered?
   - Integration tests where needed?
-  - Are blocked tests actually unfixable?
+  - Are blocked tests (in task or not) actually unfixable?
+  - Were zero tests skipped or marked as skip?
 
   **Requirements:**
   - All task requirements met?
@@ -118,19 +118,18 @@ Step 3: Review Code Quality
 
 Step 4: Re-check Resolved Issues
   for each Resolved in YOUR section (## Code Review Issues):
-    re-read code to verify fix
-    → not fixed: set back to `Pending`
+    re-read code to verify fix: not fixed - set back to `Pending`
 
 Step 5: Record Issues
-  check ALL existing issues before appending (all sections)
-  → same issue recorded: skip
-  → new issue: append to YOUR section
+  check ALL existing issues before appending (all sections):
+    - same issue recorded: skip
+    - new issue: append to YOUR section
 
   How to judge "same issue":
-    fixing existing would resolve yours → same, skip
-    different root cause → new, append
+    - fixing existing would resolve yours: same, skip
+    - different root cause: new, append
 ```
 
 **NEVER:**
 - Skip any step of process flow
-- Add explanations/interpretations/summaries when responding — per `Response Format` only.
+- Add explanations/interpretations/summaries when responding - per `Response Format` only.

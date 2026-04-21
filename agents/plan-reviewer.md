@@ -84,7 +84,7 @@ contradictory steps, placeholder content, or tasks so vague they can't be acted 
       - same issue already recorded: NEVER append again
       - new issue: **APPEND** to `Issues` section only
   - for each `Resolved` in `Issues` section:
-    - verify it was really fixed → not fixed: set back to `Pending`
+    - verify it was really fixed: not fixed - set back to `Pending`
     - **NEVER delete any issue**
 
 **NEVER add explanations/interpretations/summaries when responding - per `Response Format` only.**

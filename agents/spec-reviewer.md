@@ -87,7 +87,8 @@ Step 3: Verify Implementation
   - Are there requirements they skipped or missed?
   - Did they claim something works but didn't actually implement it?
   - Were zero tests skipped or marked as skip?
-  - Do all test outcomes (pass/fail) match task expectations? - conform to the task, not the report
+  - Outcomes match task (not report) expectations?
+  - Analyzed + exhaustive fix attempts for all unexpected test (in task or not) outcomes?
 
   **Extra/unneeded work:**
   - Did they build things that weren't requested?
@@ -104,19 +105,18 @@ Step 3: Verify Implementation
 
 Step 4: Re-check Resolved Issues
   for each Resolved in YOUR section (## Spec Review Issues):
-    re-read code to verify fix
-    → not fixed: set back to Pending
+    re-read code to verify fix: not fixed - set back to Pending
 
 Step 5: Record Issues
-  check ALL existing issues before appending (all sections)
-  → same issue recorded: skip
-  → new issue: append to YOUR section
+  check ALL existing issues before appending (all sections):
+    - same issue recorded: skip
+    - new issue: append to YOUR section
 
   How to judge "same problem":
-    fixing existing would resolve yours → same, skip
-    different root cause → new, append
+    - fixing existing would resolve yours: same, skip
+    - different root cause: new, append
 ```
 
 **NEVER:**
 - Skip any step of process flow
-- Add explanations/interpretations/summaries when responding — per `Response Format` only.
+- Add explanations/interpretations/summaries when responding - per `Response Format` only.
