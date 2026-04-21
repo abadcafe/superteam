@@ -63,12 +63,14 @@ EXPECTED | UNEXPECTED
 | test_name | PASS | FAIL | no | unexpected - regression no longer exists |
 | test_name | PASS | PASS | yes | PostgreSQL not running (see env-issues.md#EI-001) |
 
-## Failed Tests (for self-debugging)
+## Unfixed Blocked Tests
 
 ### test_name
+- **File:** tests/blackbox/test_xxx.py::test_name
 - **Expected:** [expected behavior]
 - **Actual:** [actual behavior]
-- **File:** tests/whitebox/test_xxx.py::test_name
+- **root cause:** [thoroughly analyzed and verified root cause]
+- **3 attempted approaches:** [list executed attempts]
 
 ## Summary
 - EXPECTED (Result=Expected, Blocked=no): N
@@ -120,13 +122,13 @@ Step 3: Implement (TDD for All)
   **NO TEST CAN BE SKIPPED OR MARKED AS SKIP.**
 
   If ANY test (in task or not) is truly blocked after actual execution:
-    1. Verify the root cause via actual execution (not speculation).
+    1. thoroughly verify the root cause via actual execution (not speculation).
     2. Prioritize bug fixes over workarounds, even if they exceed the task scope.
     3. If the issue remains UNFIXABLE after ≥3 distinct, actually executed approaches:
       - Mark `Blocked=yes` in test results, include root cause & executed approaches in `Details`.
       - Continue with remaining work.
 
-  after verified working:
+  after verified working, ALL issues MUST have `Status` set to either `Resolved` or `Don't Fix`:
     - for each verified `Pending` issue: set `Resolved` silently, no extra contents
     - if issues genuinely blocked after exhausting approaches:
       - for that issue: set `Don't Fix`, fill `Decision Reason` only, no extra contents
@@ -156,7 +158,7 @@ Step 4: Self-Review
   - Are tests comprehensive?
   - All tests match corresponding task step Expected?
   - Were zero tests skipped or marked as skip?
-  - Were the root causes of blocked tests analyzed, and were exhaustive fix attempts made?
+  - Were the root causes of blocked tests thoroughly analyzed, and were exhaustive fix attempts made?
 
   If you find problems during self-review, fix them now
 

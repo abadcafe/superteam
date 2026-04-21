@@ -72,7 +72,6 @@ contradictory steps, placeholder content, or tasks so vague they can't be acted 
 
 2. read context:
   - read spec → understand requirements
-  - read all task files → working/plan/task-NNN/task.md
 
 3. Check Plan:
   - use `superpowers:test-driven-development`

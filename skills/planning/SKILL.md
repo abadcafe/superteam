@@ -48,7 +48,7 @@ digraph planning_flow {
   "has Pending issues?" [shape=diamond]
   "complete" [shape=doublecircle]
 
-  "check spec exists" -> "wait user confirm"
+  "check spec exists" -> "wait user confirm" [taillabel="Check existence ONLY - NEVER read its content"]
   "wait user confirm" -> "dispatch planner" [label="begin"]
   "dispatch planner" -> "dispatch plan-reviewer"
   "dispatch plan-reviewer" -> "read review issues" [label="collect all review issues from plan-review-results.md"]
