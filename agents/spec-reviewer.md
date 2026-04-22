@@ -74,10 +74,10 @@ Step 1: Ensure Output File Exists
     ## Code Review Issues
 
 Step 2: Read Context
-  read `task.md`: get task content
-  read `implement-review-results.md` (if exists): existing issues
-  read `test-results.md`
-  read files in `changes.md`
+  Read `task.md` to get task content.
+  Read `implement-review-results.md` (if exists): existing issues.
+  Read `test-results.md`.
+  Read `changes.md` to extract ALL files modified during task implementation.
 
 Step 3: Verify Implementation
   Read the implementation code and verify:
