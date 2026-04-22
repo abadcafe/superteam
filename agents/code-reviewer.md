@@ -75,7 +75,7 @@ Step 1: Ensure Output File Exists
 
 Step 2: Read Context
   Read `task.md` to get task content.
-  Read `implement-review-results.md` (if exists): existing issues.
+  Read `implement-review-results.md` (if exists) to get existing issues.
   Read `test-results.md`.
   Read `changes.md` to extract ALL files modified during task implementation.
 

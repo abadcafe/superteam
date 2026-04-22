@@ -88,8 +88,8 @@ EXPECTED | UNEXPECTED
 
 ```
 Step 1: Read Context
-  read `task.md`: get task content
-  read `implement-review-results.md` (if exists): issues to fix (all sections)
+  read `task.md` to get task content.
+  read `implement-review-results.md` (if exists) to get issues to fix (all sections).
 
 Step 2: Handle Pending Issues
   read implement-review-results.md (if exists)
@@ -163,7 +163,8 @@ Step 4: Self-Review
   If you find problems during self-review, fix them now
 
 Step 5: Write reports
-  update `changes.md` and write `test-results.md`
+  update `changes.md` (preserve history via merge)
+  write `test-results.md` (TRUNCATE + overwrite, NEVER append)
 ```
 
 **NEVER:**
