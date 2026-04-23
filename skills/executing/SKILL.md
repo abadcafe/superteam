@@ -21,8 +21,8 @@ YOU MUST NOT UNDERSTAND WHAT HAPPEND, NEVER DOUBT THE PROCESS FLOW.
 - `working/plan/` - Plan directory
 - `working/plan/task-NNN/task.md` - Task document
 - `working/plan/task-NNN/changes.md` - Task changes
-- `working/plan/task-NNN/test-results.md` - Test results
-- `working/plan/task-NNN/implement-review-results.md` - Review results
+- `working/plan/task-NNN/test-results.md` - Task test results
+- `working/plan/task-NNN/implement-review-results.md` - Task implement review results
 - `working/plan-issues.md` - Plan issues (hardcoded)
 - `working/env-issues.md` - Environment issues (hardcoded)
 
@@ -103,26 +103,26 @@ digraph executing_flow {
   "output summary" [shape=box]
   "wait user confirm" [shape=box]
   "dispatch implementer" [shape=box]
-  "read test Status" [shape=box]
-  "Status UNEXPECTED?" [shape=diamond]
+  "get test `Status`" [shape=box]
+  "test `Status` is `UNEXPECTED`?" [shape=diamond]
   "dispatch spec-reviewer" [shape=box]
   "dispatch code-reviewer" [shape=box]
-  "read review issues" [shape=box]
-  "has Pending issues?" [shape=diamond]
+  "count `Pending` issues" [shape=box]
+  "has `Pending` issues?" [shape=diamond]
   "next task" [shape=box]
 
-  "get task list" -> "output summary" [taillabel="grep -h -m1 '^# Task' working/plan/task-*/task.md | sort"]
+  "get task list" -> "output summary" [taillabel="grep -Ehm1 '^# Task' on all task documents | sort"]
   "output summary" -> "wait user confirm"
-  "wait user confirm" -> "dispatch implementer" [label="begin Task 001"]
-  "dispatch implementer" -> "read test Status" [label="read status from test-results.md (line 4 only)"]
-  "read test Status" -> "Status UNEXPECTED?"
-  "Status UNEXPECTED?" -> "dispatch implementer" [label="yes: fix UNEXPECTED"]
-  "Status UNEXPECTED?" -> "dispatch spec-reviewer" [label="no: EXPECTED"]
+  "wait user confirm" -> "dispatch implementer" [label="begin the first task"]
+  "dispatch implementer" -> "get test `Status`" [label="sed -En '4p' on task test results"]
+  "get test `Status`" -> "test `Status` is `UNEXPECTED`?"
+  "test `Status` is `UNEXPECTED`?" -> "dispatch implementer" [label="yes: fix `UNEXPECTED`"]
+  "test `Status` is `UNEXPECTED`?" -> "dispatch spec-reviewer" [label="no: `EXPECTED`"]
   "dispatch spec-reviewer" -> "dispatch code-reviewer"
-  "dispatch code-reviewer" -> "read review issues" [label="collect all review issues from implement-review-results.md"]
-  "read review issues" -> "has Pending issues?"
-  "has Pending issues?" -> "dispatch implementer" [label="yes: FIX and SPEC/CODE REVIEW again"]
-  "has Pending issues?" -> "next task" [label="no: all reviewers confirmed, next task"]
+  "dispatch code-reviewer" -> "count `Pending` issues" [label="grep -Fc 'Status: Pending' (preserve regexp literally) on task implement review results"]
+  "count `Pending` issues" -> "has `Pending` issues?"
+  "has `Pending` issues?" -> "dispatch implementer" [label="yes: FIX and SPEC/CODE REVIEW again"]
+  "has `Pending` issues?" -> "next task" [label="no: all reviewers confirmed, next task"]
   "next task" -> "dispatch implementer" [label="Task NNN → Task NNN+1"]
 }
 ```
@@ -131,7 +131,7 @@ After all tasks:
 1. read all `working/plan/task-NNN/changes.md`
 2. read all `working/plan/task-NNN/test-results.md`
 3. read all `working/plan/task-NNN/implement-review-results.md`
-4. read all `working/plan/task-NNN/task.md` → extract goal and task names
+4. read all `working/plan/task-NNN/task.md`: extract goal and task names
 5. read `spec-issues.md`, `plan-issues.md`, `env-issues.md` (if exist)
 6. write `working/commit-message.md`
 7. write `working/task-summary.md` (include agent metrics tracked during execution)

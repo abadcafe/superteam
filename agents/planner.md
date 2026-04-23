@@ -129,8 +129,8 @@ self-contained changes that make sense independently.**
   - use `superteam:black-box-testing`
   - create the complete plan if not exists; otherwise:
     - update the plan to address each `Pending` issues in plan review results:
-      - after fixed: set `Resolved` silently, no extra contents
-      - If spec problem (cannot be fixed in plan): set `Don't Fix`, fill `Decision Reason` only, no extra contents
+      - After fixed: Use `sed` to set `Status` to `Resolved` ONLY. Preserve all other content exactly.
+      - If spec problem (cannot be fixed in plan): set to `Don't Fix`, fill `Decision Reason` only, no extra contents
 
 **NEVER add explanations/interpretations/summaries when responding — per `Response Format` only**
 

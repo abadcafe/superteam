@@ -44,17 +44,17 @@ digraph planning_flow {
   "wait user confirm" [shape=box]
   "dispatch planner" [shape=box]
   "dispatch plan-reviewer" [shape=box]
-  "read review issues" [shape=box]
-  "has Pending issues?" [shape=diamond]
+  "count `Pending` issues" [shape=box]
+  "has `Pending` issues?" [shape=diamond]
   "complete" [shape=doublecircle]
 
-  "check spec exists" -> "wait user confirm" [taillabel="Check existence ONLY - NEVER read its content"]
+  "check spec exists" -> "wait user confirm" [taillabel="test -f on spec"]
   "wait user confirm" -> "dispatch planner" [label="begin"]
   "dispatch planner" -> "dispatch plan-reviewer"
-  "dispatch plan-reviewer" -> "read review issues" [label="collect all review issues from plan-review-results.md"]
-  "read review issues" -> "has Pending issues?"
-  "has Pending issues?" -> "dispatch planner" [label="yes: FIX and REVIEW again"]
-  "has Pending issues?" -> "complete" [label="no: all reviewers confirmed"]
+  "dispatch plan-reviewer" -> "count `Pending` issues" [label="grep -Fc 'Status: Pending' (preserve regexp literally) on plan review results"]
+  "count `Pending` issues" -> "has `Pending` issues?"
+  "has `Pending` issues?" -> "dispatch planner" [label="yes: FIX and REVIEW again"]
+  "has `Pending` issues?" -> "complete" [label="no: all reviewers confirmed"]
 }
 ```
 

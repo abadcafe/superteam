@@ -128,10 +128,10 @@ Step 3: Implement (TDD for All)
       - Mark `Blocked=yes` in test results, include root cause & executed approaches in `Details`.
       - Continue with remaining work.
 
-  after verified working, ALL issues MUST have `Status` set to either `Resolved` or `Don't Fix`:
-    - for each verified `Pending` issue: set `Resolved` silently, no extra contents
-    - if issues genuinely blocked after exhausting approaches:
-      - for that issue: set `Don't Fix`, fill `Decision Reason` only, no extra contents
+  After verified working, ALL issues MUST have `Status` set to either `Resolved` or `Don't Fix`:
+    - For each `Pending` issue verified as fixed: Use `sed` to set `Status` to `Resolved` ONLY. Preserve all other content exactly.
+    - If issues genuinely blocked after exhausting approaches:
+      - For that issue: set to `Don't Fix`, fill `Decision Reason` only, no extra contents
 
 Step 4: Self-Review
   Review your work with fresh eyes. Ask yourself:

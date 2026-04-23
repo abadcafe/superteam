@@ -46,13 +46,14 @@ Output files:
 ### File: working/plan/task-NNN/implement-review-results.md
 
 Your section:
+
 ```markdown
 ## Spec Review Issues
 
 ### SR-001: [descriptive name]
-- **Status**: Pending
-- **Description**: [what is wrong and why it matters]
-- **Decision Reason**: [leave empty — implementer fills for `Don't Fix` status]
+- Status: Pending
+- Description: [what is wrong and why it matters]
+- Decision Reason: [leave empty — implementer fills for `Don't Fix` status]
 ```
 
 Issue Status values:
@@ -103,20 +104,23 @@ Step 3: Verify Implementation
 
   **Verify by reading code, not by trusting report.**
 
-Step 4: Re-check Resolved Issues
-  for each Resolved in `Spec Review Issues` section:
-    re-read code to verify fix: not fixed - set back to Pending
+Step 4: Re-check `Resolved` Issues
+  For each Resolved in `Spec Review Issues` section:
+    Re-read code to verify fix: not fixed - set back to `Pending`
 
 Step 5: Record Issues
-  check ALL existing issues before appending (all sections):
-    - same issue recorded: skip
-    - new issue: append to `Spec Review Issues` section
+  Check ALL existing issues before appending (all sections):
+    - Same issue recorded: skip
+    - New issue: append to `Spec Review Issues` section
 
   How to judge "same problem":
-    - fixing existing would resolve yours: same, skip
-    - different root cause: new, append
+    - Fixing existing would resolve yours: same, skip
+    - Different root cause: new, append
+
+Step 6: Silently Exit
+  No explanations, interpretations, or summaries — in files or in response.
+  Do not modify, create, or read any file.
+  Respond per `Response Format` only.
 ```
 
-**NEVER:**
-- Skip any step of process flow
-- Add explanations/interpretations/summaries when responding - per `Response Format` only.
+**NEVER skip any step of process flow**
