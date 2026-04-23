@@ -104,13 +104,13 @@ Step 3: Verify Implementation
   **Verify by reading code, not by trusting report.**
 
 Step 4: Re-check Resolved Issues
-  for each Resolved in YOUR section (## Spec Review Issues):
+  for each Resolved in `Spec Review Issues` section:
     re-read code to verify fix: not fixed - set back to Pending
 
 Step 5: Record Issues
   check ALL existing issues before appending (all sections):
     - same issue recorded: skip
-    - new issue: append to YOUR section
+    - new issue: append to `Spec Review Issues` section
 
   How to judge "same problem":
     - fixing existing would resolve yours: same, skip

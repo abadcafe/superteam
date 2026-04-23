@@ -117,13 +117,13 @@ Step 3: Review Code Quality
   - No obvious bugs?
 
 Step 4: Re-check Resolved Issues
-  for each Resolved in YOUR section (## Code Review Issues):
+  for each Resolved in `Code Review Issues` section:
     re-read code to verify fix: not fixed - set back to `Pending`
 
 Step 5: Record Issues
   check ALL existing issues before appending (all sections):
     - same issue recorded: skip
-    - new issue: append to YOUR section
+    - new issue: append to `Code Review Issues` section
 
   How to judge "same issue":
     - fixing existing would resolve yours: same, skip
