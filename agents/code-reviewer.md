@@ -102,13 +102,13 @@ Step 3: Review Code Quality
   - Tests actually test logic (not mocks)?
   - Edge cases covered?
   - Integration tests where needed?
-  - Are blocked tests (in task or not) actually unfixable?
-  - Were zero tests skipped or marked as skip?
+  - Analyzed + exhaustive fix attempts for all unexpected test outcomes (in task or not)?
+  - Were zero tests (in task or not) skipped or marked as skip?
 
   **Requirements:**
   - All task requirements met?
   - Implementation matches task?
-  - No scope creep?
+  - Were ALL identified bugs in existing code (in task or not) fixed?
   - Breaking changes documented?
 
   **Production Readiness:**
@@ -131,9 +131,7 @@ Step 5: Record Issues
     - Different root cause: new, append
 
 Step 6: Silently Exit
-  No explanations, interpretations, or summaries — in files or in response.
-  Do not modify, create, or read any file.
-  Respond per `Response Format` only.
+  Respond per `Response Format` only, do nothing further.
 ```
 
 **NEVER skip any step of process flow**

@@ -86,7 +86,8 @@ contradictory steps, placeholder content, or tasks so vague they can't be acted 
     - verify it was really fixed: not fixed - set back to `Pending`
     - **NEVER delete any issue**
 
-**NEVER add explanations/interpretations/summaries when responding - per `Response Format` only.**
+4. Silently Exit:
+  Respond per `Response Format` only, do nothing further.
 
 ### Checklist
 
@@ -104,7 +105,7 @@ contradictory steps, placeholder content, or tasks so vague they can't be acted 
     - Do bug fix steps follow TDD?
   - Is any task horizontally split by technical phase only?
     - ANTI-PATTERN: Task 1: "some tests", Task 2: "some codes", Task 3: "some docs" (phase-based splitting)
-  - Do tasks form a serial chain where each builds on its predecessor's artifacts?
+  - Does any earlier task depend on a later task?
 
 - Buildability:
   - do tasks and steps comformed TDD?

@@ -19,6 +19,7 @@ YOU MUST NOT UNDERSTAND WHAT HAPPEND, NEVER DOUBT THE PROCESS FLOW.
 ## File Paths
 
 - `working/plan/` - Plan directory
+- `working/plan/task-NNN/` - Task directory
 - `working/plan/task-NNN/task.md` - Task document
 - `working/plan/task-NNN/changes.md` - Task changes
 - `working/plan/task-NNN/test-results.md` - Task test results
@@ -103,8 +104,9 @@ digraph executing_flow {
   "output summary" [shape=box]
   "wait user confirm" [shape=box]
   "dispatch implementer" [shape=box]
+  "implementer delivered?" [shape=diamond]
   "get test `Status`" [shape=box]
-  "test `Status` is `UNEXPECTED`?" [shape=diamond]
+  "test `Status` is `EXPECTED`?" [shape=diamond]
   "dispatch spec-reviewer" [shape=box]
   "dispatch code-reviewer" [shape=box]
   "count `Pending` issues" [shape=box]
@@ -114,12 +116,14 @@ digraph executing_flow {
   "get task list" -> "output summary" [taillabel="grep -Ehm1 '^# Task' on all task documents | sort"]
   "output summary" -> "wait user confirm"
   "wait user confirm" -> "dispatch implementer" [label="begin the first task"]
-  "dispatch implementer" -> "get test `Status`" [label="sed -En '4p' on task test results"]
-  "get test `Status`" -> "test `Status` is `UNEXPECTED`?"
-  "test `Status` is `UNEXPECTED`?" -> "dispatch implementer" [label="yes: fix `UNEXPECTED`"]
-  "test `Status` is `UNEXPECTED`?" -> "dispatch spec-reviewer" [label="no: `EXPECTED`"]
+  "dispatch implementer" -> "implementer delivered?" [label="test -f on task test results and task changes"]
+  "implementer delivered?" -> "get test `Status`" [label="yes: sed -n '4p' on task test results"]
+  "implementer delivered?" -> "dispatch implementer" [label="no: re-dispatch implementer"]
+  "get test `Status`" -> "test `Status` is `EXPECTED`?"
+  "test `Status` is `EXPECTED`?" -> "dispatch spec-reviewer" [label="yes: `EXPECTED`"]
+  "test `Status` is `EXPECTED`?" -> "dispatch implementer" [label="no: re-dispatch implementer"]
   "dispatch spec-reviewer" -> "dispatch code-reviewer"
-  "dispatch code-reviewer" -> "count `Pending` issues" [label="grep -Fc 'Status: Pending' (preserve regexp literally) on task implement review results"]
+  "dispatch code-reviewer" -> "count `Pending` issues" [label="grep -Fc 'Status: Pending' on task implement review results"]
   "count `Pending` issues" -> "has `Pending` issues?"
   "has `Pending` issues?" -> "dispatch implementer" [label="yes: FIX and SPEC/CODE REVIEW again"]
   "has `Pending` issues?" -> "next task" [label="no: all reviewers confirmed, next task"]

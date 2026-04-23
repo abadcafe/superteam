@@ -89,13 +89,7 @@ Step 3: Verify Implementation
   - Did they claim something works but didn't actually implement it?
   - Were zero tests skipped or marked as skip?
   - Outcomes match task (not report) expectations?
-  - Analyzed + exhaustive fix attempts for all unexpected test (in task or not) outcomes?
-
-  **Extra/unneeded work:**
-  - Did they build things that weren't requested?
-  - Did they over-engineer or add unnecessary features?
-  - Did they add "nice to haves" that weren't in task?
-  - NOTE: Bug fixes for existing code are essential when bugs are identified
+  - Are blocked tests (in task or not) confirmed unfixable?
 
   **Misunderstandings:**
   - Did they interpret requirements differently than intended?
@@ -118,9 +112,7 @@ Step 5: Record Issues
     - Different root cause: new, append
 
 Step 6: Silently Exit
-  No explanations, interpretations, or summaries — in files or in response.
-  Do not modify, create, or read any file.
-  Respond per `Response Format` only.
+  Respond per `Response Format` only, do nothing further.
 ```
 
 **NEVER skip any step of process flow**
