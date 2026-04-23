@@ -147,6 +147,7 @@ self-contained changes that make sense independently.**
 
 - **NEVER** horizontally split tasks by technical phases
   - ANTI-PATTERN: Task 1: "some unit tests", Task 2: "some codes", Task 3: "some docs" (phase-based splitting)
+- All tasks execute strictly in serial order — later tasks may rely on artifacts produced by earlier tasks
 
 ## Remember
 

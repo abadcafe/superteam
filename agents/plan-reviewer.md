@@ -104,6 +104,7 @@ contradictory steps, placeholder content, or tasks so vague they can't be acted 
     - Do bug fix steps follow TDD?
   - Is any task horizontally split by technical phase only?
     - ANTI-PATTERN: Task 1: "some tests", Task 2: "some codes", Task 3: "some docs" (phase-based splitting)
+  - Do tasks form a serial chain where each builds on its predecessor's artifacts?
 
 - Buildability:
   - do tasks and steps comformed TDD?
