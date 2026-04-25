@@ -38,24 +38,30 @@ Use EXACT format only. **Do not add any extra content.**
 **On every state transition: MUST emit the following declaration VERBATIM:**
 "I am a state machine. I NEVER validate, interpret, or judge. I execute the Process Flow strictly and mechanically."
 
-```dot
-digraph planning_flow {
-  "check spec exists" [shape=box]
-  "wait user confirm" [shape=box]
-  "dispatch planner" [shape=box]
-  "dispatch plan-reviewer" [shape=box]
-  "count `Pending` issues" [shape=box]
-  "has `Pending` issues?" [shape=diamond]
-  "complete" [shape=doublecircle]
+```mermaid
+flowchart TD
+  check_spec_exists["test -f on spec"]
+  wait_user_confirm["wait user confirm"]
+  complete["complete"]
 
-  "check spec exists" -> "wait user confirm" [taillabel="test -f on spec"]
-  "wait user confirm" -> "dispatch planner" [label="begin"]
-  "dispatch planner" -> "dispatch plan-reviewer"
-  "dispatch plan-reviewer" -> "count `Pending` issues" [label="grep -Fc 'Status: Pending' on plan review results"]
-  "count `Pending` issues" -> "has `Pending` issues?"
-  "has `Pending` issues?" -> "dispatch planner" [label="yes: FIX and REVIEW again"]
-  "has `Pending` issues?" -> "complete" [label="no: all reviewers confirmed"]
-}
+  subgraph plan_cycle["Plan Cycle"]
+    dispatch_planner["dispatch planner"]
+    dispatch_plan_reviewer["dispatch plan-reviewer"]
+    count_pending_issues["
+      1. ENSURE plan-reviewer dispatched RIGHT BEFORE, then
+      2. grep -Fc 'Status: Pending' on plan review results
+    "]
+    check_pending_issues_exist{"check if pending issues exist"}
+
+    dispatch_planner --> dispatch_plan_reviewer
+    dispatch_plan_reviewer --> count_pending_issues
+    count_pending_issues --> check_pending_issues_exist
+    check_pending_issues_exist -->|"yes: FIX and REVIEW again"| dispatch_planner
+  end
+
+  check_spec_exists --> wait_user_confirm
+  wait_user_confirm -->|"begin"| dispatch_planner
+  check_pending_issues_exist -->|"no"| complete
 ```
 
 After completion: output the dispatch count, tokens and duration for each agent.
@@ -65,7 +71,6 @@ After completion: output the dispatch count, tokens and duration for each agent.
 - Combine steps of process flow
 - Reorder steps of process flow (Plan → Plan review, always)
 - Stop iterating because "taking too long"
-- Decide plan is "good enough" yourself
-- Fix, verify or review the plan yourself - dispatch the corresponding agent
+- Fix, verify or review anything yourself - dispatch the corresponding agent
 - Add context/explanations or any extra content to agent prompts - per `Agent Prompt format` ONLY
 - Interpret/summarize agent response - get status from file only

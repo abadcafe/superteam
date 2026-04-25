@@ -98,40 +98,48 @@ Track agent metrics during execution: after each agent dispatch, record its call
 **On every state transition: MUST emit the following declaration VERBATIM:**
 "I am a state machine. I NEVER validate, interpret, or judge. I execute the Process Flow strictly and mechanically."
 
-```dot
-digraph executing_flow {
-  "get task list" [shape=box]
-  "output summary" [shape=box]
-  "wait user confirm" [shape=box]
-  "dispatch implementer" [shape=box]
-  "implementer delivered?" [shape=diamond]
-  "get test `Status`" [shape=box]
-  "test `Status` is `EXPECTED`?" [shape=diamond]
-  "dispatch spec-reviewer" [shape=box]
-  "dispatch code-reviewer" [shape=box]
-  "count `Pending` issues" [shape=box]
-  "has `Pending` issues?" [shape=diamond]
-  "next task" [shape=box]
+```mermaid
+flowchart TD
+  get_task_list["grep -Ehm1 '^# Task' on all task documents | sort"]
+  output_summary["output summary"]
+  wait_user_confirm["wait user confirm"]
+  complete["complete"]
 
-  "get task list" -> "output summary" [taillabel="grep -Ehm1 '^# Task' on all task documents | sort"]
-  "output summary" -> "wait user confirm"
-  "wait user confirm" -> "dispatch implementer" [label="begin the first task"]
-  "dispatch implementer" -> "implementer delivered?" [label="test -f on task test results and task changes"]
-  "implementer delivered?" -> "get test `Status`" [label="yes: sed -n '4p' on task test results"]
-  "implementer delivered?" -> "dispatch implementer" [label="no: re-dispatch implementer"]
-  "get test `Status`" -> "test `Status` is `EXPECTED`?"
-  "test `Status` is `EXPECTED`?" -> "dispatch spec-reviewer" [label="yes: `EXPECTED`"]
-  "test `Status` is `EXPECTED`?" -> "dispatch implementer" [label="no: re-dispatch implementer"]
-  "dispatch spec-reviewer" -> "dispatch code-reviewer"
-  "dispatch code-reviewer" -> "count `Pending` issues" [label="grep -Fc 'Status: Pending' on task implement review results"]
-  "count `Pending` issues" -> "has `Pending` issues?"
-  "has `Pending` issues?" -> "dispatch implementer" [label="yes: FIX and SPEC/CODE REVIEW again"]
-  "has `Pending` issues?" -> "next task" [label="no: all reviewers confirmed, next task"]
-  "next task" -> "dispatch implementer" [label="Task NNN → Task NNN+1"]
-}
+  subgraph task_cycle["Task Cycle"]
+    dispatch_implementer["dispatch implementer"]
+    check_implementer_delivered{"test -f on task test results and task changes"}
+    get_test_status["sed -n '4p' on task test results"]
+    check_test_status{"check test status result"}
+    dispatch_spec_reviewer["dispatch spec-reviewer"]
+    dispatch_code_reviewer["dispatch code-reviewer"]
+    count_pending_issues["
+      1. ENSURE spec & code reviewer dispatched RIGHT BEFORE, then
+      2. grep -Fc 'Status: Pending' on task implement review results
+    "]
+    check_pending_issues_exist{"check if pending issues exist"}
+    next_task{"Task NNN → Task NNN + 1"}
+
+    dispatch_implementer --> check_implementer_delivered
+    check_implementer_delivered -->|"yes"| get_test_status
+    check_implementer_delivered -->|"no: re-dispatch"| dispatch_implementer
+    get_test_status --> check_test_status
+    check_test_status -->|"is `EXPECTED`"| dispatch_spec_reviewer
+    check_test_status -->|"not `EXPECTED`"| dispatch_implementer
+    dispatch_spec_reviewer --> dispatch_code_reviewer
+    dispatch_code_reviewer --> count_pending_issues
+    count_pending_issues --> check_pending_issues_exist
+    check_pending_issues_exist -->|"yes: FIX and REVIEW again"| dispatch_implementer
+    check_pending_issues_exist -->|"no"| next_task
+    next_task -->|"has next task"| dispatch_implementer
+  end
+
+  get_task_list --> output_summary
+  output_summary --> wait_user_confirm
+  wait_user_confirm -->|"begin the first task"| dispatch_implementer
+  next_task -->|"no more tasks"| complete
 ```
 
-After all tasks:
+After all tasks finished:
 1. read all `working/plan/task-NNN/changes.md`
 2. read all `working/plan/task-NNN/test-results.md`
 3. read all `working/plan/task-NNN/implement-review-results.md`
@@ -144,10 +152,7 @@ After all tasks:
 - Skip any step of process flow
 - Combine steps of process flow
 - Reorder steps of process flow (Implement → Spec review → Code review, always)
-- Combine tasks into one dispatch
 - Stop iterating because "taking too long"
-- Decide issue "not worth fixing" - Implementer's job
-- Fix, verify or review code yourself - dispatch the corresponding agent
+- Fix, verify or review anything yourself - dispatch the corresponding agent
 - Add context/explanations or any extra content to agent prompts - per `Agent Prompt format` ONLY
 - Interpret/summarize agent reponse - get status from file only
-- Make decisions not covered by steps - STOP and wait for human
