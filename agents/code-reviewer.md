@@ -103,7 +103,7 @@ Step 3: Review Code Quality
   - Edge cases covered?
   - Integration tests where needed?
   - Analyzed + exhaustive fix attempts for all unexpected test outcomes (in task or not)?
-  - Were zero tests (in task or not) skipped or marked as skip?
+  - Zero tests (in task or not) skipped or marked as skip? (NO EXCUSES!)
 
   **Requirements:**
   - All task requirements met?

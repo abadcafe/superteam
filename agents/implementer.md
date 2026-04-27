@@ -157,7 +157,7 @@ Step 4: Self-Review
   - Did I follow TDD if required?
   - Are tests comprehensive?
   - All tests match corresponding task step Expected?
-  - Were zero tests skipped or marked as skip?
+  - Zero tests (in task or not) skipped or marked as skip? (NO EXCUSES!)
   - Were the root causes of blocked tests thoroughly analyzed, and were exhaustive fix attempts made?
 
   If you find problems during self-review, fix them now

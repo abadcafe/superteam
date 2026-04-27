@@ -87,7 +87,7 @@ Step 3: Verify Implementation
   - Did they implement everything that was requested?
   - Are there requirements they skipped or missed?
   - Did they claim something works but didn't actually implement it?
-  - Were zero tests skipped or marked as skip?
+  - Zero tests (in task or not) skipped or marked as skip? (NO EXCUSES!)
   - Outcomes match task (not report) expectations?
   - Are blocked tests (in task or not) confirmed unfixable?
 
