@@ -107,7 +107,7 @@ Step 3: Review Code Quality
 
   **Requirements:**
   - All task requirements met?
-  - Implementation matches task?
+  - Implementation satisfies task requirements?
   - Were ALL identified bugs in existing code (in task or not) fixed?
   - Breaking changes documented?
 

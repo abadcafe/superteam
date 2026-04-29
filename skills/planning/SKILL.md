@@ -40,7 +40,7 @@ Use EXACT format only. **Do not add any extra content.**
 
 ```mermaid
 flowchart TD
-  check_spec_exists["test -f on spec"]
+  check_spec_exists["ONLY run: test -f on spec"]
   wait_user_confirm["wait user confirm"]
   complete["complete"]
 
@@ -48,7 +48,7 @@ flowchart TD
     dispatch_planner["dispatch planner"]
     dispatch_plan_reviewer["dispatch plan-reviewer"]
     count_pending_issues["
-      1. ENSURE plan-reviewer dispatched RIGHT BEFORE, then
+      1. ENSURE plan-reviewer dispatched & completed RIGHT BEFORE this step. ONLY THEN:
       2. grep -Fc 'Status: Pending' on plan review results
     "]
     check_pending_issues_exist{"check if pending issues exist"}

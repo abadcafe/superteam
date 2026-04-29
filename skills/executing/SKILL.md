@@ -100,32 +100,33 @@ Track agent metrics during execution: after each agent dispatch, record its call
 
 ```mermaid
 flowchart TD
-  get_task_list["grep -Ehm1 '^# Task' on all task documents | sort"]
-  output_summary["output summary"]
+  get_task_list["ONLY run: grep -Ehm1 '^# Task' on all task documents | sort"]
+  output_task_list["output task list"]
   wait_user_confirm["wait user confirm"]
   complete["complete"]
 
   subgraph task_cycle["Task Cycle"]
     dispatch_implementer["dispatch implementer"]
-    check_implementer_delivered{"test -f on task test results and task changes"}
-    get_test_status["sed -n '4p' on task test results"]
+    check_implementer_completed{"ONLY run: test -f on task test results & task changes"}
+    get_test_status["ONLY run: sed -n '4p' on task test results"]
     check_test_status{"check test status result"}
     dispatch_spec_reviewer["dispatch spec-reviewer"]
     dispatch_code_reviewer["dispatch code-reviewer"]
     count_pending_issues["
-      1. ENSURE spec & code reviewer dispatched RIGHT BEFORE, then
+      1. ENSURE spec & code reviewers BOTH dispatched & completed RIGHT BEFORE this step. ONLY THEN:
       2. grep -Fc 'Status: Pending' on task implement review results
     "]
     check_pending_issues_exist{"check if pending issues exist"}
     next_task{"Task NNN → Task NNN + 1"}
 
-    dispatch_implementer --> check_implementer_delivered
-    check_implementer_delivered -->|"yes"| get_test_status
-    check_implementer_delivered -->|"no: re-dispatch"| dispatch_implementer
+    dispatch_implementer --> check_implementer_completed
+    check_implementer_completed -->|"no: re-dispatch"| dispatch_implementer
+    check_implementer_completed -->|"yes"| get_test_status
     get_test_status --> check_test_status
-    check_test_status -->|"is `EXPECTED`"| dispatch_spec_reviewer
     check_test_status -->|"not `EXPECTED`"| dispatch_implementer
-    dispatch_spec_reviewer --> dispatch_code_reviewer
+    check_test_status -->|"is `EXPECTED`"| dispatch_spec_reviewer
+    check_test_status -->|"is `EXPECTED`"| dispatch_code_reviewer
+    dispatch_spec_reviewer --> count_pending_issues
     dispatch_code_reviewer --> count_pending_issues
     count_pending_issues --> check_pending_issues_exist
     check_pending_issues_exist -->|"yes: FIX and REVIEW again"| dispatch_implementer
@@ -133,8 +134,8 @@ flowchart TD
     next_task -->|"has next task"| dispatch_implementer
   end
 
-  get_task_list --> output_summary
-  output_summary --> wait_user_confirm
+  get_task_list --> output_task_list
+  output_task_list --> wait_user_confirm
   wait_user_confirm -->|"begin the first task"| dispatch_implementer
   next_task -->|"no more tasks"| complete
 ```
