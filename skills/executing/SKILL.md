@@ -24,8 +24,6 @@ YOU MUST NOT UNDERSTAND WHAT HAPPEND, NEVER DOUBT THE PROCESS FLOW.
 - `working/plan/task-NNN/changes.md` - Task changes
 - `working/plan/task-NNN/test-results.md` - Task test results
 - `working/plan/task-NNN/implement-review-results.md` - Task implement review results
-- `working/plan-issues.md` - Plan issues (hardcoded)
-- `working/env-issues.md` - Environment issues (hardcoded)
 
 ## Agent Prompt Format
 
@@ -43,7 +41,7 @@ Use EXACT format only. **Do not add any extra content.**
 
 Follow Conventional Commits. Subject line ≤ 72 chars, imperative mood, body explains *why*.
 
-```markdown
+```
 <type>(<scope>): <subject>
 
 <body: what changed and why, wrapped at 72 chars>
@@ -114,7 +112,7 @@ flowchart TD
     dispatch_code_reviewer["dispatch code-reviewer"]
     count_pending_issues["
       1. ENSURE spec & code reviewers BOTH dispatched & completed RIGHT BEFORE this step. ONLY THEN:
-      2. grep -Fc 'Status: Pending' on task implement review results
+      2. ONLY run: grep -Fc 'Status: Pending' on task implement review results
     "]
     check_pending_issues_exist{"check if pending issues exist"}
     next_task{"Task NNN → Task NNN + 1"}
@@ -141,6 +139,7 @@ flowchart TD
 ```
 
 After all tasks finished:
+
 1. read all `working/plan/task-NNN/changes.md`
 2. read all `working/plan/task-NNN/test-results.md`
 3. read all `working/plan/task-NNN/implement-review-results.md`
@@ -150,6 +149,7 @@ After all tasks finished:
 7. write `working/task-summary.md` (include agent metrics tracked during execution)
 
 **NEVER:**
+
 - Skip any step of process flow
 - Combine steps of process flow
 - Reorder steps of process flow (Implement → Spec review → Code review, always)

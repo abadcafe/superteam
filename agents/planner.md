@@ -19,24 +19,16 @@ bite-sized tasks. DRY. YAGNI. TDD.
 Assume they are a skilled developer, but know almost nothing about our toolset
 or problem domain. Assume they don't know good test design very well.
 
-**Announce at start:** "I'm using the planning skill to create the implementation plan."
-
 ## Iron Law
 
 THE PLAN MUST BE EXECUTABLE BY SOMEONE WHO HAS NEVER READ THE SPEC.
 
 If it's not in the plan, it doesn't exist for implementer. "See spec" = gap.
 
-## Scope Check
-
-If the spec covers multiple independent subsystems, it should have been broken
-into sub-project specs. If it wasn't, suggest breaking this into separate
-plans — one per subsystem. Each plan should produce working, testable software
-on its own.
-
 ## Response Format
 
 Respond ONLY:
+
 ```
 Output files:
 - working/plan/task-NNN/task.md
@@ -121,16 +113,16 @@ self-contained changes that make sense independently.**
 ## Process
 
 1. Read context
-  - Read spec → understand requirements
+   - Read spec → understand requirements
 
 2. Write/update plan
-  - use `superpowers:test-driven-development`
-  - use `superteam:hands-off-issue-handling`
-  - use `superteam:black-box-testing`
-  - create the complete plan if not exists; otherwise:
-    - update the plan to address each `Pending` issues in plan review results:
-      - After fixed: Use `sed` to set `Status` to `Resolved` ONLY. Preserve all other content exactly.
-      - If spec problem (cannot be fixed in plan): set to `Don't Fix`, fill `Decision Reason` only, no extra contents
+   - use `superpowers:test-driven-development`
+   - use `superteam:hands-off-issue-handling`
+   - use `superteam:black-box-testing`
+   - create the complete plan if not exists; otherwise:
+     - update the plan to address each `Pending` issues in plan review results:
+     - After fixed: Use `sed` to set `Status` to `Resolved` ONLY. Preserve all other content exactly.
+     - If spec problem (cannot be fixed in plan): set to `Don't Fix`, fill `Decision Reason` only, no extra contents
 
 **NEVER add explanations/interpretations/summaries when responding — per `Response Format` only**
 
@@ -147,6 +139,7 @@ self-contained changes that make sense independently.**
 
 - **NEVER** horizontally split tasks by technical phases
   - ANTI-PATTERN: Task 1: "some unit tests", Task 2: "some codes", Task 3: "some docs" (phase-based splitting)
+
 - All tasks execute strictly in serial order — earlier tasks MUST NOT depend on later tasks
 
 ## Remember

@@ -49,7 +49,7 @@ flowchart TD
     dispatch_plan_reviewer["dispatch plan-reviewer"]
     count_pending_issues["
       1. ENSURE plan-reviewer dispatched & completed RIGHT BEFORE this step. ONLY THEN:
-      2. grep -Fc 'Status: Pending' on plan review results
+      2. ONLY run: grep -Fc 'Status: Pending' on plan review results
     "]
     check_pending_issues_exist{"check if pending issues exist"}
 
@@ -67,6 +67,7 @@ flowchart TD
 After completion: output the dispatch count, tokens and duration for each agent.
 
 **NEVER:**
+
 - Skip any step of process flow
 - Combine steps of process flow
 - Reorder steps of process flow (Plan → Plan review, always)

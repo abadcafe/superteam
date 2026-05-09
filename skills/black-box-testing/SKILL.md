@@ -8,6 +8,7 @@ user-invocation: false
 
 做测试的时候, 要注意黑盒测试(black-box tests)和白盒测试(white-box tests)的区别. 黑盒测
 试有如下性质:
+
 1. 绝不参考任何内部实现, 只通过外部接口测试, **坚决禁止**调用被测系统内部代码
 2. 优先使用真实工具(curl、nc 等)
 
@@ -23,11 +24,15 @@ user-invocation: false
 任务内进行TDD循环, 而是在任务间进行大的TDD循环.
 
 **黑盒测试遵循TDD方法论示例:**
+
 ```
-Task 1: [write/update black-box tests and see them failed]
-Task 2: [write/update unit tests and implementions according to TDD]
+Task 1: [write/update black-box tests for a feature and see them failed]
+Task 2: [write/update unit tests and implementions according to TDD for the feature]
 ...
-Task N: [run black-box tests, verify if implementions works, do bug fix]
+Task N: [run black-box tests, verify if the feature implementions works, do bug fix]
+...
+Task M: [write/update black-box tests for another feature and see them failed]
+...
 ```
 
 - Task 1与Task N必须是2个任务, 否则即违反TDD
@@ -35,13 +40,15 @@ Task N: [run black-box tests, verify if implementions works, do bug fix]
 - Task N只能在相关的代码编写、编译、单元测试等任务之后完成, 否则无法验证到相关的代码, 从而违反TDD
 
 **注意:**
+
 - **必须先规划完编写或修改黑盒测试的任务以后, 才能规划相关的代码编写任务, 否则即违反TDD**
 - 测试用例本身的编写过程不用遵循TDD, 但是辅助函数, 工具等仍然要遵循TDD
 - 在同一个任务中, 代码编写、编译、单元测试等工作必须先于黑盒测试(如有)
+- **已有的黑盒测试用例要按照需求和设计的变化更新或删除, 而不是简单地忽略掉**
 - **禁止任何测试用例被跳过, 或被标记为跳过(不运行)**
 - 运行测试和验证实现的任务必须也要负责找出导致测试用例**非预期**结果的根因, 然后修复(修复过程也要TDD)并再次验证
   - 毕竟测试用例或代码实现都有可能出bug
-- 所有黑盒测试用例加起来必须完整覆盖所有用户场景(正向/负向场景以及各种边界条件)和所有外部接口
+- 所有黑盒测试用例(已有的和新增的)加起来必须完整覆盖所有用户场景(正向/负向场景以及各种边界条件)和所有外部接口
 
 ## 黑盒测试规范
 
@@ -52,11 +59,12 @@ Task N: [run black-box tests, verify if implementions works, do bug fix]
   - 例如，所有公共 fixture 都在 conftest.py 中定义
 - 测试用例优先选择调用真实工具(如curl、nc等)而不是自己编写类似功能, 因为这样更接近真实场景
   - 设计测试用例前**必须**先使用 `[command] --help` 等手段充分理解真实工具的所有参数和行为, **禁止**基于推测的行为设计测试用例
+  - `[command]`的返回值除了0以外, 其他的返回值都不一定可靠, 不允许依赖0以外的返回值
 - 测试用例**禁止**参考任何功能代码和单测代码, 只能从外部接口的角度来完成测试
 - 所有 Python 代码**必须**有完整的 Type Annotation
 - 确保被测的可执行文件是最新版本且正确运行
 - 规范管理测试产出物，不污染无关目录和环境
 - 测试配置文件应作为测试代码的一部分，不能污染正常配置文件目录
-- 测试用例可独立运行(无用例间依赖)
-- 测试用例可重复运行(无状态残留)
-- 禁止假设测试环境是自己独占, 尽量避免潜在环境冲突.
+- 每个测试用例都必须可独立运行(无用例间依赖)
+- 每个测试用例都必须可重复运行(无状态残留)
+- 禁止假设测试环境是自己独占, 尽量避免潜在环境冲突
