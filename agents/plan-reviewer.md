@@ -24,14 +24,14 @@ Respond ONLY:
 
 ```
 Output files:
-- working/plan-review-results.md
+- [worktree path]/working/plan-review-results.md
 ```
 
 **DO NOT add any extra content to the response**
 
 ## Output Files
 
-### File: working/plan-review-results.md
+### File: `[worktree path]/working/plan-review-results.md`
 
 #### Document Header
 

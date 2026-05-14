@@ -24,9 +24,8 @@ brainstorming → spec in docs/superpowers/specs/
 
 直接复用，不自建：
 - `superpowers:using-git-worktrees` — brainstorming 结束后自动触发，创建 worktree
-- `superpowers:finishing-a-development-branch` — executing 结束后调用，处理合并/PR/清理
 
-从 disallowedTools 中移除这两个 skill。
+从 disallowedTools 中移除 `using-git-worktrees`。`finishing-a-development-branch` 保持禁用，superteam 不需要它（无人值守模式结束后用户自行决定合并/PR/丢弃）。
 
 ## 改动清单
 
@@ -111,31 +110,41 @@ File Paths 中删除 `working/spec.md - Spec file` 行。
 - 删除整个 `### File: working/commit-message.md` 输出格式定义
 - `### File: working/task-summary.md` 中 `[copy from changes.md Files section]` 改为从 git diff 获取文件列表
 - "After all tasks finished" 部分删除 `read all working/plan/task-NNN/changes.md` 和 `write working/commit-message.md`
-- "After all tasks finished" 末尾加一步：调用 `superpowers:finishing-a-development-branch`
 - Agent Prompt Format 中为 code-reviewer 传递 BASE_SHA 和 HEAD_SHA
 - 状态机在 dispatch implementer 前记录当前 HEAD SHA 作为 BASE_SHA，implementer 完成后记录新 HEAD SHA 作为 HEAD_SHA，传给 code-reviewer
 
-### 7. hands-off-issue-handling：统一命名
+### 7. README 更新
 
-**文件：** `skills/hands-off-issue-handling/SKILL.md`
+**文件：** `README.md`
 
-**改动：** `working/task-issues.md` 保持不变，将 executing skill 和 README 中的 `working/plan-issues.md` 统一改为 `working/task-issues.md`
+**改动：将 README 中的 `working/plan-issues.md` 统一改为 `working/task-issues.md`
 
 ### 8. README 更新
 
 **文件：** `README.md`
 
 **改动：**
-- disallowedTools 列表中移除 `Skill(superpowers:using-git-worktrees)` 和 `Skill(superpowers:finishing-a-development-branch)`
+- disallowedTools 列表中移除 `Skill(superpowers:using-git-worktrees)`，保留 `Skill(superpowers:finishing-a-development-branch)` 禁用
 - 文件约定表中删除 `working/plan/task-NNN/changes.md` 和 `working/commit-message.md` 行
 - `working/plan-issues.md` → `working/task-issues.md`
 - 工作流说明中反映 worktree 自动创建/清理
+
+## Worktree 约束
+
+与 superpowers 一致，假设整个流程在 worktree 内运行：
+- brainstorming 结束后 `using-git-worktrees` 自动创建 worktree 并 cd 进去
+- planning 和 executing 都在该 worktree 内运行
+- 用户中断后重启 Claude 时，需自行 cd 到 worktree 目录再启动 skill
+- 不提供自动发现 worktree 的机制
+
+planning skill 加约束："This should be run in a dedicated worktree (created by brainstorming skill)"
+executing skill 加约束："REQUIRED: already in a worktree before starting"
 
 ## 不改动的部分
 
 - **路径：** `working/plan/`、`working/spec-issues.md`、`working/env-issues.md` 等路径全部保持原样。`working/spec.md` 不再使用，spec 路径通过 Agent Prompt Format 动态传递
 - **using-git-worktrees skill：** 直接复用 superpowers 的
-- **finishing-a-development-branch skill：** 直接复用 superpowers 的
+- **finishing-a-development-branch skill：** 保持禁用，superteam 不需要
 - **planner agent：** 不需要 commit（plan 是过程文件，留在 working/ 里）
 - **plan-reviewer agent：** 不需要改动
 - **black-box-testing skill：** 无路径引用，不需要改动
@@ -146,7 +155,6 @@ File Paths 中删除 `working/spec.md - Spec file` 行。
 |------|----------|
 | skills/planning/SKILL.md | description + 流程加 spec 发现步骤 |
 | skills/executing/SKILL.md | 删 changes.md/commit-message.md + 加 finishing + 传 SHA |
-| skills/hands-off-issue-handling/SKILL.md | 统一命名确认 |
 | agents/implementer.md | 加 commit + 删 changes.md |
 | agents/spec-reviewer.md | 删 changes.md 引用 |
 | agents/code-reviewer.md | 改 git diff review |

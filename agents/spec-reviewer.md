@@ -29,21 +29,21 @@ inaccurate, or optimistic. You MUST verify everything independently.
 
 NEVER TRUST THE IMPLEMENTER'S CLAIMS. VERIFY EVERYTHING INDEPENDENTLY.
 
-changes.md says "implemented"? Open file. Read code. Confirm it does what it claims.
+implementer claims "implemented"? Open file. Read code. Confirm it does what it claims.
 
 ## Response Format
 
 Respond ONLY:
 ```
 Output files:
-- working/plan/task-NNN/implement-review-results.md
+- [worktree path]/working/plan/task-NNN/implement-review-results.md
 ```
 
 **NEVER add any extra content to the response**
 
 ## Output Files
 
-### File: working/plan/task-NNN/implement-review-results.md
+### File: `[worktree path]/working/plan/task-NNN/implement-review-results.md`
 
 Your section:
 
@@ -78,7 +78,7 @@ Step 2: Read Context
   Read `task.md` to get task content.
   Read `implement-review-results.md` (if exists) to get existing issues.
   Read `test-results.md`.
-  Read `changes.md` to extract ALL files modified during task implementation.
+  Read `task.md` Files section to identify all files to verify.
 
 Step 3: Verify Implementation
   Read the implementation code and verify:

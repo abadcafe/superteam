@@ -33,7 +33,6 @@ Superteam 是 Superpowers 的改写和扩展，提供轻量级的 AI 驱动开�
     "Skill(superpowers:receiving-code-review),"\
     "Skill(superpowers:verification-before-completion),"\
     "Skill(superpowers:finishing-a-development-branch),"\
-    "Skill(superpowers:using-git-worktrees),"\
     "Skill(superpowers:writing-skills),"\
     "Skill(superpowers:brainstorm),"\
     "Skill(superpowers:write-plan),"\
@@ -63,7 +62,7 @@ Superteam 是 Superpowers 的改写和扩展，提供轻量级的 AI 驱动开�
 
 ### 无人值守模式
 
-整个 planning 和 executing 过程完全自动化运行，用户只需在开始前确认 spec/plan 概要，之后无需介入。系统自动处理迭代修复、审核反馈等所有中间环节，直至生成最终的 commit message 和 task summary。
+整个 planning 和 executing 过程完全自动化运行，用户只需在开始前确认 spec/plan 概要，之后无需介入。系统自动处理迭代修复、审核反馈等所有中间环节，直至生成最终的 task summary。
 
 如果你ctrl -c了，他其实也可以继续接着之前的任务跑，你告诉他从几号任务开始执行就好了。
 
@@ -76,9 +75,9 @@ Superteam 是 Superpowers 的改写和扩展，提供轻量级的 AI 驱动开�
 ## 工作流
 
 ```
-1. brainstorming → spec.md
-2. planning → plan/
-3. executing → changes
+1. brainstorming → spec → worktree 自动创建
+2. planning → plan/（在 worktree 中）
+3. executing → commit per task + task-summary（在 worktree 中）
 ```
 
 ### Step 1: 需求分析 (Superpowers)
@@ -111,11 +110,11 @@ claude --plugin-dir /path/to/superteam
 
 ### planning
 
-根据 `working/spec.md` 创建任务文档到 `working/plan/task-NNN/task.md`。
+根据 spec 创建任务文档到 `working/plan/task-NNN/task.md`。
 
 ### executing
 
-执行 `working/plan/` 中的任务，输出 `working/commit-message.md` 和 `working/task-summary.md`。
+执行 `working/plan/` 中的任务，每个 task 完成后 commit，全部完成后输出 `working/task-summary.md`。
 
 ### black-box-testing（不用手动调用）
 
@@ -130,7 +129,7 @@ claude --plugin-dir /path/to/superteam
 
 三种问题类型：
 - `working/spec-issues.md` — 规格文档问题（模糊不清或前后矛盾）
-- `working/plan-issues.md` — 任务规划文档问题
+- `working/task-issues.md` — 任务规划文档问题
 - `working/env-issues.md` — 环境问题（编译/运行环境异常）
 
 目的：
@@ -175,37 +174,33 @@ claude --plugin-dir /path/to/superteam
 
 ### 开始项目
 
-1. 启动 brainstorming：
+1. 启动 brainstorming（完成后自动创建 worktree）：
    ```
    /superpowers:brainstorming
    ```
 
-2. spec 写入 `working/spec.md`
-
-3. 启动 planning：
+2. 启动 planning（在 worktree 中）：
    ```
    /superteam:planning
    ```
 
-4. plan 写入 `working/plan/`，确认后启动 executing：
+3. plan 写入 `working/plan/`，确认后启动 executing：
    ```
    /superteam:executing
    ```
 
-5. 完成，生成 commit message 和 task summary
+4. 完成，生成 task summary
 
 ## 文件约定
 
 | 文件 | 描述 |
 |------|------|
-| `working/spec.md` | 需求规格 |
+| `docs/superpowers/specs/*.md` | 需求规格（brainstorming 输出） |
 | `working/plan/task-NNN/task.md` | 任务文档 |
 | `working/plan-review-results.md` | 计划审核结果 |
-| `working/plan/task-NNN/changes.md` | 任务变更 |
 | `working/plan/task-NNN/test-results.md` | 测试结果 |
 | `working/plan/task-NNN/implement-review-results.md` | 实现审核结果 |
-| `working/commit-message.md` | Git commit 消息 |
 | `working/task-summary.md` | 任务总结 |
 | `working/spec-issues.md` | 规格问题 |
-| `working/plan-issues.md` | 计划问题 |
+| `working/task-issues.md` | 任务文档问题 |
 | `working/env-issues.md` | 环境问题 |

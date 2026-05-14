@@ -31,8 +31,8 @@ Respond ONLY:
 
 ```
 Output files:
-- working/plan/task-NNN/task.md
-- working/plan/task-MMM/task.md
+- [worktree path]/working/plan/task-NNN/task.md
+- [worktree path]/working/plan/task-MMM/task.md
 ...[all task files list here]
 ```
 
@@ -40,7 +40,7 @@ Output files:
 
 ## Output Files
 
-### File: working/plan/task-NNN/task.md
+### File: `[worktree path]/working/plan/task-NNN/task.md`
 
 ````markdown
 # Task NNN: [Component Name]
@@ -88,6 +88,13 @@ def function(input):
 
 Run: `pytest tests/path/test.py::test_name -v`
 Expected: PASS
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add tests/path/test.py src/path/file.py
+git commit -m "feat: add specific feature"
+```
 ````
 
 ## Task's File Structure

@@ -9,6 +9,8 @@ disable-model-invocation: true
 You operate as a state machine, dispatching agents and reading files strictly
 according to the process flow.
 
+Skill args: `[worktree path]`
+
 ## Iron Law
 
 YOU ARE ABSOLUTELY NOT AN ASSISTANT. YOU DO NOT THINK, VERIFY, INTERPRET,
@@ -18,49 +20,43 @@ YOU MUST NOT UNDERSTAND WHAT HAPPEND, NEVER DOUBT THE PROCESS FLOW.
 
 ## File Paths
 
-- `working/plan/` - Plan directory
-- `working/plan/task-NNN/` - Task directory
-- `working/plan/task-NNN/task.md` - Task document
-- `working/plan/task-NNN/changes.md` - Task changes
-- `working/plan/task-NNN/test-results.md` - Task test results
-- `working/plan/task-NNN/implement-review-results.md` - Task implement review results
+- `[worktree path]/working/plan/` - Plan directory
+- `[worktree path]/working/plan/task-NNN/` - Task directory
+- `[worktree path]/working/plan/task-NNN/task.md` - Task document
+- `[worktree path]/working/plan/task-NNN/test-results.md` - Task test results
+- `[worktree path]/working/plan/task-NNN/implement-review-results.md` - Task implement review results
+- `[worktree path]/working/task-summary.md` - Task summary
 
 ## Agent Prompt Format
 
 Use EXACT format only. **Do not add any extra content.**
 
+For implementer, spec-reviewer:
 ```
+- Work from worktree: [worktree path]
 - Task number: NNN
-- Task directory: working/plan/task-NNN/
-- Task file: working/plan/task-NNN/task.md
+- Task directory: [worktree path]/working/plan/task-NNN/
+- Task file: [worktree path]/working/plan/task-NNN/task.md
+```
+
+For code-reviewer:
+```
+- Work from worktree: [worktree path]
+- Task number: NNN
+- Task directory: [worktree path]/working/plan/task-NNN/
+- Task file: [worktree path]/working/plan/task-NNN/task.md
+- BASE_SHA: [git HEAD SHA before implementer dispatch]
+- HEAD_SHA: [git HEAD SHA after implementer completed]
 ```
 
 ## Output Files
 
-### File: working/commit-message.md
-
-Follow Conventional Commits. Subject line ≤ 72 chars, imperative mood, body explains *why*.
-
-```
-<type>(<scope>): <subject>
-
-<body: what changed and why, wrapped at 72 chars>
-```
-
-Type: `feat`, `fix`, `refactor`, `perf`, `test`, `docs`, `chore`
-Scope: derive from Project Overview Goal in task files (the module or area affected)
-Subject: derive from Project Overview Goal in task files (what was done, not how)
-Body: What the change does and why it matters. No tasks.
-
-### File: working/task-summary.md
+### File: `[worktree path]/working/task-summary.md`
 
 ```markdown
 # Task Summary
 
 ## Task NNN: [task name]
-
-### Files
-[copy from changes.md Files section]
 
 ### Test Status
 [copy Status from test-results.md: EXPECTED or UNEXPECTED]
@@ -104,8 +100,10 @@ flowchart TD
   complete["complete"]
 
   subgraph task_cycle["Task Cycle"]
+    record_base_sha["ONLY run: git rev-parse HEAD → record as BASE_SHA"]
     dispatch_implementer["dispatch implementer"]
-    check_implementer_completed{"ONLY run: test -f on task test results & task changes"}
+    record_head_sha["ONLY run: git rev-parse HEAD → record as HEAD_SHA"]
+    check_implementer_completed{"ONLY run: test -f on task test results"}
     get_test_status["ONLY run: sed -n '4p' on task test results"]
     check_test_status{"check test status result"}
     dispatch_spec_reviewer["dispatch spec-reviewer"]
@@ -117,9 +115,11 @@ flowchart TD
     check_pending_issues_exist{"check if pending issues exist"}
     next_task{"Task NNN → Task NNN + 1"}
 
+    record_base_sha --> dispatch_implementer
     dispatch_implementer --> check_implementer_completed
     check_implementer_completed -->|"no: re-dispatch"| dispatch_implementer
-    check_implementer_completed -->|"yes"| get_test_status
+    check_implementer_completed -->|"yes"| record_head_sha
+    record_head_sha --> get_test_status
     get_test_status --> check_test_status
     check_test_status -->|"not `EXPECTED`"| dispatch_implementer
     check_test_status -->|"is `EXPECTED`"| dispatch_spec_reviewer
@@ -140,13 +140,11 @@ flowchart TD
 
 After all tasks finished:
 
-1. read all `working/plan/task-NNN/changes.md`
-2. read all `working/plan/task-NNN/test-results.md`
-3. read all `working/plan/task-NNN/implement-review-results.md`
-4. read all `working/plan/task-NNN/task.md`: extract goal and task names
-5. read `spec-issues.md`, `plan-issues.md`, `env-issues.md` (if exist)
-6. write `working/commit-message.md`
-7. write `working/task-summary.md` (include agent metrics tracked during execution)
+1. read all task test results
+2. read all task implement review results
+3. read all task document: extract goal and task names
+4. read `spec-issues.md`, `task-issues.md`, `env-issues.md` (if exist)
+5. write task summary (include agent metrics tracked during execution)
 
 **NEVER:**
 
