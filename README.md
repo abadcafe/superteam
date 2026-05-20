@@ -83,7 +83,7 @@ Superteam 是 Superpowers 的改写和扩展，提供轻量级的 AI 驱动开�
 
 ### Step 1: 需求分析 (Superpowers)
 
-使用你喜欢的 skill（例如 `grill-me-with-docs`, `superpowers:brainstorming`, 或者就用plan mode都行）定义需求，输出到 `working/spec.md`。
+使用你喜欢的 skill（例如 `grill-with-docs`, `superpowers:brainstorming`, 或者就用plan mode都行）定义需求，输出到 `working/spec.md`。
 
 ### Step 2: 规划实现 (Superteam)
 
