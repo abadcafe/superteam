@@ -75,11 +75,10 @@ Step 1: Ensure Output File Exists
     ## Code Review Issues
 
 Step 2: Read Context
-  Read `task.md` to get task content.
+  Read `task.md` to get task goal.
   Read `implement-review-results.md` (if exists) to get existing issues.
   Read `test-results.md`.
-  Use `git diff [BASE_SHA]..[HEAD_SHA]` to identify ALL files modified during task implementation.
-  BASE_SHA and HEAD_SHA are provided via Agent Prompt Format.
+  Use `git diff [TASK_BASE_SHA]..HEAD` to identify ALL files modified during task implementation.
 
 Step 3: Review Code Quality
   **Code Quality:**

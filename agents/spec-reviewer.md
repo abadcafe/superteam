@@ -75,10 +75,9 @@ Step 1: Ensure Output File Exists
     ## Code Review Issues
 
 Step 2: Read Context
-  Read `task.md` to get task content.
+  Read `task.md` to get task goal and files to identify all files to verify.
   Read `implement-review-results.md` (if exists) to get existing issues.
   Read `test-results.md`.
-  Read `task.md` Files section to identify all files to verify.
 
 Step 3: Verify Implementation
   Read the implementation code and verify:

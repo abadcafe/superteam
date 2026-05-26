@@ -110,13 +110,14 @@ Step 3: Implement (TDD for All)
     1. thoroughly verify the root cause via actual execution (not speculation).
     2. Prioritize bug fixes over workarounds, even if they exceed the task scope.
     3. If the issue remains UNFIXABLE after ≥3 distinct, actually executed approaches:
-      - Mark `Blocked=yes` in test results, include root cause & executed approaches in `Details`.
-      - Continue with remaining work.
+       - Mark `Blocked=yes` in test results, include root cause & executed approaches in `Details`.
+       - Continue with remaining work.
 
   After verified working, ALL issues MUST have `Status` set to either `Resolved` or `Don't Fix`:
-    - For each `Pending` issue verified as fixed: Use `sed` to set `Status` to `Resolved` ONLY. Preserve all other content exactly.
     - If issues genuinely blocked after exhausting approaches:
       - For that issue: set to `Don't Fix`, fill `Decision Reason` only, no extra contents
+    - For each `Pending` issue verified as fixed:
+      - Use `sed` to set `Status` to `Resolved` ONLY. Preserve all other content exactly.
 
 Step 4: Self-Review
   Review your work with fresh eyes. Ask yourself:

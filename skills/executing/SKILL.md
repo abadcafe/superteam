@@ -45,8 +45,7 @@ For code-reviewer:
 - Task number: NNN
 - Task directory: [worktree path]/working/plan/task-NNN/
 - Task file: [worktree path]/working/plan/task-NNN/task.md
-- BASE_SHA: [git HEAD SHA before implementer dispatch]
-- HEAD_SHA: [git HEAD SHA after implementer completed]
+- TASK_BASE_SHA: [Git HEAD SHA at task start]
 ```
 
 ## Output Files
@@ -100,9 +99,8 @@ flowchart TD
   complete["complete"]
 
   subgraph task_cycle["Task Cycle"]
-    record_base_sha["ONLY run: git rev-parse HEAD → record as BASE_SHA"]
+    record_task_base_sha["ONLY run: git rev-parse HEAD → Record current HEAD as TASK_BASE_SHA"]
     dispatch_implementer["dispatch implementer"]
-    record_head_sha["ONLY run: git rev-parse HEAD → record as HEAD_SHA"]
     check_implementer_completed{"ONLY run: test -f on task test results"}
     get_test_status["ONLY run: sed -n '4p' on task test results"]
     check_test_status{"check test status result"}
@@ -115,11 +113,10 @@ flowchart TD
     check_pending_issues_exist{"check if pending issues exist"}
     next_task{"Task NNN → Task NNN + 1"}
 
-    record_base_sha --> dispatch_implementer
+    record_task_base_sha --> dispatch_implementer
     dispatch_implementer --> check_implementer_completed
     check_implementer_completed -->|"no: re-dispatch"| dispatch_implementer
-    check_implementer_completed -->|"yes"| record_head_sha
-    record_head_sha --> get_test_status
+    check_implementer_completed -->|"yes"| get_test_status
     get_test_status --> check_test_status
     check_test_status -->|"not `EXPECTED`"| dispatch_implementer
     check_test_status -->|"is `EXPECTED`"| dispatch_spec_reviewer
