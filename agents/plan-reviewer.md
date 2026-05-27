@@ -5,6 +5,7 @@ model: opus
 skills:
   - superpowers:test-driven-development
   - superteam:black-box-testing
+  - superteam:module-design
 ---
 
 # Plan Reviewer Agent
@@ -100,9 +101,17 @@ contradictory steps, or tasks so vague they can't be acted on.
 - Spec alignment:
   - For each requirement: covered by at least one task?
 
+- Module Design (use `superteam:module-design`):
+  - Does each module declare responsibilities, public operations, and data entities?
+  - Do any modules violate size thresholds (responsibilities >3, pub items >12, data entities >5)?
+  - Do any modules have coincidental or logical cohesion?
+  - Are there circular dependencies between modules?
+  - Do stable modules expose abstractions (traits) rather than concrete implementations?
+
 - Task Decomposition:
   - Tasks have clear boundaries?
   - Steps are actionable (specific action, not vague)?
+  - Does each module have a corresponding _test.rs?
   - Do test running steps have bug-fix steps within the same task?
     - Do bug fix steps follow TDD?
   - Is any task horizontally split by technical phase only?

@@ -6,6 +6,7 @@ skills:
   - superpowers:test-driven-development
   - superteam:hands-off-issue-handling
   - superteam:black-box-testing
+  - superteam:module-design
 ---
 
 # Planner Agent
@@ -59,64 +60,57 @@ This is Task N of M.
 
 ---
 
-**Files:**
-- Create: `exact/path/to/file.py`
-- Modify: `exact/path/to/existing.py`
-- Test: `tests/exact/path/to/test.py`
+## Modules
 
-- [ ] **Step 1: Write the failing test**
+```
+module: [name]
+responsibilities: [one sentence]
+public operations: [pub fn/struct/enum/trait/type/const names]
+data entities: [struct/enum/type names]
+```
 
-```python
-def test_specific_behavior():
-    result = function(input)
-    assert result == expected
+## Files
+
+- Modify: `src/path/to/module.rs`
+- Modify: `src/path/to/module_test.rs`
+
+## Steps
+
+- [ ] **Step 1: Write the failing test in module_test.rs**
+
+```rust
+#[test]
+fn test_specific_behavior() {
+    let result = module::function(input);
+    assert_eq!(result, expected);
+}
 ```
 
 - [ ] **Step 2: Run test to verify it fails**
 
-Run: `pytest tests/path/test.py::test_name -v`
-Expected: FAIL with "function not defined"
+Run: `cargo test --lib path::to::module_test -- --nocapture`
+Expected: FAIL with "function not found"
 
-- [ ] **Step 3: Write minimal implementation**
+- [ ] **Step 3: Write minimal implementation in module.rs**
 
-```python
-def function(input):
-    return expected
+```rust
+pub fn function(input: InputType) -> OutputType {
+    expected
+}
 ```
 
 - [ ] **Step 4: Run test to verify it passes**
 
-Run: `pytest tests/path/test.py::test_name -v`
+Run: `cargo test --lib path::to::module_test -- --nocapture`
 Expected: PASS
 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add tests/path/test.py src/path/file.py
+git add src/path/to/module.rs src/path/to/module_test.rs
 git commit -m "feat: add specific feature"
 ```
 ````
-
-## Task's File Structure
-
-Before defining tasks, map out which files will be created or modified and what
-each one is responsible for. This is where decomposition decisions get locked
-in.
-
-- Design units with clear boundaries and well-defined interfaces. Each file
-  should have one clear responsibility.
-- You reason best about code one can hold in context at once, and edits are more
-  reliable when files are focused. Prefer smaller, focused files over large ones
-  that do too much.
-- Files that change together should live together. Split by responsibility, not
-  by technical layer.
-- In existing codebases, follow established patterns. If the codebase uses large
-  files, don't unilaterally restructure - but if a file you're modifying has
-  grown unwieldy, including a split in the plan is reasonable.
-
-This structure informs the task decomposition. **Each task should produce
-self-contained changes that make sense independently.**
-
 ## Process
 
 1. Read context
@@ -125,7 +119,7 @@ self-contained changes that make sense independently.**
 2. Write/update plan
    - use `superpowers:test-driven-development`
    - use `superteam:hands-off-issue-handling`
-   - use `superteam:black-box-testing`
+   - use `superteam:module-design`
    - create the complete plan if not exists; otherwise:
      - update the plan to address each `Pending` issues in plan review results:
      - After fixed: Use `sed` to set `Status` to `Resolved` ONLY. Preserve all other content exactly.
