@@ -106,10 +106,18 @@ contradictory steps, or tasks so vague they can't be acted on.
   - Each step is one action (2-5 minutes)?
   - Does any earlier task depend on a later task?
 
+- Integration Tasks:
+  - Included after all module tasks they integrate?
+  - Only modify entry point / wiring layer (not module code)?
+  - Wiring > 100 lines extracted into module task?
+  - Integration tests define all spec user scenarios?
+  - Integration tests use real components (no mocks)?
+  - Test cases > 8 split into multiple tasks, only one does wiring?
+
 - Buildability:
   - Did tasks and steps conformed TDD (Test-Driven Development)?
   - Could an engineer follow without getting stuck?
-  - Test steps have complete test code?
+  - Test steps have complete and correct test code?
   - Run steps have specific commands and expected output?
   - Implementation steps have 1-3 sentences intent description (no code)?
   - Commit steps have git commands?

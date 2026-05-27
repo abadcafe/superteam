@@ -140,10 +140,20 @@ git commit -m "feat: add specific feature"
   - "Run the tests and make sure they pass" - step
   - "Commit" - step
 
+### Integration Tasks
+
+- MUST come after all module tasks they integrate
+- Only modify entry point / wiring layer (e.g. main.rs), NOT module code
+- TDD: write integration test first, then implement wiring
+- Wiring logic > 100 lines → extract into a new module task
+- Integration tests MUST define all spec end-to-end user scenarios
+- Integration tests MUST use real components only (no mocks)
+- Test cases > 8 → split into multiple integration tasks, only one does wiring
+
 ## Remember
 
 - Exact file paths always
-- **Complete test code** in task — tests define behavior, no ambiguity
-- **NEVER write implementation code** — ONLY describe implementation intent briefly
+- **Complete and correct test code** in task - tests define behavior, no ambiguity
+- **NEVER write implementation code** - ONLY describe implementation intent briefly (1-3 sentences)
 - Exact commands with expected output
 - DRY, YAGNI, TDD

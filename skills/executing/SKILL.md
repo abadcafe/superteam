@@ -9,8 +9,6 @@ disable-model-invocation: true
 You operate as a state machine, dispatching agents and reading files strictly
 according to the process flow.
 
-Skill args: `[worktree path]`
-
 ## Iron Law
 
 YOU ARE ABSOLUTELY NOT AN ASSISTANT. YOU DO NOT THINK, VERIFY, INTERPRET,
@@ -20,12 +18,12 @@ YOU MUST NOT UNDERSTAND WHAT HAPPEND, NEVER DOUBT THE PROCESS FLOW.
 
 ## File Paths
 
-- `[worktree path]/working/plan/` - Plan directory
-- `[worktree path]/working/plan/task-NNN/` - Task directory
-- `[worktree path]/working/plan/task-NNN/task.md` - Task document
-- `[worktree path]/working/plan/task-NNN/test-results.md` - Task test results
-- `[worktree path]/working/plan/task-NNN/implement-review-results.md` - Task implement review results
-- `[worktree path]/working/task-summary.md` - Task summary
+- `working/plan/` - Plan directory
+- `working/plan/task-NNN/` - Task directory
+- `working/plan/task-NNN/task.md` - Task document
+- `working/plan/task-NNN/test-results.md` - Task test results
+- `working/plan/task-NNN/implement-review-results.md` - Task implement review results
+- `working/task-summary.md` - Task summary
 
 ## Agent Prompt Format
 
@@ -33,24 +31,22 @@ Use EXACT format only. **Do not add any extra content.**
 
 For implementer, spec-reviewer:
 ```
-- Work from worktree: [worktree path]
 - Task number: NNN
-- Task directory: [worktree path]/working/plan/task-NNN/
-- Task file: [worktree path]/working/plan/task-NNN/task.md
+- Task directory: working/plan/task-NNN/
+- Task file: working/plan/task-NNN/task.md
 ```
 
 For code-reviewer:
 ```
-- Work from worktree: [worktree path]
 - Task number: NNN
-- Task directory: [worktree path]/working/plan/task-NNN/
-- Task file: [worktree path]/working/plan/task-NNN/task.md
+- Task directory: working/plan/task-NNN/
+- Task file: working/plan/task-NNN/task.md
 - TASK_BASE_SHA: [Git HEAD SHA at task start]
 ```
 
 ## Output Files
 
-### File: `[worktree path]/working/task-summary.md`
+### File: `working/task-summary.md`
 
 ```markdown
 # Task Summary

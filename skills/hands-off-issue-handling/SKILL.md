@@ -43,7 +43,7 @@ user-invocation: false
 - 写任务文档时违反规格文档所引起的问题不是规格文档问题禁止记录到规格文档问题列表, 必须马上解决.
 - 编写规格文档时发现的规格文档问题禁止记录到规格文档问题列表, 必须马上解决.
 
-路径: `[worktree path]/working/spec-issues.md`
+路径: `working/spec-issues.md`
 记录格式:
 
 ```markdown
@@ -65,7 +65,7 @@ user-invocation: false
 - 编写任务文档时发现的任务文档问题禁止记录到任务文档问题列表, 必须马上解决.
 - 已有代码中的bug就算任务文档中没有提到也不属于任务文档问题禁止记录到任务文档问题列表, 必须主动解决bug.
 
-路径: `[worktree path]/working/task-issues.md`
+路径: `working/task-issues.md`
 记录格式:
 
 ```markdown
@@ -85,7 +85,7 @@ user-invocation: false
 
 - 任何代码逻辑问题都绝不属于环境问题禁止记录到环境问题列表, 必须马上解决.
 
-路径: `[worktree path]/working/env-issues.md`
+路径: `working/env-issues.md`
 记录格式:
 
 ```markdown
