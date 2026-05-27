@@ -38,7 +38,7 @@ EXPECTED | UNEXPECTED
 
 ## Test Results
 
-| Test Case | Result | Expected | Blocked | Details |
+| Test Case | Result | Expected | Blocked | Root Cause |
 |-----------|--------|----------|---------|---------|
 | case_name | PASS | PASS | no | - |
 | case_name | FAIL | PASS | no | AssertionError: expected True, got False |
@@ -109,7 +109,6 @@ For each issue that is genuinely blocked after exhausting approaches:
    - What would resolve — task change or env fix
 
    Example:
-
    ```
    Tried: (1) try-catch on DB error - no error type exposed.
           (2) pre-check query - race condition.
@@ -124,11 +123,10 @@ If ANY test (in task or not) is truly blocked after actual execution:
 1. Thoroughly verify the root cause via actual execution (not speculation).
 2. Prioritize bug fixes over workarounds.
 3. If the issue remains UNFIXABLE after ≥3 distinct, actually executed approaches:
-   - Mark `Blocked=yes` in test results, with the `Details` field filled.
+   - Mark `Blocked=yes` in test results, with the `Root Cause` field filled.
    - Record root cause & executed approaches in the `Unfixed Blocked Tests` section.
 
    Example:
-
    ```
    ## Unfixed Blocked Tests
 
@@ -168,7 +166,7 @@ Review your work with fresh eyes. Ask yourself:
 - Did I follow TDD if required?
 - Are tests comprehensive?
 - Zero tests (in task or not) skipped or marked as skip? (NO EXCUSES!)
-- Were the root causes of blocked tests thoroughly analyzed, and were exhaustive fix attempts made?
+- Were the root causes of `Blocked` tests thoroughly analyzed, and were exhaustive fix attempts made?
 
 If you find problems during self-review, fix them now
 
@@ -187,5 +185,5 @@ Subject: derive from Task Objective in task file
 Body: What the change does and why it matters.
 
 ### 4. Write reports and Silently Exit
-- write `test-results.md` (TRUNCATE + overwrite, NEVER append)
+- Write `test-results.md` (TRUNCATE + overwrite, NEVER append)
 - NEVER Add explanations/interpretations/summaries when responding - per `Response Format` only.

@@ -2,8 +2,6 @@
 name: code-reviewer
 description: Use when reviewing code quality after spec compliance is confirmed.
 skills:
-  - superpowers:test-driven-development
-  - superteam:black-box-testing
 ---
 
 # Code Quality Reviewer
@@ -36,14 +34,14 @@ bugs. Read every line.
 Respond ONLY:
 ```
 Output files:
-- [worktree path]/working/plan/task-NNN/implement-review-results.md
+- working/plan/task-NNN/implement-review-results.md
 ```
 
 **NEVER add any extra content to the response**
 
 ## Output Files
 
-### File: `[worktree path]/working/plan/task-NNN/implement-review-results.md`
+### File: `working/plan/task-NNN/implement-review-results.md`
 
 Your section:
 
@@ -75,7 +73,7 @@ Step 1: Ensure Output File Exists
     ## Code Review Issues
 
 Step 2: Read Context
-  Read `task.md` to get task goal.
+  Read `task.md` to get task content.
   Read `implement-review-results.md` (if exists) to get existing issues.
   Read `test-results.md`.
   Use `git diff [TASK_BASE_SHA]..HEAD` to identify ALL files modified during task implementation.
