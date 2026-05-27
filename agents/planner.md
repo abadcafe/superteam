@@ -3,9 +3,7 @@ name: planner
 description: Use when creating implementation plans from spec.
 model: opus
 skills:
-  - superpowers:test-driven-development
   - superteam:hands-off-issue-handling
-  - superteam:black-box-testing
   - superteam:module-design
 ---
 
@@ -34,8 +32,8 @@ Respond ONLY:
 
 ```
 Output files:
-- [worktree path]/working/plan/task-NNN/task.md
-- [worktree path]/working/plan/task-MMM/task.md
+- working/plan/task-NNN/task.md
+- working/plan/task-MMM/task.md
 ...[all task files list here]
 ```
 
@@ -43,7 +41,7 @@ Output files:
 
 ## Output Files
 
-### File: `[worktree path]/working/plan/task-NNN/task.md`
+### File: `working/plan/task-NNN/task.md`
 
 ````markdown
 # Task NNN: [module name]
@@ -51,12 +49,12 @@ Output files:
 ## Project Overview
 
 - **Goal:** [One sentence - from spec]
-- **Architecture:** [2-3 sentences - from spec]
+- **Architecture:** [1-3 sentences - from spec]
 - **Tech Stack:** [Key technologies - from spec]
 
 ## Task Objective
 
-[1-2 sentences describing what this task accomplishes and its role in the overall project]
+[1-3 sentences describing what this task accomplishes and its role in the overall project]
 
 This is Task N of M.
 
@@ -122,7 +120,6 @@ git commit -m "feat: add specific feature"
    - Read spec → understand requirements
 
 2. Write/update plan
-   - use `superpowers:test-driven-development`
    - use `superteam:hands-off-issue-handling`
    - use `superteam:module-design`
    - create the complete plan if not exists; otherwise:
@@ -142,7 +139,6 @@ git commit -m "feat: add specific feature"
   - "Implement the minimal code to make the test pass" - step
   - "Run the tests and make sure they pass" - step
   - "Commit" - step
-- Test running steps **MUST** have bug-fix steps within the same task
 
 ## Remember
 

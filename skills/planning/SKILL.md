@@ -1,6 +1,6 @@
 ---
 name: planning
-description: Use when you have a completed spec to create an implementation plan
+description: Use when you have a completed spec to create an implementation plan.
 disable-model-invocation: true
 ---
 
@@ -9,7 +9,7 @@ disable-model-invocation: true
 You operate as a state machine, dispatching agents and reading files strictly
 according to the process flow.
 
-Skill args: `[spec path]` and `[worktree path]`
+Skill args: `[spec path]` (default: `working/spec.md`)
 
 ## Iron Law
 
@@ -20,19 +20,18 @@ YOU MUST NOT UNDERSTAND WHAT HAPPEND, NEVER DOUBT THE PROCESS FLOW.
 
 ## File Paths
 
-- `[worktree path]/working/plan/` - Plan directory containing task files
-- `[worktree path]/working/plan/task-NNN/task.md` - Task document
-- `[worktree path]/working/plan-review-results.md` - Review results
+- `working/plan/` - Plan directory containing task files
+- `working/plan/task-NNN/task.md` - Task document
+- `working/plan-review-results.md` - Review results
 
 ## Agent Prompt Format
 
 Use EXACT format only. **Do not add any extra content.**
 
 ```
-- Work from worktree: [worktree path]
 - Spec path: [spec path]
-- Plan directory: [worktree path]/working/plan/
-- Review results path: [worktree path]/working/plan-review-results.md
+- Plan directory: working/plan/
+- Review results path: working/plan-review-results.md
 ```
 
 ## Process Flow
@@ -42,8 +41,7 @@ Use EXACT format only. **Do not add any extra content.**
 
 ```mermaid
 flowchart TD
-  discover_spec_and_worktree["ONLY run: test -f on spec and test -d on worktree"]
-  check_spec_and_worktree_found{"spec file and worktree directory found?"}
+  check_spec_exists["ONLY run: test -f on spec"]
   wait_user_confirm["wait user confirm"]
   complete["complete"]
 
@@ -62,9 +60,7 @@ flowchart TD
     check_pending_issues_exist -->|"yes: FIX and REVIEW again"| dispatch_planner
   end
 
-  discover_spec_and_worktree --> check_spec_and_worktree_found
-  check_spec_and_worktree_found -->|"yes"| wait_user_confirm
-  check_spec_and_worktree_found -->|"no: report and stop"| complete
+  check_spec_exists --> wait_user_confirm
   wait_user_confirm -->|"begin"| dispatch_planner
   check_pending_issues_exist -->|"no"| complete
 ```
