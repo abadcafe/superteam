@@ -22,7 +22,7 @@ user-invocation: false
 
 ### 1.1 模块设计
 
-模块的行为由测试用例定义. 每个模块必须声明模块名、职责、公共操作、数据实体和测试用例:
+模块的行为由测试用例定义. 每个模块必须声明模块名、职责、公共操作、主要数据实体和测试用例:
 
 ```
 module: auth
@@ -32,7 +32,7 @@ data entities: User, Token, Session
 tests: test_login_success, test_login_invalid_password, test_logout, test_token_refresh, test_token_expiry
 ```
 
-## 2. 模块的约束(不能怎样)
+## 2. 模块约束(不能怎样)
 
 ### 2.1 大小约束
 
@@ -119,7 +119,7 @@ tests: test_login_success, test_login_invalid_password, test_logout, test_token_
 对模块的依赖就是对模块内所有内容的依赖——模块中存在不被一起使用的项, 会导致无关项的
 变化强制依赖方升级和重新验证.
 
-## 4. 模块的外部接口设计
+## 4. 模块外部接口设计
 
 ### 4.1 最小化接口
 
@@ -165,7 +165,7 @@ tests: test_login_success, test_login_invalid_password, test_logout, test_token_
 这使得依赖方向从"使用方→实现方"反转为"使用方→接口, 实现方→接口",
 打破直接依赖环路, 并让接口精确反映使用方的需求.
 
-## 5. 模块的测试规范
+## 5. 模块测试规范
 
 ### 5.1 测试定义行为
 
