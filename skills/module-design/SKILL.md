@@ -41,8 +41,9 @@ tests: test_login_success, test_login_invalid_password, test_logout, test_token_
 | 维度 | 含义 | 阈值 |
 |------|------|------|
 | 职责 | 用一句话能说清的独立职责, 需用"和/与"连接即为多个 | >3 |
-| 公开操作 | 模块对外暴露的 pub 项(fn, struct, enum, trait, type, const 等) | >12 |
-| 数据实体 | 模块内定义的 struct/enum/type | >5 |
+| 公开操作 | 模块对外暴露的 pub 项(fn, struct, enum, trait, type, const 等) | >14 |
+| 数据实体 | 模块内定义的 struct/enum/type | >7 |
+| 测试用例 | 模块对应的测试用例总数 | >35 |
 
 ### 2.2 不得违反内聚约束
 
@@ -58,7 +59,7 @@ tests: test_login_success, test_login_invalid_password, test_logout, test_token_
 - **禁止循环依赖**: 模块间的 `use` 依赖不得形成环路. 环路使所有被圈入的模块变成
   一个"超级模块", 任何一个发布都必须构建全部. 打破环路的方法:
   1. 提取共同依赖到新模块
-  2. 通过 trait 反转依赖方向(DIP), trait 放在使用方模块或单独模块而非实现方模块
+  2. 通过 trait / interface 反转依赖方向(DIP), trait 放在使用方模块或单独模块而非实现方模块
 - **禁止语义耦合**: 不得利用另一个模块的内部实现知识:
   - 不得因"知道"对方会自动初始化而跳过初始化调用
   - 不得因"知道"对方只用部分字段而只部分构造数据
