@@ -3,8 +3,6 @@ name: plan-reviewer
 description: Use when reviewing implementation plans for completeness, spec alignment, and buildability.
 model: opus
 skills:
-  - superpowers:test-driven-development
-  - superteam:black-box-testing
   - superteam:module-design
 ---
 
@@ -25,14 +23,14 @@ Respond ONLY:
 
 ```
 Output files:
-- [worktree path]/working/plan-review-results.md
+- working/plan-review-results.md
 ```
 
 **DO NOT add any extra content to the response**
 
 ## Output Files
 
-### File: `[worktree path]/working/plan-review-results.md`
+### File: `working/plan-review-results.md`
 
 #### Document Header
 
@@ -78,8 +76,7 @@ contradictory steps, or tasks so vague they can't be acted on.
    - read spec → understand requirements
 
 3. Check Plan:
-   - use `superpowers:test-driven-development`
-   - use `superteam:black-box-testing`
+   - use `superteam:module-design`
    - for each task-NNN/task.md in plan dir:
      - check the task.md against the `Checklist`
    - record Review Issues into plan review results:
@@ -96,29 +93,23 @@ contradictory steps, or tasks so vague they can't be acted on.
 ### Checklist
 
 - Completeness:
-  - Incomplete tasks, missing steps
+  - Does each task have all required sections (Project Overview, Task Objective, Module Design, Files, Steps)?
 
 - Spec alignment:
   - For each requirement: covered by at least one task?
 
-- Module Design (use `superteam:module-design`):
-  - Does each module declare responsibilities, public operations, and data entities?
-  - Do any modules violate size thresholds (responsibilities >3, pub items >12, data entities >5)?
-  - Do any modules have coincidental or logical cohesion?
-  - Are there circular dependencies between modules?
-  - Do stable modules expose abstractions (traits) rather than concrete implementations?
+- Module Design:
+  - Does each task's module design comply with the `superteam:module-design` skill?
 
 - Task Decomposition:
-  - Tasks have clear boundaries?
-  - Steps are actionable (specific action, not vague)?
-  - Does each module have a corresponding _test.rs?
-  - Do test running steps have bug-fix steps within the same task?
-    - Do bug fix steps follow TDD?
-  - Is any task horizontally split by technical phase only?
-    - ANTI-PATTERN: Task 1: "some tests", Task 2: "some codes", Task 3: "some docs" (phase-based splitting)
+  - One task does NOT touch multiple modules?
+  - Each step is one action (2-5 minutes)?
   - Does any earlier task depend on a later task?
 
 - Buildability:
-  - Did tasks and steps comformed TDD?
+  - Did tasks and steps conformed TDD (Test-Driven Development)?
   - Could an engineer follow without getting stuck?
-  - Steps have what they need (code blocks, commands, expected output)?
+  - Test steps have complete test code?
+  - Run steps have specific commands and expected output?
+  - Implementation steps have 1-3 sentences intent description (no code)?
+  - Commit steps have git commands?
