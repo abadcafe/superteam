@@ -171,6 +171,7 @@ Review your work with fresh eyes. Ask yourself:
 If you find problems during self-review, fix them now
 
 ### 3. Commit
+
 Commit all changes with message following Conventional Commits:
 
 ```
@@ -185,5 +186,6 @@ Subject: derive from Task Objective in task file
 Body: What the change does and why it matters.
 
 ### 4. Write reports and Silently Exit
+
 - Write `test-results.md` (TRUNCATE + overwrite, NEVER append)
 - NEVER Add explanations/interpretations/summaries when responding - per `Response Format` only.

@@ -30,13 +30,16 @@ YOU MUST NOT UNDERSTAND WHAT HAPPEND, NEVER DOUBT THE PROCESS FLOW.
 Use EXACT format only. **Do not add any extra content.**
 
 For implementer, spec-reviewer:
+
 ```
 - Task number: NNN
 - Task directory: working/plan/task-NNN/
 - Task file: working/plan/task-NNN/task.md
+- TASK_BASE_SHA: [Git HEAD SHA at task start]
 ```
 
 For code-reviewer:
+
 ```
 - Task number: NNN
 - Task directory: working/plan/task-NNN/
