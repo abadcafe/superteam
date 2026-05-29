@@ -73,7 +73,7 @@ tests: test_<operation>_<scenario>, ...
 ## Files
 
 - Modify: `src/path/to/module.rs`
-- Modify: `src/path/to/module_test.rs`
+- Modify: `src/path/to/module_tests.rs`
 
 ## Steps
 
@@ -146,9 +146,7 @@ git commit -m "feat: add specific feature"
 - Only modify entry point / wiring layer (e.g. main.rs), NOT module code
 - TDD: write integration test first, then implement wiring
 - Wiring logic > 100 lines → extract into a new module task
-- Integration tests MUST define all spec end-to-end user scenarios
-- Integration tests MUST use real components only (no mocks)
-- Test cases > 8 → split into multiple integration tasks, only one does wiring
+- If multiple integration tasks share the same outcome, wire the outcome exactly once
 
 ## Remember
 

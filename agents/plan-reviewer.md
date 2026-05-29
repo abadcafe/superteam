@@ -92,32 +92,30 @@ contradictory steps, or tasks so vague they can't be acted on.
 
 ### Checklist
 
-- Completeness:
-  - Does each task have all required sections (Project Overview, Task Objective, Module Design, Files, Steps)?
+Completeness:
+- Does each task have all required sections (Project Overview, Task Objective, Module Design, Files, Steps)?
 
-- Spec alignment:
-  - For each requirement: covered by at least one task?
+Spec alignment:
+- For each requirement: covered by at least one task?
 
-- Module Design:
-  - Does each task's module design comply with the `superteam:module-design` skill?
+Module Design:
+- Does each task's module design comply with the `superteam:module-design` skill?
 
-- Task Decomposition:
-  - One task does NOT touch multiple modules?
-  - Each step is one action (2-5 minutes)?
-  - Does any earlier task depend on a later task?
+Task Decomposition:
+- One task does NOT touch multiple modules?
+- Each step is one action (2-5 minutes)?
+- Does any earlier task depend on a later task?
 
-- Integration Tasks:
-  - Included after all module tasks they integrate?
-  - Only modify entry point / wiring layer (not module code)?
-  - Wiring > 100 lines extracted into module task?
-  - Integration tests define all spec user scenarios?
-  - Integration tests use real components (no mocks)?
-  - Test cases > 8 split into multiple tasks, only one does wiring?
+Integration Tasks:
+- Included after all module tasks they integrate?
+- Only modify entry point / wiring layer (not module code)?
+- Wiring > 100 lines extracted into module task?
+- If multiple integration tasks share the same outcome, is the outcome wired exactly once?
 
-- Buildability:
-  - Did tasks and steps conformed TDD (Test-Driven Development)?
-  - Could an engineer follow without getting stuck?
-  - Test steps have complete and correct test code?
-  - Run steps have specific commands and expected output?
-  - Implementation steps have 1-3 sentences intent description (no code)?
-  - Commit steps have git commands?
+Buildability:
+- Did tasks and steps conformed TDD (Test-Driven Development)?
+- Could an engineer follow without getting stuck?
+- Test steps have complete and correct test code?
+- Run steps have specific commands and expected output?
+- Implementation steps have 1-3 sentences intent description (no code)?
+- Commit steps have git commands?
