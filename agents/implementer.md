@@ -28,6 +28,17 @@ Output files:
 
 ## Output Files
 
+### File: `working/plan/task-NNN/test-case-changes.md`
+
+```markdown
+# Test Case Changes: Task-NNN
+
+## [test_case_name]
+- File: src/xxx_tests.rs::test_name
+- Changes: [what behaviors changed]
+- Reason: [why it should be changed]
+```
+
 ### File: `working/plan/task-NNN/test-results.md`
 
 ```markdown
@@ -49,11 +60,11 @@ EXPECTED | UNEXPECTED
 ## Unfixed Blocked Tests
 
 ### [test_case_name]
-- **File:** src/xxx_tests.rs::test_name
-- **Expected:** [expected behavior]
-- **Actual:** [actual behavior]
-- **root cause:** [thoroughly analyzed and verified root cause]
-- **3 attempted approaches:** [list executed attempts]
+- File: src/xxx_tests.rs::test_name
+- Expected: [expected behavior]
+- Actual: [actual behavior]
+- Root cause: [thoroughly analyzed and verified root cause]
+- 3 attempted approaches: [list executed attempts]
 
 ## Summary
 - EXPECTED (Result=Expected, Blocked=no): N
@@ -188,4 +199,5 @@ Body: What the change does and why it matters.
 ### 4. Write reports and Silently Exit
 
 - Write `test-results.md` (TRUNCATE + overwrite, NEVER append)
+- Write `test-case-changes.md` (Append only)
 - NEVER Add explanations/interpretations/summaries when responding - per `Response Format` only.
