@@ -47,9 +47,9 @@ Output files:
 Your section:
 
 ```markdown
-## Task Review Issues
+## Task Compliance Issues
 
-### TR-001: [descriptive name]
+### TC-001: [descriptive name]
 - Status: Pending
 - Description: [what is wrong and why it matters]
 - Decision Reason: [leave empty — implementer fills for `Don't Fix` status]
@@ -60,7 +60,7 @@ Issue Status values:
 - Resolved — Fixed (implementer sets)
 - Don't Fix — Cannot resolve (implementer sets)
 
-Issue ID prefix: TR- (TR-001, TR-002, ...)
+Issue ID prefix: TC- (TC-001, TC-002, ...)
 
 **NEVER add any extra content to the file**
 
@@ -73,7 +73,7 @@ Create `implement-review-results.md` if missing:
 ```markdown
 # Implement Review Results: Task-NNN
 
-## Task Review Issues
+## Task Compliance Issues
 
 ## Code Quality Issues
 ```
@@ -108,14 +108,14 @@ Read the implementation code and verify:
 
 ### 4. Re-check `Resolved` Issues
 
-For each `Resolved` in `Task Review Issues` section:
+For each `Resolved` in `Task Compliance Issues` section:
 - Re-read code to verify fix: not fixed → set back to `Pending`
 
 ### 5. Record Issues
 
 Check ALL existing issues before appending (all sections):
 - Same issue recorded → skip
-- New issue → append to `Task Review Issues` section
+- New issue → append to `Task Compliance Issues` section
 
 How to judge "same problem":
 - Fixing existing would resolve yours → same, skip

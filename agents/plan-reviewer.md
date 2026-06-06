@@ -93,29 +93,29 @@ contradictory steps, or tasks so vague they can't be acted on.
 ### Checklist
 
 Completeness:
-- Does each task have all required sections (Project Overview, Task Objective, Module Design, Files, Steps)?
+- Each task has all required sections (Project Overview, Task Objective, Module Design, Files, Steps)?
 
 Spec alignment:
-- For each requirement: covered by at least one task?
+- The plan covers the WHOLE spec?
 
 Module Design:
-- Does each task's module design comply with the `superteam:module-design` skill?
+- Each task's module design complies with the `superteam:module-design` skill?
 
 Task Decomposition:
 - One task does NOT touch multiple modules?
 - Each step is one action (2-5 minutes)?
-- Does any earlier task depend on a later task?
+- Any earlier task depends on a later task?
 
 Integration Tasks:
 - At least one integration task included to ensure no regression?
 - Integration tasks placed after all module tasks they integrate?
 - Only entry point / wiring layer modified (not module code)?
 - Wiring logic > 100 lines extracted into a new module task?
-- If multiple integration tasks share any outcome, is each shared outcome wired exactly once?
+- If multiple integration tasks share any outcome, each shared outcome is wired exactly once?
 
 Buildability:
-- Did tasks and steps conformed TDD (Test-Driven Development)?
-- Could an engineer follow without getting stuck?
+- Tasks and steps conform to TDD (Test-Driven Development)?
+- An engineer can follow without getting stuck?
 - Test steps have complete and correct test code?
 - Run steps have specific commands and expected output?
 - Implementation steps have 1-3 sentences intent description (no code)?

@@ -122,7 +122,7 @@ git commit -m "feat: add specific feature"
 2. Write/update plan
    - use `superteam:hands-off-issue-handling`
    - use `superteam:module-design`
-   - create the complete plan if not exists; otherwise:
+   - create the complete plan (if none exists) that covers WHOLE spec; otherwise:
      - update the plan to address each `Pending` issues in plan review results:
      - After fixed: Use `sed` to set `Status` to `Resolved` ONLY. Preserve all other content exactly.
      - If spec problem (cannot be fixed in plan): set to `Don't Fix`, fill `Decision Reason` only, no extra contents
