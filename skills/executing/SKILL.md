@@ -30,7 +30,7 @@ YOU MUST NOT UNDERSTAND WHAT HAPPEND, NEVER DOUBT THE PROCESS FLOW.
 
 Use EXACT format only. **Do not add any extra content.**
 
-For implementer, spec-reviewer:
+For implementer, task-compliance-reviewer:
 
 ```
 - Task number: NNN
@@ -39,7 +39,7 @@ For implementer, spec-reviewer:
 - TASK_BASE_SHA: [Git HEAD SHA at task start]
 ```
 
-For code-reviewer:
+For code-quality-reviewer:
 
 ```
 - Task number: NNN
@@ -71,8 +71,8 @@ For code-reviewer:
 
 ### Agent Metrics
 - implementer: N calls, N tokens, Nm Ns
-- spec-reviewer: N calls, N tokens, Nm Ns
-- code-reviewer: N calls, N tokens, Nm Ns
+- task-compliance-reviewer: N calls, N tokens, Nm Ns
+- code-quality-reviewer: N calls, N tokens, Nm Ns
 
 ## Task NNN: [task name]
 ...
@@ -107,10 +107,10 @@ flowchart TD
     check_implementer_completed{"ONLY run: test -f on task test results"}
     get_test_status["ONLY run: sed -n '4p' on task test results"]
     check_test_status{"check test status result"}
-    dispatch_spec_reviewer["dispatch spec-reviewer"]
-    dispatch_code_reviewer["dispatch code-reviewer"]
+    dispatch_task_compliance_reviewer["dispatch task-compliance-reviewer"]
+    dispatch_code_quality_reviewer["dispatch code-quality-reviewer"]
     count_pending_issues["
-      1. ENSURE spec & code reviewers BOTH dispatched & completed RIGHT BEFORE this step. ONLY THEN:
+      1. ENSURE task-compliance & code-quality reviewers have BOTH completed RIGHT BEFORE this step. ONLY THEN:
       2. ONLY run: grep -Fc 'Status: Pending' on task implement review results
     "]
     check_pending_issues_exist{"check if pending issues exist"}
@@ -122,10 +122,10 @@ flowchart TD
     check_implementer_completed -->|"yes"| get_test_status
     get_test_status --> check_test_status
     check_test_status -->|"not `EXPECTED`"| dispatch_implementer
-    check_test_status -->|"is `EXPECTED`"| dispatch_spec_reviewer
-    check_test_status -->|"is `EXPECTED`"| dispatch_code_reviewer
-    dispatch_spec_reviewer --> count_pending_issues
-    dispatch_code_reviewer --> count_pending_issues
+    check_test_status -->|"is `EXPECTED`"| dispatch_task_compliance_reviewer
+    check_test_status -->|"is `EXPECTED`"| dispatch_code_quality_reviewer
+    dispatch_task_compliance_reviewer --> count_pending_issues
+    dispatch_code_quality_reviewer --> count_pending_issues
     count_pending_issues --> check_pending_issues_exist
     check_pending_issues_exist -->|"yes: FIX and REVIEW again"| dispatch_implementer
     check_pending_issues_exist -->|"no"| next_task
@@ -149,7 +149,7 @@ After all tasks finished:
 
 - Skip any step of process flow
 - Combine steps of process flow
-- Reorder steps of process flow (Implement → Spec review → Code review, always)
+- Reorder steps of process flow (Implement → Task compliance review → Code quality review, always)
 - Stop iterating because "taking too long"
 - Fix, verify or review anything yourself - dispatch the corresponding agent
 - Add context/explanations or any extra content to agent prompts - per `Agent Prompt format` ONLY

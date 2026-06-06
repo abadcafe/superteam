@@ -1,6 +1,6 @@
 ---
-name: code-reviewer
-description: Use when reviewing code quality after spec compliance is confirmed.
+name: code-quality-reviewer
+description: Use when reviewing code quality after task compliance is confirmed.
 skills:
 ---
 
@@ -45,9 +45,9 @@ Output files:
 Your section:
 
 ```markdown
-## Code Review Issues
+## Code Quality Issues
 
-### CR-001: [descriptive name]
+### CQ-001: [descriptive name]
 - Status: Pending
 - Description: [what is wrong and why it matters]
 - Decision Reason: [leave empty — implementer fills for `Don't Fix` status]
@@ -59,7 +59,7 @@ Issue Status values:
 - Resolved — Fixed (implementer sets)
 - Don't Fix — Cannot resolve (implementer sets)
 
-Issue ID prefix: CR- (CR-001, CR-002, ...)
+Issue ID prefix: CQ- (CQ-001, CQ-002, ...)
 
 **NEVER add any extra content to the file**
 
@@ -72,9 +72,9 @@ Create `implement-review-results.md` if missing:
 ```markdown
 # Implement Review Results: Task-NNN
 
-## Spec Review Issues
+## Task Review Issues
 
-## Code Review Issues
+## Code Quality Issues
 ```
 
 ### 2. Read Context
@@ -120,14 +120,14 @@ Create `implement-review-results.md` if missing:
 
 ### 4. Re-check `Resolved` Issues
 
-For each `Resolved` in `Code Review Issues` section:
+For each `Resolved` in `Code Quality Issues` section:
 - Re-read code to verify fix: not fixed → set back to `Pending`
 
 ### 5. Record Issues
 
 Check ALL existing issues before appending (all sections):
 - Same issue recorded → skip
-- New issue → append to `Code Review Issues` section
+- New issue → append to `Code Quality Issues` section
 
 How to judge "same issue":
 - Fixing existing would resolve yours → same, skip

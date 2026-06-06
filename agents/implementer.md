@@ -149,7 +149,7 @@ If ANY test (in task or not) is truly blocked after actual execution:
    - **3 attempted approaches:**
      1. Start PostgreSQL via systemctl — unit postgresql.service not found
      2. Install PostgreSQL via apt — no sudo/root permission
-     3. Use SQLite as fallback — task spec requires PostgreSQL-specific features (JSONB)
+     3. Use SQLite as fallback — task requires PostgreSQL-specific features (JSONB)
    ```
 
 ### 2. Self-Review
