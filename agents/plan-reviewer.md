@@ -107,10 +107,11 @@ Task Decomposition:
 - Does any earlier task depend on a later task?
 
 Integration Tasks:
-- Included after all module tasks they integrate?
-- Only modify entry point / wiring layer (not module code)?
-- Wiring > 100 lines extracted into module task?
-- If multiple integration tasks share the same outcome, is the outcome wired exactly once?
+- At least one integration task included to ensure no regression?
+- Integration tasks placed after all module tasks they integrate?
+- Only entry point / wiring layer modified (not module code)?
+- Wiring logic > 100 lines extracted into a new module task?
+- If multiple integration tasks share any outcome, is each shared outcome wired exactly once?
 
 Buildability:
 - Did tasks and steps conformed TDD (Test-Driven Development)?

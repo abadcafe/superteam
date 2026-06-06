@@ -143,10 +143,11 @@ git commit -m "feat: add specific feature"
 ### Integration Tasks
 
 - MUST come after all module tasks they integrate
-- Only modify entry point / wiring layer (e.g. main.rs), NOT module code
-- TDD: write integration test first, then implement wiring
-- Wiring logic > 100 lines → extract into a new module task
-- If multiple integration tasks share the same outcome, wire the outcome exactly once
+- MUST only modify entry point / wiring layer (e.g. main.rs), NOT module code
+- MUST write integration test first, then implement wiring (TDD)
+- MUST extract wiring logic > 100 lines into a new module task
+- If multiple integration tasks share any outcome, MUST wire each shared outcome exactly once
+- MUST include at least one integration task to ensure no regression
 
 ## Remember
 
