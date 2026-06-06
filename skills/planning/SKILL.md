@@ -65,7 +65,10 @@ flowchart TD
   check_pending_issues_exist -->|"no"| complete
 ```
 
-After completion: output the dispatch count, tokens and duration for each agent.
+After completion:
+
+1. output the dispatch count, tokens, and duration for each agent.
+2. output task summary, including task goal and module design.
 
 **NEVER:**
 
