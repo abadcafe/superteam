@@ -4,14 +4,22 @@ Superteam 是 Superpowers 的改写和扩展，提供轻量级的 AI 驱动开�
 
 ## 设计理念
 
-我希望在我跟claude沟通完spec之后，他就不要再打扰我了，自己慢慢跑我睡一觉起来再收货。时间长一点也没关系，不要打扰我睡觉就行。如果不满意，我就删掉让他重新跑，反正电费不值钱，coding plan又是包月的。这样，我就可以没事时就预先搞出一堆东西，在合适的时候拿出来，轻松又愉快🐶
+我希望在我跟claude沟通完spec之后，他就不要再打扰我了，自己慢慢跑我睡一觉起来再收货。时间长
+一点也没关系，不要打扰我睡觉就行。如果不满意，我就删掉让他重新跑，反正电费不值钱，coding
+plan又是包月的。这样，我就可以没事时就预先搞出一堆东西，在合适的时候拿出来，轻松又愉快🐶
 
-但是superpowers的理念与这冲突很大，他一旦碰上问题就马上跳出来等人类干预，并且他大量使用上下文，长时间跑下来的结果乱七八糟。所以superteam的核心思想就是 Token 换质量：
+但是superpowers有这几个问题：
+1. 一旦碰上问题就马上跳出来等人类干预
+2. 大量使用上下文，长时间跑下来的结果与预期不符
+3. 架构设计方面完全没有约束，模块之间的边界等全部随意来，项目基本上是不可维护的
+4. 最重要的一点，它的plan里把所有代码都写完了，既费时间又费token, 可是实际上质量很低
+
+所以superteam的核心思想就是 Token 换质量：
 1. 主agent就是个状态机，不要思考，也不传递除文件路径之外的多余上下文，机械化地执行流程就OK，这样他就能长时间运行。
 2. 各个子agent的每次调用都是全新的上下文，从文件系统读取信息来完成该做的事情。
 3. 所有 reviewer 都不限制 review 次数。由于通过文件系统沟通并将 issues 持久化记录，迭代必然收敛，无需人为设置上限。
-4. 通过黑盒测试来验证最终产出是否符合spec要求
-5. 只要模型达到一定水准（如 GLM-5、Qwen 3.6 Plus），就能产出质量相近的代码，主要差别在于 token 消耗和耗时。
+4. 测试定义行为——测试是模块行为的唯一权威定义，实现必须通过测试
+5. 只要模型达到一定水准（如 GLM-5、xiaomi mimo v2.5），就能产出质量相近的代码，主要差别在于 token 消耗和耗时。
 
 目前我自己验证，这套东西在后端开发和 CLI 程序开发中表现良好，其他场景我验证的比较少。欢迎大家提issue和pr。
 
@@ -38,61 +46,37 @@ Superteam 是 Superpowers 的改写和扩展，提供轻量级的 AI 驱动开�
 
 ### 无人值守模式
 
-整个 planning 和 executing 过程完全自动化运行，用户只需在开始前确认 spec/plan 概要，之后无需介入。系统自动处理迭代修复、审核反馈等所有中间环节，直至生成最终的 task summary。
+整个 planning 和 executing 过程完全自动化运行，用户只需在开始前确认 spec/plan 概要，之后
+无需介入。系统自动处理迭代修复、审核反馈等所有中间环节，直至生成最终的 task summary。
 
 如果你ctrl -c了，他其实也可以继续接着之前的任务跑，你告诉他从几号任务开始执行就好了。
 
-### 黑盒测试与模块设计
+### 模块设计与 TDD
 
-黑盒测试验证 spec 与实现的一致性，模块设计确保代码结构合理：
-- 测试用例不参考任何内部实现，只通过外部接口验证功能行为是否符合 spec 定义
-- 黑盒测试作为独立任务，与功能实现任务分离，遵循 TDD 方法论
-- 模块遵循单一职责和接口最小化原则，测试模块与被测模块分离
+模块设计确保代码结构合理，TDD 确保行为定义清晰：
+- 模块遵循单一职责和接口最小化原则
+- 测试定义模块行为，实现必须通过测试
+- 测试模块与被测模块分离，只通过公开接口交互
 
 ## 工作流
 
-```
-0. 用claude -w进入一个worktree
-1. 写个spec.md
-2. planning → working/plan/（在 worktree 中）
-3. executing → commit per task + task-summary（在 worktree 中）
-```
-
-### Step 1: 需求分析 (Superpowers)
-
-使用你喜欢的 skill（例如 `grill-with-docs`, `superpowers:brainstorming`, 或者就用plan mode都行）定义需求，输出到 `working/spec.md`。
-
-### Step 2: 规划实现 (Superteam)
-
-使用 `planning` skill 根据 spec 创建任务文档。启动方式：
-
-```bash
-claude --plugin-dir /path/to/superteam
-```
-
-然后在对话中使用 skill：
-
-```
-/superteam:planning
-```
-
-### Step 3: 执行实现 (Superteam)
-
-使用 `executing` skill 执行计划：
-
-```
-/superteam:executing
-```
+1. 用claude -w进入一个worktree
+2. 写个 working/spec.md
+3. /planning (可以指定spec的路径，默认是working/spec.md) → working/plan/（在 worktree 中）
+4. /executing → commit per task + task-summary（在 worktree 中）
 
 ## Skills
 
 ### planning
 
-根据 spec 创建任务文档到 `working/plan/task-NNN/task.md`。作为状态机驱动 planner 和 plan-reviewer 迭代，直至所有 review issues 解决。
+- 根据 spec 创建任务文档到 `working/plan/task-NNN/task.md`
+- 作为状态机驱动 planner 和 plan-reviewer 迭代，直至所有 issues 解决
 
 ### executing
 
-串行执行 `working/plan/` 中的任务，每个 task 完成后 commit，全部完成后输出 `working/task-summary.md`。作为状态机驱动 implementer、spec-reviewer、code-reviewer 迭代，直至所有 review issues 解决。
+- 串行执行 `working/plan/` 中的任务，每个 task 完成后 commit
+- 全部完成后输出 `working/task-summary.md`
+- 作为状态机驱动 implementer、spec-reviewer、code-reviewer 迭代，直至所有 issues 解决
 
 ### module-design（不用手动调用）
 
@@ -105,7 +89,8 @@ claude --plugin-dir /path/to/superteam
 
 ### hands-off-issue-handling（不用手动调用）
 
-问题处理规范。当 agent 在执行过程中遇到非工作对象本身的问题（如 spec 模糊、环境异常等），在尝试多种方案后仍无法解决时，需做出假设并记录到文件系统。
+问题处理规范。当 agent 在执行过程中遇到非工作对象本身的问题（如 spec 模糊、环境异常等），在
+尝试多种方案后仍无法解决时，需做出假设并记录到文件系统。
 
 三种问题类型：
 - `working/spec-issues.md` — 规格文档问题（模糊不清或前后矛盾）
@@ -143,33 +128,6 @@ claude --plugin-dir /path/to/superteam
 │   └── hands-off-issue-handling/  # 内部问题处理
 └── README.md
 ```
-
-## 使用方法
-
-### 安装
-
-```bash
-claude --plugin-dir /path/to/superteam
-```
-
-### 开始项目
-
-1. 启动 brainstorming（完成后自动创建 worktree）：
-   ```
-   /superpowers:brainstorming
-   ```
-
-2. 启动 planning（在 worktree 中）：
-   ```
-   /superteam:planning
-   ```
-
-3. plan 写入 `working/plan/`，确认后启动 executing：
-   ```
-   /superteam:executing
-   ```
-
-4. 完成，生成 task summary
 
 ## 文件约定
 
