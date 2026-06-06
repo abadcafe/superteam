@@ -19,33 +19,9 @@ Superteam 是 Superpowers 的改写和扩展，提供轻量级的 AI 驱动开�
 
 叠个甲：大模型这个东西是概率性的，因此无法保证他万无一失。只要在各种场景下的任务成功率比以往有提升，就是好方法（逃
 
-另外，这套流程是依赖superpowers的，主要是它的tdd skill实在太好了。但是superpowers的其他skill实际上会干扰整体流程执行，因此要加上这些设置：
-```
-~/.local/bin/claude \
-  --disallowedTools \
-    "Skill(superpowers:using-superpowers),"\
-    "Skill(superpowers:writing-plans),"\
-    "Skill(superpowers:executing-plans),"\
-    "Skill(superpowers:subagent-driven-development),"\
-    "Skill(superpowers:dispatching-parallel-agents),"\
-    "Skill(superpowers:systematic-debugging),"\
-    "Skill(superpowers:requesting-code-review),"\
-    "Skill(superpowers:receiving-code-review),"\
-    "Skill(superpowers:verification-before-completion),"\
-    "Skill(superpowers:finishing-a-development-branch),"\
-    "Skill(superpowers:writing-skills),"\
-    "Skill(superpowers:brainstorm),"\
-    "Skill(superpowers:write-plan),"\
-    "Skill(superpowers:execute-plan)" \
-  --dangerously-skip-permissions
-```
-
 ### 后续改进方向
 
-1. planning阶段会耗费较多时间和较多token，因为实际上在plan阶段很多代码都已经写出来了。目前把superpowers的单plan文件模式改成了拆分到多个task目录里的task.md模式，有所改善。
-2. executing阶段我特意放弃了superpowers的任务并行开发模式，主要是考虑到无人值守模式下耗时长是可以接受的，反正我不跟他交互。正确性对我来说比耗时更重要, 毕竟就算它并行开发也要3个小时以上, 我不打算半夜起来验证它。
-3. 前端等其他场景验证较少。
-4. 各种周边系统例如git, ci/cd等, 都没有对接。
+1. 前端等其他场景验证较少。
 
 ## 主要功能
 
@@ -66,17 +42,19 @@ Superteam 是 Superpowers 的改写和扩展，提供轻量级的 AI 驱动开�
 
 如果你ctrl -c了，他其实也可以继续接着之前的任务跑，你告诉他从几号任务开始执行就好了。
 
-### 黑盒测试能力
+### 黑盒测试与模块设计
 
-黑盒测试主要是为了验证 spec 与实现的一致性：
+黑盒测试验证 spec 与实现的一致性，模块设计确保代码结构合理：
 - 测试用例不参考任何内部实现，只通过外部接口验证功能行为是否符合 spec 定义
 - 黑盒测试作为独立任务，与功能实现任务分离，遵循 TDD 方法论
+- 模块遵循单一职责和接口最小化原则，测试模块与被测模块分离
 
 ## 工作流
 
 ```
-1. brainstorming → spec → worktree 自动创建
-2. planning → plan/（在 worktree 中）
+0. 用claude -w进入一个worktree
+1. 写个spec.md
+2. planning → working/plan/（在 worktree 中）
 3. executing → commit per task + task-summary（在 worktree 中）
 ```
 
@@ -110,18 +88,20 @@ claude --plugin-dir /path/to/superteam
 
 ### planning
 
-根据 spec 创建任务文档到 `working/plan/task-NNN/task.md`。
+根据 spec 创建任务文档到 `working/plan/task-NNN/task.md`。作为状态机驱动 planner 和 plan-reviewer 迭代，直至所有 review issues 解决。
 
 ### executing
 
-执行 `working/plan/` 中的任务，每个 task 完成后 commit，全部完成后输出 `working/task-summary.md`。
+串行执行 `working/plan/` 中的任务，每个 task 完成后 commit，全部完成后输出 `working/task-summary.md`。作为状态机驱动 implementer、spec-reviewer、code-reviewer 迭代，直至所有 review issues 解决。
 
-### black-box-testing（不用手动调用）
+### module-design（不用手动调用）
 
-黑盒测试规范，用于规划、实现或审核任务。强调：
-- 不参考内部实现，只通过外部接口测试
-- 优先使用真实工具（curl、nc 等）
-- 黑盒测试作为独立任务，遵循 TDD 方法论
+模块设计规范，用于规划、实现或审核任务。强调：
+- 单一职责：一个模块只有一个变更理由
+- 接口最小化：公开接口尽量少
+- 黑盒测试：测试模块只允许调用被测模块的公开接口
+- 测试模块与被测模块必须分离（`xxx.rs` + `xxx_tests.rs`）
+- 集成测试放在 tests 目录，覆盖所有端到端用户场景，禁止 mock
 
 ### hands-off-issue-handling（不用手动调用）
 
@@ -140,10 +120,10 @@ claude --plugin-dir /path/to/superteam
 
 | Agent | 用途 |
 |-------|------|
-| planner | 创建任务文档 |
-| plan-reviewer | 审核任务文档 |
-| implementer | 执行任务实现 |
-| spec-reviewer | 审核实现是否符合 spec |
+| planner | 根据 spec 创建任务文档，遵循 TDD 和模块设计规范 |
+| plan-reviewer | 审核任务文档的完整性、spec 对齐和可构建性 |
+| implementer | 按 TDD 流程执行单个任务：写测试 → 实现 → commit |
+| spec-reviewer | 审核实现是否符合 spec 要求 |
 | code-reviewer | 审核代码质量 |
 
 ## 目录结构
@@ -159,7 +139,7 @@ claude --plugin-dir /path/to/superteam
 ├── skills/
 │   ├── planning/     # /superteam:planning
 │   ├── executing/    # /superteam:executing
-│   ├── black-box-testing/  # 黑盒测试规范
+│   ├── module-design/      # 模块设计与黑盒测试规范
 │   └── hands-off-issue-handling/  # 内部问题处理
 └── README.md
 ```
@@ -200,6 +180,7 @@ claude --plugin-dir /path/to/superteam
 | `working/plan-review-results.md` | 计划审核结果 |
 | `working/plan/task-NNN/test-results.md` | 测试结果 |
 | `working/plan/task-NNN/implement-review-results.md` | 实现审核结果 |
+| `working/plan/task-NNN/test-case-changes.md` | 测试用例变更记录 |
 | `working/task-summary.md` | 任务总结 |
 | `working/spec-issues.md` | 规格问题 |
 | `working/task-issues.md` | 任务文档问题 |

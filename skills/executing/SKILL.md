@@ -23,6 +23,7 @@ YOU MUST NOT UNDERSTAND WHAT HAPPEND, NEVER DOUBT THE PROCESS FLOW.
 - `working/plan/task-NNN/task.md` - Task document
 - `working/plan/task-NNN/test-results.md` - Task test results
 - `working/plan/task-NNN/implement-review-results.md` - Task implement review results
+- `working/plan/task-NNN/test-case-changes.md` - Test case changes
 - `working/task-summary.md` - Task summary
 
 ## Agent Prompt Format
@@ -62,8 +63,11 @@ For code-reviewer:
 ### Blocked Tests
 [copy Blocked Tests table from test-results.md, or "None"]
 
-### Don't Fix Issues
+### `Don't Fix` Issues
 [copy issues with Status: Don't Fix from implement-review-results.md, include ID, name, and Decision Reason. Or "None"]
+
+### Test Case Changes
+[copy contents from test-case-changes.md, or "None"]
 
 ### Agent Metrics
 - implementer: N calls, N tokens, Nm Ns
@@ -136,11 +140,10 @@ flowchart TD
 
 After all tasks finished:
 
-1. read all task test results
-2. read all task implement review results
-3. read all task document: extract goal and task names
-4. read `spec-issues.md`, `task-issues.md`, `env-issues.md` (if exist)
-5. write task summary (include agent metrics tracked during execution)
+1. read all task test results, test case changes, and implement review results
+2. read all task document: extract goal and task names
+3. read `spec-issues.md`, `task-issues.md`, `env-issues.md` (if exist)
+4. write task summary (include agent metrics tracked during execution)
 
 **NEVER:**
 
