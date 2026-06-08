@@ -96,7 +96,7 @@ Completeness:
 - Each task has all required sections (Project Overview, Task Objective, Module Design, Files, Steps)?
 
 Spec alignment:
-- The plan covers the WHOLE spec?
+- Every detail in the spec is covered by at least one task?
 
 Module Design:
 - Each task's module design complies with the `superteam:module-design` skill?
