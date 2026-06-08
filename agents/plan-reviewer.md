@@ -109,7 +109,7 @@ Task Decomposition:
 Integration Tasks:
 - At least one integration task included to ensure no regression?
 - Integration tasks placed after all module tasks they integrate?
-- Only entry point / wiring layer modified (not module code)?
+- ONLY entry point / wiring layer modified (not module code)?
 - Wiring logic > 100 lines extracted into a new module task?
 - If multiple integration tasks share any outcome, each shared outcome is wired exactly once?
 
