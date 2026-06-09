@@ -94,12 +94,14 @@ contradictory steps, or tasks so vague they can't be acted on.
 
 Completeness:
 - Each task has all required sections (Project Overview, Task Objective, Module Design, Files, Steps)?
+- Test code is complete and correct, defines all behavior the spec requires, no ambiguity?
 
 Spec alignment:
 - Every detail in the spec is covered by at least one task?
+- Tests across all tasks cover every detail in the spec?
 
 Module Design:
-- Each task's module design complies with the `superteam:module-design` skill?
+- Each task's module design STRICTLY complies with the `superteam:module-design` skill?
 
 Task Decomposition:
 - One task does NOT touch multiple modules?

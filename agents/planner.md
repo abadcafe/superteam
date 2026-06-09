@@ -152,7 +152,8 @@ git commit -m "feat: add specific feature"
 ## Remember
 
 - Exact file paths always
-- **Complete and correct test code** in task - tests define behavior, no ambiguity
+- **Tests across all tasks cover every detail in spec** - no uncovered details
+- **Complete and correct test code** in task - tests MUST define all behavior the spec requires, no ambiguity
 - **NEVER write implementation code** - ONLY describe implementation intent briefly (1-3 sentences)
 - Exact commands with expected output
 - DRY, YAGNI, TDD
