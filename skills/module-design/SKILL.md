@@ -15,7 +15,8 @@ user-invocation: false
 - 一个 `xxx.rs` 文件是一个模块. 模块下面还可以有子模块, 即 `xxx.rs` + `xxx/` 目录,
   `xxx/` 目录下是 `xxx` 的子模块(子模块也是模块)
 - 单独一个函数、一个子程序、一个例程、或者一个类(struct/trait/enum), 都**不是**模块
-- crate 不是模块, 它是多个模块的集合
+- Crate 不是模块, 它是多个模块的集合
+- Python 的包和模块都是模块，等于 Rust 的模块和子模块
 
 模块是**类之上的更大组织粒度**——一个模块内含多个相互关联的函数、struct、trait、enum 等项,
 是对相关功能的聚合容器.
@@ -45,7 +46,7 @@ tests: test_login_success, test_login_invalid_password, test_logout, test_token_
 | 数据实体 | 模块内定义的 struct/enum/type | >7 |
 | 测试用例 | 模块对应的测试用例总数 | >35 |
 
-### 2.2 不得违反内聚约束
+### 2.2 内聚约束
 
 - **禁止巧合内聚**: 不得创建 `utils`、`misc`、`helpers`、`common` 等以"杂项"为名
   的模块——这种模块内部操作之间没有任何可辨识的关系, 是最差的内聚形式
@@ -54,7 +55,7 @@ tests: test_login_success, test_login_invalid_password, test_logout, test_token_
 - **禁止将无关项混入同一模块**: 如果模块中半数函数操作半数数据, 另外半数函数操作
   另外半数数据, 则实际上有两个模块伪装成一个, 必须拆分
 
-### 2.3 不得违反耦合约束
+### 2.3 耦合约束
 
 - **禁止循环依赖**: 模块间的 `use` 依赖不得形成环路. 环路使所有被圈入的模块变成
   一个"超级模块", 任何一个发布都必须构建全部. 打破环路的方法:
@@ -120,7 +121,7 @@ tests: test_login_success, test_login_invalid_password, test_logout, test_token_
 对模块的依赖就是对模块内所有内容的依赖——模块中存在不被一起使用的项, 会导致无关项的
 变化强制依赖方升级和重新验证.
 
-## 4. 模块公开接口设计
+## 4. 模块接口设计
 
 ### 4.1 最小化公开接口
 
@@ -128,7 +129,7 @@ tests: test_login_success, test_login_invalid_password, test_logout, test_token_
 
 - 不确定是否应该 pub 时, 就不 pub
 - 每增加一个 pub 项都要问: "这个项与模块的抽象一致吗? 去掉它模块职责是否完整?"
-- 优先通过组合少量精确定义的接口提供功能, 而非暴露大量细粒度操作
+- **通过组合少量精确定义的接口提供功能, 而非暴露大量细粒度操作**
 
 ### 4.2 接口一致性
 
@@ -168,9 +169,45 @@ tests: test_login_success, test_login_invalid_password, test_logout, test_token_
 这使得依赖方向从"使用方→实现方"反转为"使用方→抽象接口, 实现方→抽象接口", 
 打破直接依赖环路, 并让抽象接口精确反映使用方的需求.
 
-## 5. 模块测试规范
+## 5. 模块层次结构设计
 
-### 5.1 测试定义行为
+深模块: 简洁接口隐藏强大功能（如 Unix I/O: open/read/write/close 封装文件系统与io设备等多个复杂层次）
+浅模块: 接口复杂度 ≈ 实现复杂度, 没有抽象价值
+
+**深模块优于浅模块**
+
+### 5.1 设计原则
+
+- **模块层级与目录层级必须对应**：同层级模块放在同目录下，子模块放在子目录下
+  - 例如：xxx.rs 模块的子模块放在 xxx/yyy.rs
+- 每个模块层级必须**改变抽象**, 而非仅转发调用
+- **必须按信息隐藏原则**而不是按操作的执行顺序拆分模块
+- 如果信息隐藏原则造成模块过大，**必须拆分成子模块**，而不是拆成同层级的浅模块
+
+### 5.2 判断标准
+
+若去掉某模块层级后调用方几乎不需要多了解实现细节, 则该层级必须去掉. 例如 pass-through 反例:
+
+```
+// handler.rs — 该模块仅转发, 未改变抽象, 参数和返回值与下层完全一致
+pub fn handle_user_query(id: u64) -> User { service::find_user(id) }
+
+// service.rs — 该模块仅转发, 未改变抽象, 参数和返回值与下层完全一致
+pub fn find_user(id: u64) -> User { repo::get_user(id) }
+
+// repo.rs — 真正有意义的逻辑
+pub fn get_user(id: u64) -> User {
+    let row = db.query("SELECT ...", &[id]);
+    User::from_row(row)      // 这里改变了抽象: SQL Row → domain User
+}
+
+// handler 和 service 模块没有改变抽象, 应去掉, 直接用 repo 模块
+// **注意**: 这是模块层级的判断标准, 不适用于函数调用等其他场景的层级判断
+```
+
+## 6. 模块测试规范
+
+### 6.1 测试定义行为
 
 测试模块是模块行为的**唯一定义来源**, 测试用例**必须完整覆盖**模块所有行为. 模块能做什么、
 不能做什么、边界在哪里, 都由测试用例规定. 没有测试覆盖的行为可认为不存在.
@@ -185,7 +222,7 @@ tests: test_login_success, test_login_invalid_password, test_logout, test_token_
 - 测试用例必须从模块的**外部可观察行为**出发设计, 而非基于内部实现细节
 - 必须先同步更新测试以定义新的行为, 再变更模块的公开接口——不得出现测试与接口不一致
 
-### 5.2 测试模块结构
+### 6.2 测试模块结构
 
 - 每个模块 `xxx.rs` 对应同目录下的 `xxx_tests.rs`, 测试用例数 >35 个则拆为 `xxx_<子职责>_tests.rs`
 - 测试模块只允许调用被测模块的**公开接口**(pub 项), **禁止**调用或依赖任何内部实现(非 pub 项)
@@ -195,7 +232,7 @@ tests: test_login_success, test_login_invalid_password, test_logout, test_token_
 - 进程级测试属于集成测试, 必须端到端覆盖所有用户场景, 只能调用进程外部接口, 而不是代码级接口
 - 集成测试必须放在tests目录而不是src目录下, 与模块级测试区分开
 
-### 5.3 测试用例命名
+### 6.3 测试用例命名
 
 - 格式: `test_<操作>_<场景>`, 如 `test_login_invalid_password`
 - 操作名对应被测的公开操作, 场景名描述具体行为或条件

@@ -76,7 +76,7 @@ contradictory steps, or tasks so vague they can't be acted on.
    - read spec → understand requirements
 
 3. Check Plan:
-   - use `superteam:module-design`
+   - use `/superteam:module-design`
    - for each task-NNN/task.md in plan dir:
      - check the task.md against the `Checklist`
    - record Review Issues into plan review results:
@@ -101,7 +101,7 @@ Spec alignment:
 - Tests across all tasks cover every detail in the spec?
 
 Module Design:
-- Each task's module design STRICTLY complies with the `superteam:module-design` skill?
+- Each task's module design STRICTLY complies with the `/superteam:module-design` skill?
 
 Task Decomposition:
 - One task does NOT touch multiple modules?

@@ -82,7 +82,7 @@ EXPECTED | UNEXPECTED
 
 ### 1. Implement
 
-use `superteam:hands-off-issue-handling`
+use `/superteam:hands-off-issue-handling`
 
 #### A. Execute Task Steps
 

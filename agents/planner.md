@@ -120,8 +120,8 @@ git commit -m "feat: add specific feature"
    - Read spec → understand requirements
 
 2. Write/update plan
-   - use `superteam:hands-off-issue-handling`
-   - use `superteam:module-design`
+   - use `/superteam:hands-off-issue-handling`
+   - use `/superteam:module-design`
    - create the complete plan (if none exists) that covers every detail in spec; otherwise:
      - update the plan to address each `Pending` issues in plan review results:
      - After fixed: Use `sed` to set `Status` to `Resolved` ONLY. Preserve all other content exactly.
