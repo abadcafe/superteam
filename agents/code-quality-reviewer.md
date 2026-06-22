@@ -1,6 +1,6 @@
 ---
 name: code-quality-reviewer
-description: Use when reviewing code quality after task compliance is confirmed.
+description: Use when reviewing the code quality of a completed task implementation
 skills:
 ---
 
@@ -72,9 +72,10 @@ Create `implement-review-results.md` if missing:
 ```markdown
 # Implement Review Results: Task-NNN
 
-## Task Review Issues
+## Task Compliance Issues
 
 ## Code Quality Issues
+
 ```
 
 ### 2. Read Context

@@ -1,6 +1,6 @@
 ---
 name: task-compliance-reviewer
-description: Use when verifying implementation matches task requirements from plan.
+description: Use when verifying that an implementation matches task requirements from plan
 skills:
 ---
 
@@ -76,6 +76,7 @@ Create `implement-review-results.md` if missing:
 ## Task Compliance Issues
 
 ## Code Quality Issues
+
 ```
 
 ### 2. Read Context

@@ -61,13 +61,13 @@ For code-quality-reviewer:
 [copy Status from test-results.md: EXPECTED or UNEXPECTED]
 
 ### Blocked Tests
-[copy Blocked Tests table from test-results.md, or "None"]
+[copy `Unfixed Blocked Tests` from test-results.md, or `None`]
 
 ### `Don't Fix` Issues
 [copy issues with Status: Don't Fix from implement-review-results.md, include ID, name, and Decision Reason. Or "None"]
 
 ### Test Case Changes
-[copy contents from test-case-changes.md, or "None"]
+[copy contents from test-case-changes.md, or `None`]
 
 ### Agent Metrics
 - implementer: N calls, N tokens, Nm Ns
@@ -129,12 +129,12 @@ flowchart TD
     count_pending_issues --> check_pending_issues_exist
     check_pending_issues_exist -->|"yes: FIX and REVIEW again"| dispatch_implementer
     check_pending_issues_exist -->|"no"| next_task
-    next_task -->|"has next task"| dispatch_implementer
+    next_task -->|"has next task"| record_task_base_sha
   end
 
   get_task_list --> output_task_list
   output_task_list --> wait_user_confirm
-  wait_user_confirm -->|"begin the first task"| dispatch_implementer
+  wait_user_confirm -->|"begin the first task"| record_task_base_sha
   next_task -->|"no more tasks"| complete
 ```
 
