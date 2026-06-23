@@ -76,7 +76,7 @@ plan又是包月的。这样，我就可以没事时就预先搞出一堆东西�
 
 - 串行执行 `working/plan/` 中的任务，每个 task 完成后 commit
 - 全部完成后输出 `working/task-summary.md`
-- 作为状态机驱动 implementer、task-compliance-reviewer、code-quality-reviewer 迭代，直至所有 issues 解决
+- 作为状态机驱动 implementer、task-reviewer 迭代，直至所有 issues 解决
 
 ### module-design（不用手动调用）
 
@@ -108,8 +108,7 @@ plan又是包月的。这样，我就可以没事时就预先搞出一堆东西�
 | planner | 根据 spec 创建任务文档，遵循 TDD 和模块设计规范 |
 | plan-reviewer | 审核任务文档的完整性、spec 对齐和可构建性 |
 | implementer | 按 TDD 流程执行单个任务：写测试 → 实现 → commit |
-| task-compliance-reviewer | 审核实现是否符合 task 要求 |
-| code-quality-reviewer | 审核代码质量 |
+| task-reviewer | 审核单个任务实现的 task 符合度和代码质量 |
 
 ## 目录结构
 
@@ -119,8 +118,7 @@ plan又是包月的。这样，我就可以没事时就预先搞出一堆东西�
 │   ├── planner.md
 │   ├── plan-reviewer.md
 │   ├── implementer.md
-│   ├── task-compliance-reviewer.md
-│   └── code-quality-reviewer.md
+│   └── task-reviewer.md
 ├── skills/
 │   ├── planning/     # /superteam:planning
 │   ├── executing/    # /superteam:executing

@@ -1,6 +1,6 @@
 ---
 name: module-design
-description: Use when planning, implementing or reviewing module structure and interfaces
+description: Use whenever writing code, writing tests, designing architecture or modules, refactoring, or reviewing code, to enforce module boundaries, public interfaces, dependency direction, cohesion, coupling, information hiding, and black-box tests that use only public interfaces.
 user-invocation: false
 ---
 
@@ -225,9 +225,9 @@ pub fn get_user(id: u64) -> User {
 ### 6.2 测试模块结构
 
 - 每个模块 `xxx.rs` 对应同目录下的 `xxx_tests.rs`, 测试用例数 >35 个则拆为 `xxx_<子职责>_tests.rs`
-- 测试模块只允许调用被测模块的**公开接口**(pub 项), **禁止**调用或依赖任何内部实现(非 pub 项)
+- 测试模块**禁止**调用或依赖任何被测模块的内部实现，最多只允许调用被测模块的**模块级公开接口**
 - 被测模块内部**不得**包含任何测试代码——所有测试代码必须在 `_tests.rs` 文件中
-- 测试模块与被测模块**必须**是两个独立的模块, 通过被测模块的公开接口交互, 实现真正的黑盒测试
+- 测试模块与被测模块**必须**是两个独立的模块, 通过被测模块的模块级公开接口交互, 实现模块级黑盒测试
 - 模块级测试必须放在被测模块的同目录下, **禁止**放在被测模块的子目录下
 - 进程级测试属于集成测试, 必须端到端覆盖所有用户场景, 只能调用进程外部接口, 而不是代码级接口
 - 集成测试必须放在tests目录而不是src目录下, 与模块级测试区分开
