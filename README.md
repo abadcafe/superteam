@@ -21,7 +21,7 @@
 
 我自己的例子:
 
-在项目成型后, 让模型反复执行(例如codex的 /goal)如下prompt:
+在review的时候, 让模型反复执行(例如codex的 /goal)如下prompt:
 ```
 全面彻底地review整个项目有哪些:
 1. 不符合规范的地方
